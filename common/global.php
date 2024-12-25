@@ -7,7 +7,7 @@ ini_set('log_errors', TRUE); // Error/Exception file logging engine.
 ini_set('error_log', "../logsMyPC/log_reporting_common_global-".date("Ymd").".dat"); // Logging file path
 error_log( "TO_DELETE checking path" );
 
-ob_start();
+//202412logsMyPC ob_start();
 function is_session_started(){
     if ( php_sapi_name() !== 'cli' ) {
         if ( version_compare(phpversion(), '5.4.0', '>=') ) {
@@ -62,4 +62,4 @@ $_SESSION['HTML'] = G_HTML;
 define("G_ASSETS_PATH", G_PATH . G_ASSETS);
 $_SESSION['ASSETS_PATH'] = G_ASSETS_PATH;
 $_SESSION["IMG_PATH"] = $_SESSION['ASSETS']."img/" . $_SESSION['LANG'] . "/";
-ob_clean();
+//202412logsMyPC ob_clean();
