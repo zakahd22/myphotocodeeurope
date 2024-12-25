@@ -1,8 +1,7 @@
 
 <?php
 
-//202412 require_once G_PATH . 'common/mailer/PHPMailerAutoload.php';
-spl_autoload_register('PHPMailerAutoload', true, true);//202412  
+require_once G_PATH . 'common/mailer/PHPMailerAutoload.php';
 
 //modificada a partir de la versíó motor
 
