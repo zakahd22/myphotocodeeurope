@@ -39,10 +39,17 @@ define("G_PATH", $G_PATH);
 
 //require_once G_PATH . "common/config/config.php";
 require_once G_PATH . "common/config/params.php";
+error_log( "TO_DELETE global 02" );
 
 require_once G_PATH . "common/utils.php";
+error_log( "TO_DELETE global 03" );
+
 require_once G_PATH . "common/mail.php";
+error_log( "TO_DELETE global 04" );
+
 require_once G_PATH . "common/Classes/EntityController.php";
+error_log( "TO_DELETE global 05" );
+
 
 //require_once G_PATH . "common/dictionary.php";
 //require_once G_PATH . "common/mail.php";
@@ -56,6 +63,9 @@ elseif(isset($_SESSION['LANG'])) {
 else{
     $LANG = 'en-US';
 }
+
+error_log( "TO_DELETE global 06" );
+
 
 $_SESSION['LANG'] = $LANG;
 $_SESSION['RENT_NAME'] = G_RENTNAME;
