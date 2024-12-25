@@ -1,0 +1,57 @@
+{
+  "default": {
+    "server": {
+      "port": 8000
+    },
+    "camera": {
+      "framerate": 30,
+      "resolution": [
+        160,
+        384
+      ],
+      "rotation": 180,
+      "sensor_mode": 3
+    },
+    "remote_config": {
+      "file": "screenar.zip",
+      "uri": "home399659235.1and1-data.host",
+      "ftp_user": "u67519522-screenar",
+      "ftp_pwd": "Scr33n4r!",
+      "version": "v1"
+    },
+    "face_animator": {
+      "framerate":30,
+      "classifier": "facedetector/haarcascade_frontalface_default.xml",
+      "alpha": "data/160x384-alpha2.png",
+      "overlay": ["data/crown/1.png"],
+      "effects": ["negative", "sketch", "denoise", "emboss", "oilpaint", "hatch", "gpen", "pastel", "watercolor", "film", "blur", "saturation"],
+      "min_face_size": {
+        "width": 15,
+        "height": 15
+      }
+    },
+    "scheduler": {
+      "flow": ["CAPTURE"],
+      "schedule_items": [
+        {
+          "name": "CAPTURE",
+          "duration": 10,
+          "action": "ANIMATE"
+        },
+        {
+          "name": "SLEEP",
+          "duration": 10
+        },
+        {
+          "name":"ANIMATE",
+          "duration": 20,
+          "action": "SLEEP"
+        },
+        {
+          "name": "DEKOY",
+          "duration": 5
+        }
+      ]
+    }
+  }
+}

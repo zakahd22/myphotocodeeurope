@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Test de App Owner</title>
+</head>
+
+
+
+<body>
+<h1>Formularios POST de modificaci&oacute;n de datos </h1>
+  
+
+<form action="app_modif.php" method="post" name="form1" target="_blank">
+  <p>M&eacute;todo para insertar News nuevas
+    <input name="m" type="hidden" id="m" value="1" />
+     <input name="t" type="hidden" id="t" value="1" />
+ </p>
+  <p>url
+    <input name="url" type="text" id="url" size="100" />
+</p>
+  <p>urlMobile
+    <input name="urlMobile" type="text" id="urlMobile" size="100" />
+    <input type="submit" name="Submit" value="Enviar" />
+  </p>
+  <p>&nbsp; </p>
+</form>
+<hr />
+<form action="app_modif.php" method="post" name="form2" target="_blank">
+  <p>M&eacute;todo para insertar booths nuevos (id en blanco) o modificar existente
+    <input name="m" type="hidden" id="m" value="2" />
+	&nbsp;booth_id <input name="id" type="text" size="10" />
+  </p>
+  <p>name
+    <input name="name" type="text" id="name" size="100" />
+  </p>
+  <p><b>location</b><br />
+    &nbsp;&nbsp;&nbsp;latitude <input name="latitude" type="text" size="25" />
+  &nbsp;&nbsp;longitude <input name="longitude" type="text" id="longitude" size="25" /></p>
+  <p>location para users 
+    <input name="location" type="text" size="50" />
+    &nbsp; <input type="submit" name="Submit" value="Enviar" />
+  </p>
+</form>
+<hr />
+<form action="app_modif.php" method="post" name="form3" target="_blank">
+  <p>M&eacute;todo para modificar datos de alerta offline
+    <input name="m" type="hidden" id="m" value="3" />
+	&nbsp;booth_id <input name="id" type="text" size="10" />
+  </p>
+  <p>offline alert &nbsp;
+    <input type="checkbox" name="checkOffline" value="1" />  Activada<br />
+	&nbsp;&nbsp;Hora inicio <input name="hS" type="text" size="4" />
+	&nbsp;&nbsp;Minuto inicio <input name="mS" type="text" size="4" />
+	&nbsp;&nbsp;Hora final 	<input name="hE" type="text" size="4" />
+	&nbsp;&nbsp;Minuto final <input name="mE" type="text" size="4" />
+	&nbsp; 
+	<input type="submit" name="Submit" value="Enviar" />
+  </p>
+</form>
+<hr />
+<form action="app_modif.php" method="post" name="form4" target="_blank">
+  <p>M&eacute;todo para el cambio de estado de alerta online/offline de un booth
+    <input name="m" type="hidden" id="m" value="4" />&nbsp;booth_id <input name="id" type="text" size="10" />
+  </p>
+  <p>forzar/borrar alerta de estado: 
+    <select name="setState">
+      <option selected="selected">online</option>
+      <option>offline</option>
+    </select>
+    &nbsp; <input type="submit" name="Submit" value="Enviar" />
+  </p>
+</form>
+<hr />
+<form action="app_modif.php" method="post" name="form5" target="_blank">
+  <p>M&eacute;todo para el cambio de estado de alerta money de un booth
+    <input name="m" type="hidden" id="m" value="5" />&nbsp;booth_id <input name="id" type="text" size="10" />
+  </p>
+  <p>forzar/borrar alerta de money: 
+    <select name="setState">
+      <option selected="selected">ok</option>
+      <option>alerta</option>
+    </select>
+    &nbsp; <input type="submit" name="Submit" value="Enviar" />
+  </p>
+</form>
+<hr />
+<form action="app_modif.php" method="post" name="form6" target="_blank">
+  <p>M&eacute;todo para el cambio de estado de alerta stock de un booth
+    <input name="m" type="hidden" id="m" value="6" />&nbsp;booth_id <input name="id" type="text" size="10" />
+  </p>
+  <p>forzar/borrar alerta de stock: 
+    <select name="setState">
+      <option selected="selected">ok</option>
+      <option>alerta</option>
+    </select>
+    &nbsp; <input type="submit" name="Submit" value="Enviar" />
+  </p>
+</form>
+<hr />
+<h1>Simulaci&oacute;n de funcionamiento </h1>
+<form action="pb_info.php" method="post" name="form7" target="_blank">
+  <p><b>Partida</b> 
+    <input name="d" type="hidden" value="1" /><input name="t" type="hidden" value="10" />
+  &nbsp;booth_id 
+  <input name="id" type="text" size="10" />&nbsp;stock <input name="s" type="text" size="10" />&nbsp;money <input name="m" type="text" size="10" />
+  &nbsp;producto <select name="i1">
+      <option selected="selected">101</option><option>102</option><option>103</option>
+	  <option>104</option><option>105</option><option>106</option>
+    </select>
+  &nbsp; <input type="submit" name="Submit" value="Enviar" />
+  </p>
+</form>
+<form action="pb_info.php" method="post" name="form8" target="_blank">
+  <p><b>Report</b> 
+    <input name="d" type="hidden" value="1" /><input name="t" type="hidden" value="20" />
+  &nbsp;booth_id <input name="id" type="text" size="10" />&nbsp;stock <input name="s" type="text" size="10" />&nbsp;money <input name="m" type="text" size="10" />
+  &nbsp;report number <input name="i1" type="text" size="10" />
+  &nbsp; <input type="submit" name="Submit" value="Enviar" />
+  </p>
+</form>
+</body>
+</html>

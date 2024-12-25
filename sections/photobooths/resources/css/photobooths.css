@@ -1,0 +1,34 @@
+.regBooth{
+    width: 440px;
+    height: 215px;
+    margin-left: 65px;
+}
+.infoListBooth{
+    height: 215px;
+    width: 215px;
+}
+.imgListBooth{
+    
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+}
+.pbs_img{
+    width: 215px;
+    height: auto;
+}
+#positional_div{
+    width: 100%;
+    height: 30px;
+}

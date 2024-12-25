@@ -1,0 +1,14 @@
+{
+  "framerate": 4,
+  "type": "cycle",
+  "time_window": [
+    {
+      "start":"25/06",
+      "end":"28/06"
+    },
+    {
+      "start":"24/12",
+      "end":"25/12"
+    }
+  ]
+}
