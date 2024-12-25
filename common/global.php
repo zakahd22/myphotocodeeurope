@@ -5,11 +5,10 @@ ini_set('ignore_repeated_errors', TRUE); // always use TRUE
 ini_set('display_errors', FALSE); // Error/Exception display, use FALSE only in production environment or real server. Use TRUE in development environment
 ini_set('log_errors', TRUE); // Error/Exception file logging engine.
 ini_set('error_log', "../logsMyPC/log_reporting_common_global-".date("Ymd").".dat"); // Logging file path
-error_log( "TO_DELETE checking path" );
+//error_log( "TO_DELETE checking path" );
 
 //202412logsMyPC ob_start();
 function is_session_started(){
-    error_log( "TO_DELETE is_session_started: " . php_sapi_name() );
     if ( php_sapi_name() !== 'cli' ) {
         if ( version_compare(phpversion(), '5.4.0', '>=') ) {
             return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
@@ -23,8 +22,6 @@ function is_session_started(){
 
 if(is_session_started() === FALSE) session_start();
 
-error_log( "TO_DELETE global 01. PHP_VERSION: " . PHP_VERSION );
-
 //a cada session start incloure global, si s'accedeix a la bd cridar el conexio.php
 //replace(common, "") IMPORTANT que no existeixi cap més directori common al cami cap al fitxer!!
 //define("G_PATH", dirname(__FILE__)."/../");
@@ -33,22 +30,16 @@ error_log( "TO_DELETE global 01. PHP_VERSION: " . PHP_VERSION );
 $path = dirname (__FILE__);
 $G_PATH = substr($path, 0, (strrpos($path, '/') + 1));
 
-error_log( "TO_DELETE global 02. path: $path , $G_PATH" );
-
 define("G_PATH", $G_PATH);
 
 //require_once G_PATH . "common/config/config.php";
 require_once G_PATH . "common/config/params.php";
-error_log( "TO_DELETE global 02" );
 
 require_once G_PATH . "common/utils.php";
-error_log( "TO_DELETE global 03" );
 
 require_once G_PATH . "common/mail.php";
-error_log( "TO_DELETE global 04" );
 
 require_once G_PATH . "common/Classes/EntityController.php";
-error_log( "TO_DELETE global 05" );
 
 
 //require_once G_PATH . "common/dictionary.php";
@@ -63,8 +54,6 @@ elseif(isset($_SESSION['LANG'])) {
 else{
     $LANG = 'en-US';
 }
-
-error_log( "TO_DELETE global 06" );
 
 
 $_SESSION['LANG'] = $LANG;

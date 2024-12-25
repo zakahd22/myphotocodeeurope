@@ -29,8 +29,6 @@ function PHPMailerAutoload($classname)
         require $filename;
     }
 }
-error_log( "TO_DELETE PHPMailerAutoload 01. version_compare 5.1.2: " . version_compare(PHP_VERSION, '5.1.2', '>=') );
-error_log( "TO_DELETE PHPMailerAutoload 01. version_compare 5.3.0: " . version_compare(PHP_VERSION, '5.3.0', '>=') );
 spl_autoload_register('PHPMailerAutoload', true, true);
 //if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
 //    //SPL autoloading was introduced in PHP 5.1.2
