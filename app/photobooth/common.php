@@ -47,23 +47,6 @@ else{
 }
 //20201022 FINAL
 
-//APP_fesLogDebbug("common *******************".$_SERVER['HTTP_USER_AGENT'],"logDebug2021userAgent");
-
-////2021 ip router
-//if(isset($_REQUEST['idb'])){
-//    if($_REQUEST['idb']==8174){
-//        APP_fesLogDebbug("common de 8174 *******************".$_SERVER['REMOTE_ADDR'],"logDebug2021router");
-//    }
-//}
-
-
-////20170626deu INICI
-//if(isset($_REQUEST['idb'])){
-//    if($_REQUEST['idb']==7682){
-//        APP_fesLogDebbug("common de 7682 *******************","logDebug20170626deu");
-//    }
-//}
-////20170626deu FINAL
 
 
 //20170629pb INICI
