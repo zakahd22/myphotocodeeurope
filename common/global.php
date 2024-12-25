@@ -9,7 +9,7 @@ error_log( "TO_DELETE checking path" );
 
 //202412logsMyPC ob_start();
 function is_session_started(){
-    error_log( "TO_DELETE is_session_started" . php_sapi_name() );
+    error_log( "TO_DELETE is_session_started: " . php_sapi_name() );
     if ( php_sapi_name() !== 'cli' ) {
         if ( version_compare(phpversion(), '5.4.0', '>=') ) {
             return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
@@ -23,6 +23,8 @@ function is_session_started(){
 
 if(is_session_started() === FALSE) session_start();
 
+error_log( "TO_DELETE global 01" );
+
 //a cada session start incloure global, si s'accedeix a la bd cridar el conexio.php
 //replace(common, "") IMPORTANT que no existeixi cap més directori common al cami cap al fitxer!!
 //define("G_PATH", dirname(__FILE__)."/../");
@@ -30,6 +32,8 @@ if(is_session_started() === FALSE) session_start();
 //G_PATH getting the position + 1 of the last slash 
 $path = dirname (__FILE__);
 $G_PATH = substr($path, 0, (strrpos($path, '/') + 1));
+
+error_log( "TO_DELETE global 02. path: $path , $G_PATH" );
 
 define("G_PATH", $G_PATH);
 
