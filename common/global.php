@@ -23,7 +23,7 @@ function is_session_started(){
 
 if(is_session_started() === FALSE) session_start();
 
-error_log( "TO_DELETE global 01" );
+error_log( "TO_DELETE global 01. PHP_VERSION: " . PHP_VERSION );
 
 //a cada session start incloure global, si s'accedeix a la bd cridar el conexio.php
 //replace(common, "") IMPORTANT que no existeixi cap més directori common al cami cap al fitxer!!
