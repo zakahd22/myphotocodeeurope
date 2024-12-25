@@ -9,6 +9,7 @@ error_log( "TO_DELETE checking path" );
 
 //202412logsMyPC ob_start();
 function is_session_started(){
+    error_log( "TO_DELETE is_session_started" . php_sapi_name() );
     if ( php_sapi_name() !== 'cli' ) {
         if ( version_compare(phpversion(), '5.4.0', '>=') ) {
             return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
