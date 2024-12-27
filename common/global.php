@@ -1,9 +1,9 @@
 <?php
-function exceptions_error_handler($severity, $message, $filename, $lineno) {
-    throw new ErrorException($message, 0, $severity, $filename, $lineno);
-}
-
-set_error_handler('exceptions_error_handler');
+//function exceptions_error_handler($severity, $message, $filename, $lineno) {
+//    throw new ErrorException($message, 0, $severity, $filename, $lineno);
+//}
+//
+//set_error_handler('exceptions_error_handler');
 
 error_reporting(E_ALL); // Error/Exception engine, always use E_ALL
 //error_reporting(E_ALL ^ E_WARNING); // Error/Exception engine, E_ALL except Warnings
@@ -11,7 +11,7 @@ ini_set('ignore_repeated_errors', TRUE); // always use TRUE
 ini_set('display_errors', FALSE); // Error/Exception display, use FALSE only in production environment or real server. Use TRUE in development environment
 ini_set('log_errors', TRUE); // Error/Exception file logging engine.
 ini_set('error_log', "../logsMyPC/log_reporting_common_global-".date("Ymd").".dat"); // Logging file path
-//error_log( "TO_DELETE checking path" );
+error_log( "TO_DELETE checking path" );
 
 //202412logsMyPC ob_start();
 function is_session_started(){
@@ -73,3 +73,6 @@ define("G_ASSETS_PATH", G_PATH . G_ASSETS);
 $_SESSION['ASSETS_PATH'] = G_ASSETS_PATH;
 $_SESSION["IMG_PATH"] = $_SESSION['ASSETS']."img/" . $_SESSION['LANG'] . "/";
 //202412logsMyPC ob_clean();
+
+
+error_log( "TO_DELETE global end" );
