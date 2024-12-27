@@ -92,7 +92,8 @@ if (!$event_id) {
 
     VIC_fesLog("event_init, dongle: $dongle; no event ok#" . $event_id . "#" . $ftpInfo); //20130504
 
-    die("ok#" . $event_id . "#" . $ftpInfo);
+//202412merda_die    die("ok#" . $event_id . "#" . $ftpInfo);
+    echo "ok#" . $event_id . "#" . $ftpInfo;//202412merda_die
 }
 
 $event = $baseController->eventsModel->getEvent($event_id, $rental_id);
@@ -108,7 +109,8 @@ if (!$event) {
 
     VIC_fesLog("event_init, dongle: $dongle; event & dongle from diferent owners ok#" . $event_id . "#" . $ftpInfo); //20130504
 
-    die("ok#" . $event_id . "#" . $ftpInfo);
+//202412merda_die    die("ok#" . $event_id . "#" . $ftpInfo);
+    echo "ok#" . $event_id . "#" . $ftpInfo;//202412merda_die
 }
 
 VIC_fesLog("event_init, dongle: $dongle; def event_id: $event_id; autocreated?: {$event_autocreated}"); //20130504
@@ -130,18 +132,21 @@ if ($event_autocreated) {
         $ftpInfo = getFtpInfo($baseController, $event_id, 0);
         VIC_fesLog("event_init, dongle: $dongle; currentDate > event_start ok#" . $event_id . "#" . $ftpInfo); //20130504
 
-        die("ok#" . $event_id . "#" . $ftpInfo);
+//202412merda_die        die("ok#" . $event_id . "#" . $ftpInfo);
+        echo "ok#" . $event_id . "#" . $ftpInfo;//202412merda_die
     } 
     else {
         $ftpInfo = getFtpInfo($baseController, $event_id, $event_ftp_folder_id);
         VIC_fesLog("event_init, dongle: $dongle; currentDate <= event_start ok#" . $event_id . "#" . $ftpInfo); //20130504
 
-        die("ok#" . $event_id . "#" . $ftpInfo);
+//202412merda_die        die("ok#" . $event_id . "#" . $ftpInfo);
+        echo "ok#" . $event_id . "#" . $ftpInfo;//202412merda_die
     }
 } 
 else {
     $ftpInfo = getFtpInfo($baseController, $event_id, $event_ftp_folder_id);
     VIC_fesLog("event_init, dongle: $dongle; event not autocreated ok#" . $event_id . "#" . $ftpInfo); //20130504
-    die("ok#" . $event_id . "#" . $ftpInfo);
+//202412merda_die    die("ok#" . $event_id . "#" . $ftpInfo);
+    echo "ok#" . $event_id . "#" . $ftpInfo;//202412merda_die
 }
 
