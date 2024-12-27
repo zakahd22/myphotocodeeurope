@@ -1,8 +1,8 @@
 <?php
 
 include_once "../common/global.php";
-error_log( "TO_DELETE event_init 00" );
-include_once G_PATH . "common/general.php";
+//error_log( "TO_DELETE event_init 00" );
+//include_once G_PATH . "common/general.php";
 error_log( "TO_DELETE event_init 01" );
 require_once G_PATH . "common/Classes/baseController.php";
 error_log( "TO_DELETE event_init 02" );
@@ -93,7 +93,7 @@ if (!$event_id) {
     VIC_fesLog("event_init, dongle: $dongle; no event ok#" . $event_id . "#" . $ftpInfo); //20130504
 
 //202412merda_die    die("ok#" . $event_id . "#" . $ftpInfo);
-    echo "ok#" . $event_id . "#" . $ftpInfo;//202412merda_die
+    echo "ok#" . $event_id . "#" . $ftpInfo; return;//202412merda_die
 }
 
 $event = $baseController->eventsModel->getEvent($event_id, $rental_id);
@@ -110,7 +110,7 @@ if (!$event) {
     VIC_fesLog("event_init, dongle: $dongle; event & dongle from diferent owners ok#" . $event_id . "#" . $ftpInfo); //20130504
 
 //202412merda_die    die("ok#" . $event_id . "#" . $ftpInfo);
-    echo "ok#" . $event_id . "#" . $ftpInfo;//202412merda_die
+    echo "ok#" . $event_id . "#" . $ftpInfo; return;//202412merda_die
 }
 
 VIC_fesLog("event_init, dongle: $dongle; def event_id: $event_id; autocreated?: {$event_autocreated}"); //20130504
@@ -133,20 +133,18 @@ if ($event_autocreated) {
         VIC_fesLog("event_init, dongle: $dongle; currentDate > event_start ok#" . $event_id . "#" . $ftpInfo); //20130504
 
 //202412merda_die        die("ok#" . $event_id . "#" . $ftpInfo);
-        echo "ok#" . $event_id . "#" . $ftpInfo;//202412merda_die
     } 
     else {
         $ftpInfo = getFtpInfo($baseController, $event_id, $event_ftp_folder_id);
         VIC_fesLog("event_init, dongle: $dongle; currentDate <= event_start ok#" . $event_id . "#" . $ftpInfo); //20130504
 
 //202412merda_die        die("ok#" . $event_id . "#" . $ftpInfo);
-        echo "ok#" . $event_id . "#" . $ftpInfo;//202412merda_die
     }
 } 
 else {
     $ftpInfo = getFtpInfo($baseController, $event_id, $event_ftp_folder_id);
     VIC_fesLog("event_init, dongle: $dongle; event not autocreated ok#" . $event_id . "#" . $ftpInfo); //20130504
 //202412merda_die    die("ok#" . $event_id . "#" . $ftpInfo);
-    echo "ok#" . $event_id . "#" . $ftpInfo;//202412merda_die
+    
 }
-
+echo "ok#" . $event_id . "#" . $ftpInfo;//202412merda_die
