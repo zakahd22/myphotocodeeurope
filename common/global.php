@@ -5,12 +5,16 @@
 //
 //set_error_handler('exceptions_error_handler');
 
+
+//echo "<p>__DIR__".__DIR__."</p>";
+//echo "<p>dirname (__FILE__)".dirname (__FILE__)."</p>";
+
 error_reporting(E_ALL); // Error/Exception engine, always use E_ALL
 //error_reporting(E_ALL ^ E_WARNING); // Error/Exception engine, E_ALL except Warnings
 ini_set('ignore_repeated_errors', TRUE); // always use TRUE
 ini_set('display_errors', FALSE); // Error/Exception display, use FALSE only in production environment or real server. Use TRUE in development environment
 ini_set('log_errors', TRUE); // Error/Exception file logging engine.
-ini_set('error_log', __DIR__ . "../../logsMyPC/log_reporting_common_global-".date("Ymd").".dat"); // Logging file path
+ini_set('error_log', __DIR__ . "/../../logsMyPC/log_reporting_common_global-".date("Ymd").".dat"); // Logging file path
 error_log( "TO_DELETE checking path" );
 
 //202412logsMyPC ob_start();
