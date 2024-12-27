@@ -114,6 +114,7 @@ class BdD {
         try {
             mysqli_free_result($this->rs);
         } catch (Exception $e) {
+            $error = $e->getMessage();
         }
         return true;
     }

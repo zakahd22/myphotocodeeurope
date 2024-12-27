@@ -2,7 +2,9 @@
 
 include_once "../common/global.php";
 include_once G_PATH . "common/general.php";
+error_log( "TO_DELETE event_init 01" );
 require_once G_PATH . "common/Classes/baseController.php";
+error_log( "TO_DELETE event_init 02" );
 
 $baseController = new baseController();
 $baseController->createModel('booths');
@@ -10,6 +12,7 @@ $baseController->createModel('events');
 $baseController->createModel('ftp_folders');
 $baseController->createModel('photos');
 
+error_log( "TO_DELETE event_init 03" );
 
 function createNewEvent($baseController, $rental_id, $rand_string) {
     $currentDate = date('Ymd');
