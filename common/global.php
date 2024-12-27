@@ -1,4 +1,10 @@
 <?php
+function exceptions_error_handler($severity, $message, $filename, $lineno) {
+    throw new ErrorException($message, 0, $severity, $filename, $lineno);
+}
+
+set_error_handler('exceptions_error_handler');
+
 error_reporting(E_ALL); // Error/Exception engine, always use E_ALL
 //error_reporting(E_ALL ^ E_WARNING); // Error/Exception engine, E_ALL except Warnings
 ini_set('ignore_repeated_errors', TRUE); // always use TRUE
