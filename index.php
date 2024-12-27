@@ -1,8 +1,6 @@
 <?php
 require_once "common/global.php";
-error_log( "TO_DELETE index01" );
 require_once 'common/conexio.php';
-error_log( "TO_DELETE index02" );
 $document_root = "/homepages/46/d399659235/htdocs";
 
 new index_view();
@@ -16,7 +14,6 @@ class index_view{
     
     public function __construct($lang='en-US') {
         
-        error_log( "TO_DELETE index03" );
         $this->define_elements();
         $this->prepare_view();
         $this->show_view();
