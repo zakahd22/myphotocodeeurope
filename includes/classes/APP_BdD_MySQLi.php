@@ -112,9 +112,10 @@ class BdD {
 
     public function CloseRs() {
         try {
-        return mysqli_free_result($this->rs);
+            mysqli_free_result($this->rs);
         } catch (Exception $e) {
         }
+        return true;
     }
 
     public function GetField($field) {
