@@ -1,6 +1,7 @@
 <?php
 
 include_once "../common/global.php";
+error_log( "TO_DELETE event_init 00" );
 include_once G_PATH . "common/general.php";
 error_log( "TO_DELETE event_init 01" );
 require_once G_PATH . "common/Classes/baseController.php";
