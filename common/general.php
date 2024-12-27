@@ -4,13 +4,14 @@
     //ini_set('upload_max_filesize', '64M');
 //    require 'config/params.php';
 
-    connect();
+//20242412merda2    connect();
     $doTrace = false;
 
     function connect(){
         require 'config/config.php';
 
-        $link = mysql_connect($DB_myphotocode_web['host'],$DB_myphotocode_web['user'],$DB_myphotocode_web['pass']);
+//20242412merda        $link = mysql_connect($DB_myphotocode_web['host'],$DB_myphotocode_web['user'],$DB_myphotocode_web['pass']);
+        $link = mysqli_connect($DB_myphotocode_web['host'],$DB_myphotocode_web['user'],$DB_myphotocode_web['pass'],$DB_myphotocode_web['database']);//20242412merda
         if (!$link) die('ko');
         mysql_select_db($DB_myphotocode_web['database']);
     }
