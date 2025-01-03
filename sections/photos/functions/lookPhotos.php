@@ -2,6 +2,7 @@
 require_once "../../../common/global.php";
 require_once G_PATH . "common/conexio.php";
 require_once G_PATH . "common/Classes/baseController.php";
+error_log( "TO_DELETE lookPhotos 01" );
 //substituir per classe.
 $labels_apartat = "login";
 include G_PATH.'labels.php';
@@ -9,6 +10,8 @@ include G_PATH."sections/photos/functions/gifEncoder.php";
 
 include G_PATH . "src/myphotocode/domain/Contact.php";
 include G_PATH . "src/myphotocode/domain/ContactType.php";
+
+error_log( "TO_DELETE lookPhotos 02" );
 
 function instagramButton($picture, $size = null) {
 

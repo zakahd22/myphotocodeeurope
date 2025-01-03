@@ -41,6 +41,7 @@ app/user/userimage/
 app/user/userqr/
 events/
 phpmyadmin/
+phpmyadminEU/
 news/
 news-no/
 printPhoto/
