@@ -34,6 +34,7 @@
                                         printf("%s: %d %s", $this->VER, $i, $this->ERR['ERR01']);
                                         exit (0);
                                 }
+                                error_log( "TO_DELETE lookPhotos->GIFEncoder i: $i" );
                                 for($j = (13 + 3 * (2 << (ord($this->BUF[$i] { 10 }) & 0x07))), $k = true; $k; $j++) {
                                         switch($this->BUF[$i] { $j }) {
                                                 case "!" :
