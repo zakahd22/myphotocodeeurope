@@ -1520,34 +1520,35 @@ HTML;
 HTML;
     return $html;
   }
+//202501    function instagramButton($picture, $size) {
+    function instagramButton($picture, $size = null) {
 
-//    function instagramButton($picture, $size) {
-//
-//        $return = "";
-//        if (isset($size)) {
-//            $redimensionar = "width = $size";
-//        } else {
-//            $redimensionar = "";
-//        }
-//
-//        switch ($this->clientType) {
-//            case "iOS":
-//                $return = <<<HTML
-//                <a class='links_share iOSInstaShare' href='$picture' download><img class="photoButton" $redimensionar onclick="window.location = 'instagram://camera'" src='images/web/icon-instagram.png' alt='Instagram iOS'></a>
-//HTML;
-//                break;
-//            case "Android":
-//                $return = <<<HTML
-//                <a class='links_share androidInstaShare' href='$picture' download><img class="photoButton" $redimensionar onclick="window.location = 'https://www.instagram.com'" src='images/web/icon-instagram.png' alt='Instagram Android'></a>
-//HTML;
-//                break;
-//            default:
-//                $return = "";
-//                break;
-//        }
-//
-//        return $return;
-//    }
+
+        $return = "";
+        if (isset($size)) {
+            $redimensionar = "width = $size";
+        } else {
+            $redimensionar = "";
+        }
+
+        switch ($this->clientType) {
+            case "iOS":
+                $return = <<<HTML
+                <a class='links_share iOSInstaShare' href='$picture' download><img class="photoButton" $redimensionar onclick="window.location = 'instagram://camera'" src='images/web/icon-instagram.png' alt='Instagram iOS'></a>
+HTML;
+                break;
+            case "Android":
+                $return = <<<HTML
+                <a class='links_share androidInstaShare' href='$picture' download><img class="photoButton" $redimensionar onclick="window.location = 'https://www.instagram.com'" src='images/web/icon-instagram.png' alt='Instagram Android'></a>
+HTML;
+                break;
+            default:
+                $return = "";
+                break;
+        }
+
+        return $return;
+    }
 
     private function getClientTypeFromUserAgent()
     {
