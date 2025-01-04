@@ -61,10 +61,7 @@
                         $cmap = 0;
 //20250104vic                        if(ord($this->BUF[0] { 10 }) & 0x80) {
                          if(ord($this->BUF[0][10]) & 0x80) {
-                               $cmap = 3 * (2 << (ord($this->BUF[0] {
-                                        10
-                                }
-                                ) & 0x07 ) );
+                               $cmap = 3 * (2 << (ord($this->BUF[0][10]) & 0x07 ) );
                                 $this->GIF .= substr($this->BUF[0], 6, 7);
                                 $this->GIF .= substr($this->BUF[0], 13, $cmap);
                                 $this->GIF .= "!\377\13NETSCAPE2.0\3\1".GIFEncoder :: GIFWord($this->LOP)."\0";
@@ -72,28 +69,13 @@
                 }
 
                 function GIFAddFrames($i, $d) {
-                        $Locals_str = 13 + 3 * (2 << (ord($this->BUF[$i] {
-                                10
-                        }
-                        ) & 0x07 ) );
+                        $Locals_str = 13 + 3 * (2 << (ord($this->BUF[$i][10]) & 0x07 ) );
                         $Locals_end = strlen($this->BUF[$i]) - $Locals_str - 1;
                         $Locals_tmp = substr($this->BUF[$i], $Locals_str, $Locals_end);
-                        $Global_len = 2 << (ord($this->BUF[0] {
-                                10
-                        }
-                        ) & 0x07 );
-                        $Locals_len = 2 << (ord($this->BUF[$i] {
-                                10
-                        }
-                        ) & 0x07 );
-                        $Global_rgb = substr($this->BUF[0], 13, 3 * (2 << (ord($this->BUF[0] {
-                                10
-                        }
-                        ) & 0x07 ) ) );
-                        $Locals_rgb = substr($this->BUF[$i], 13, 3 * (2 << (ord($this->BUF[$i] {
-                                10
-                        }
-                        ) & 0x07 ) ) );
+                        $Global_len = 2 << (ord($this->BUF[0][10]) & 0x07 );
+                        $Locals_len = 2 << (ord($this->BUF[$i][10]) & 0x07 );
+                        $Global_rgb = substr($this->BUF[0], 13, 3 * (2 << (ord($this->BUF[0][10]) & 0x07 ) ) );
+                        $Locals_rgb = substr($this->BUF[$i], 13, 3 * (2 << (ord($this->BUF[$i][10]) & 0x07 ) ) );
                         $Locals_ext = "!\xF9\x04".chr(($this->DIS << 2) + 0).chr(($d >> 0) & 0xFF).chr(($d >> 8) & 0xFF)."\x0\x0";
 //20250104                        if($this->COL > - 1 && ord($this->BUF[$i] { 10 }) & 0x80) {
                          if($this->COL > - 1 && ord($this->BUF[$i][10]) & 0x80) {
@@ -114,26 +96,17 @@
                                         $Locals_tmp = substr($Locals_tmp, 10, strlen($Locals_tmp) - 10);
                                         break;
                         }
-                        if(ord($this->BUF[$i] { 10 }) & 0x80 && $this->IMG > - 1) {
+                        if(ord($this->BUF[$i][10]) & 0x80 && $this->IMG > - 1) {
                                 if($Global_len == $Locals_len) {
                                         if(GIFEncoder :: GIFBlockCompare($Global_rgb, $Locals_rgb, $Global_len)) {
                                                 $this->GIF .= ($Locals_ext.$Locals_img.$Locals_tmp);
                                         }
                                         else{
-                                                $byte = ord($Locals_img {
-                                                        9
-                                                }
-                                                );
+                                                $byte = ord($Locals_img[9]);
                                                 $byte |= 0x80;
                                                 $byte &= 0xF8;
-                                                $byte |= (ord($this->BUF[0] {
-                                                        10
-                                                }
-                                                ) & 0x07 );
-                                                $Locals_img {
-                                                        9
-                                                }
-                                                = chr($byte);
+                                                $byte |= (ord($this->BUF[0][10]) & 0x07 );
+                                                $Locals_img[9] = chr($byte);
                                                 $this->GIF .= ($Locals_ext.$Locals_img.$Locals_rgb.$Locals_tmp);
                                         }
                                 }
@@ -144,14 +117,8 @@
                                         );
                                         $byte |= 0x80;
                                         $byte &= 0xF8;
-                                        $byte |= (ord($this->BUF[$i] {
-                                                10
-                                        }
-                                        ) & 0x07 );
-                                        $Locals_img {
-                                                9
-                                        }
-                                        = chr($byte);
+                                        $byte |= (ord($this->BUF[$i][10]) & 0x07 );
+                                        $Locals_img[9] = chr($byte);
                                         $this->GIF .= ($Locals_ext.$Locals_img.$Locals_rgb.$Locals_tmp);
                                 }
                         }
@@ -182,4 +149,3 @@
                         return ($this->GIF);
                 }
         }
-?>
