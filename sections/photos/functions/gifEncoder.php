@@ -35,7 +35,8 @@
                                         exit (0);
                                 }
                                 error_log( "TO_DELETE lookPhotos->GIFEncoder i: $i" );
-                                for($j = (13 + 3 * (2 << (ord($this->BUF[$i] { 10 }) & 0x07))), $k = true; $k; $j++) {
+//20250104vic                                for($j = (13 + 3 * (2 << (ord($this->BUF[$i] { 10 }) & 0x07))), $k = true; $k; $j++) {
+                                for($j = (13 + 3 * (2 << (ord($this->BUF[$i][10]) & 0x07))), $k = true; $k; $j++) {//20250104vic
                                         switch($this->BUF[$i] { $j }) {
                                                 case "!" :
                                                         if((substr($this->BUF[$i], ($j + 3), 8)) == "NETSCAPE") {
@@ -58,8 +59,9 @@
 
                 function GIFAddHeader() {
                         $cmap = 0;
-                        if(ord($this->BUF[0] { 10 }) & 0x80) {
-                                $cmap = 3 * (2 << (ord($this->BUF[0] {
+//20250104vic                        if(ord($this->BUF[0] { 10 }) & 0x80) {
+                         if(ord($this->BUF[0][10]) & 0x80) {
+                               $cmap = 3 * (2 << (ord($this->BUF[0] {
                                         10
                                 }
                                 ) & 0x07 ) );
@@ -93,8 +95,9 @@
                         }
                         ) & 0x07 ) ) );
                         $Locals_ext = "!\xF9\x04".chr(($this->DIS << 2) + 0).chr(($d >> 0) & 0xFF).chr(($d >> 8) & 0xFF)."\x0\x0";
-                        if($this->COL > - 1 && ord($this->BUF[$i] { 10 }) & 0x80) {
-                                for($j = 0; $j < (2 << (ord($this->BUF[$i] { 10 }) & 0x07)); $j++) {
+//20250104                        if($this->COL > - 1 && ord($this->BUF[$i] { 10 }) & 0x80) {
+                         if($this->COL > - 1 && ord($this->BUF[$i][10]) & 0x80) {
+                               for($j = 0; $j < (2 << (ord($this->BUF[$i][10]) & 0x07)); $j++) {
                                         if(ord($Locals_rgb { 3 * $j + 0 }) == (($this->COL >> 16) & 0xFF) && ord($Locals_rgb { 3 * $j + 1 }) == (($this->COL >> 8) & 0xFF) && ord($Locals_rgb { 3 * $j + 2 }) == (($this->COL >> 0) & 0xFF)) {
                                                 $Locals_ext = "!\xF9\x04".chr(($this->DIS << 2) + 1).chr(($d >> 0) & 0xFF).chr(($d >> 8) & 0xFF).chr($j)."\x0";
                                                 break;
@@ -111,7 +114,7 @@
                                         $Locals_tmp = substr($Locals_tmp, 10, strlen($Locals_tmp) - 10);
                                         break;
                         }
-                        if(ord($this->BUF[$i] { 10 }) & 0x80 && $this->IMG > - 1) {
+                        if(ord($this->BUF[$i][10]) & 0x80 && $this->IMG > - 1) {
                                 if($Global_len == $Locals_len) {
                                         if(GIFEncoder :: GIFBlockCompare($Global_rgb, $Locals_rgb, $Global_len)) {
                                                 $this->GIF .= ($Locals_ext.$Locals_img.$Locals_tmp);
