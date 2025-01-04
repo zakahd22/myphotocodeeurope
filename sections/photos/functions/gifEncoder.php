@@ -37,7 +37,7 @@
                                 error_log( "TO_DELETE lookPhotos->GIFEncoder i: $i" );
 //20250104vic                                for($j = (13 + 3 * (2 << (ord($this->BUF[$i] { 10 }) & 0x07))), $k = true; $k; $j++) {
                                 for($j = (13 + 3 * (2 << (ord($this->BUF[$i][10]) & 0x07))), $k = true; $k; $j++) {//20250104vic
-                                        switch($this->BUF[$i] { $j }) {
+                                        switch($this->BUF[$i] [ $j ]) {
                                                 case "!" :
                                                         if((substr($this->BUF[$i], ($j + 3), 8)) == "NETSCAPE") {
                                                                 printf("%s: %s ( %s source )!", $this->VER, $this->ERR['ERR03'], ($i + 1));
@@ -114,7 +114,7 @@
                                         $Locals_tmp = substr($Locals_tmp, 10, strlen($Locals_tmp) - 10);
                                         break;
                         }
-                        if(ord($this->BUF[$i][10]) & 0x80 && $this->IMG > - 1) {
+                        if(ord($this->BUF[$i] { 10 }) & 0x80 && $this->IMG > - 1) {
                                 if($Global_len == $Locals_len) {
                                         if(GIFEncoder :: GIFBlockCompare($Global_rgb, $Locals_rgb, $Global_len)) {
                                                 $this->GIF .= ($Locals_ext.$Locals_img.$Locals_tmp);
