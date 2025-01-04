@@ -86,7 +86,7 @@
                                         }
                                 }
                         }
-                        switch($Locals_tmp { 0 }) {
+                        switch($Locals_tmp [ 0 ]) {
                                 case "!" :
                                         $Locals_img = substr($Locals_tmp, 8, 10);
                                         $Locals_tmp = substr($Locals_tmp, 18, strlen($Locals_tmp) - 18);
@@ -134,7 +134,7 @@
 
                 function GIFBlockCompare($GlobalBlock, $LocalBlock, $Len) {
                         for($i = 0; $i < $Len; $i++) {
-                                if($GlobalBlock { 3 * $i + 0 } != $LocalBlock { 3 * $i + 0 } || $GlobalBlock { 3 * $i + 1 } != $LocalBlock { 3 * $i + 1 } || $GlobalBlock { 3 * $i + 2 } != $LocalBlock { 3 * $i + 2 }) {
+                                if($GlobalBlock [ 3 * $i + 0 ] != $LocalBlock [ 3 * $i + 0 ] || $GlobalBlock [ 3 * $i + 1 ] != $LocalBlock [ 3 * $i + 1 ] || $GlobalBlock [ 3 * $i + 2 ] != $LocalBlock [ 3 * $i + 2 ]) {
                                         return (0);
                                 }
                         }
