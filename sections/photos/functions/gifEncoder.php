@@ -111,10 +111,7 @@
                                         }
                                 }
                                 else{
-                                        $byte = ord($Locals_img {
-                                                9
-                                        }
-                                        );
+                                        $byte = ord($Locals_img [9]);
                                         $byte |= 0x80;
                                         $byte &= 0xF8;
                                         $byte |= (ord($this->BUF[$i][10]) & 0x07 );
