@@ -80,7 +80,7 @@
 //20250104                        if($this->COL > - 1 && ord($this->BUF[$i] { 10 }) & 0x80) {
                          if($this->COL > - 1 && ord($this->BUF[$i][10]) & 0x80) {
                                for($j = 0; $j < (2 << (ord($this->BUF[$i][10]) & 0x07)); $j++) {
-                                        if(ord($Locals_rgb { 3 * $j + 0 }) == (($this->COL >> 16) & 0xFF) && ord($Locals_rgb { 3 * $j + 1 }) == (($this->COL >> 8) & 0xFF) && ord($Locals_rgb { 3 * $j + 2 }) == (($this->COL >> 0) & 0xFF)) {
+                                        if(ord($Locals_rgb [ 3 * $j + 0 ]) == (($this->COL >> 16) & 0xFF) && ord($Locals_rgb [ 3 * $j + 1 ]) == (($this->COL >> 8) & 0xFF) && ord($Locals_rgb [ 3 * $j + 2 ]) == (($this->COL >> 0) & 0xFF)) {
                                                 $Locals_ext = "!\xF9\x04".chr(($this->DIS << 2) + 1).chr(($d >> 0) & 0xFF).chr(($d >> 8) & 0xFF).chr($j)."\x0";
                                                 break;
                                         }
