@@ -64,6 +64,7 @@ log/
 .selected_editor
 .ssh/
 app/photobooth/offset.php
+sections/totalshare/offset.php
 .idea/*
 .vim/
 uploads/
