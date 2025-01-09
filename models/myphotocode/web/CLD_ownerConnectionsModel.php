@@ -11,7 +11,8 @@ class CLD_ownerConnectionsModel extends baseModel{
     public function getownerConnection($id, $type_user){
         $this->setFilter("user", "=", $id);    
         $this->setFilter("type_user", "=", $type_user, "AND");    
-        $this->setOrder(data, "DESC");
+//20250109owner        $this->setOrder(data, "DESC");
+        $this->setOrder('data', "DESC");//20250109owner
         $this->setLimit("5");
         return $this->select('CLD_ownerConnections');
     }
