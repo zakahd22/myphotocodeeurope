@@ -1,10 +1,8 @@
 <?php
-
-//20250111cron require_once "../../common/global.php";
-require_once __DIR__ ."/../../common/global.php";//20250111cron
+chdir( __DIR__ );//20250111cron
+require_once "../../common/global.php";
 error_log( "TO_DELETE gestor 01" );
-//20250111cron require_once '../../common/conexio.php';
-require_once __DIR__ ."/../../common/conexio.php";//20250111cron 
+require_once '../../common/conexio.php';
 error_log( "TO_DELETE gestor 02" );
 require_once "telegram.php";
 ob_start();
