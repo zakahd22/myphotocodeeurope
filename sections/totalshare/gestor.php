@@ -1,13 +1,13 @@
 <?php
 chdir( __DIR__ );//20250111cron
 require_once "../../common/global.php";
-error_log( "TO_DELETE gestor 01" );
+//error_log( "TO_DELETE gestor 01" );
 require_once '../../common/conexio.php';
-error_log( "TO_DELETE gestor 02" );
+//error_log( "TO_DELETE gestor 02" );
 require_once "telegram.php";
 ob_start();
 //error_reporting(E_ALL);
-ini_set('display_errors',1);
+//ini_set('display_errors',1);
 
 $html = "<script src='functions.js'/>"; //No s'utilitza enlloc !?
 
