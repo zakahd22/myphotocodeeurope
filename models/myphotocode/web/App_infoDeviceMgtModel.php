@@ -50,7 +50,8 @@ class App_infoDeviceMgtModel extends baseModel{
         $this->setFilter('idBooth', '=', $pb_id);  
         $this->setLimit(1);
         $result = $this->select('App_infoDeviceMgt');
-utils::log("Consulta amb getActiveDeviceAlertsByBooth".$this->get_sql_string(), logMoment);
+//20250111PBlist utils::log("Consulta amb getActiveDeviceAlertsByBooth".$this->get_sql_string(), logMoment);
+utils::log("Consulta amb getActiveDeviceAlertsByBooth".$this->get_sql_string(), 'logMoment');//20250111PBlist 
         $numDevicealerts = 0; 
         if(count($result) && $result[0]['ok']==0){
            $numDevicealerts = 1; 
@@ -87,7 +88,8 @@ utils::log("Consulta amb getActiveDeviceAlertsByBooth".$this->get_sql_string(), 
                 LEFT JOIN CLD_boothTypes cbt ON ab.CLD_idType = cbt.id 
                 WHERE aidm.idBooth = $pb_id ORDER BY aidm.`when` DESC";      
         $query = $this->my_query($sql);
-        utils::log("Consulta amb getDeviceAlertsByBoothHtml  ".$this->get_sql_string(), logMoment);
+//20250111PBlist         utils::log("Consulta amb getDeviceAlertsByBoothHtml  ".$this->get_sql_string(), logMoment);
+        utils::log("Consulta amb getDeviceAlertsByBoothHtml  ".$this->get_sql_string(), 'logMoment');//20250111PBlist 
         if($query){
             $i = 0;
             $result = array();
