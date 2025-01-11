@@ -774,105 +774,107 @@ class lookPhotos extends baseController{
         
         if(file_exists(G_PATH . $this->gif)){
             $this->haveGif2D = true;
-        } elseif ($this->tipusPhoto == 1 || $this->tipusPhoto == 2){
-            $foto = imagecreatefromjpeg(G_PATH . $this->img);
-            if($this->tipusPhoto == 1){
-                list($w, $h) = getimagesize(G_PATH . $this->img);
-
-                
-                $h_m = ($h/4) - 57;
-                //TODO: Farem un calcul de $h/4 a la tira i calculem els 4 valors. De moment ho provem a la B5
-                if($this->boothType == 'W'){
-                    $h2 = Array(57,498,939,1380); 
-                }else{
-                    
-                   
-                 $h2 = Array(57,566,1075,1584);
-                }
-                
-                
-                $w -= 110;
-                $z=0;
-                while($z<4){
-                    $destino = imagecreatetruecolor($w, $h_m);
-                    $destino_name = G_PATH . $this->event_folder.$this->code."-S".$z.".gif";
-                    imagecopyresampled($destino, $foto , 0, 0, 55, $h2[$z] , $w, $h_m , $w, $h_m);
-                    imagegif($destino,$destino_name);
-                    imagedestroy($destino);
-                    $z++;
-                }
-            }   
-            elseif($this->tipusPhoto == 2){
-                list($w, $h) = getimagesize(G_PATH . $this->img);
-
-                $w_m = ($w/4) - 65;
-                $w2 = Array(75,587,1095,1600);                
-                $h -= 110;
-                $z=0;
-                while($z<4){
-                    $destino = imagecreatetruecolor($w_m, $h);
-                    $destino_name = G_PATH . $this->event_folder.$this->code."-S".$z.".gif";
-                    imagecopyresampled($destino, $foto, 0, 0, $w2[$z] , 55,  $w_m, $h , $w_m, $h);   
-                    imagegif($destino,$destino_name);       
-                    imagedestroy($destino);
-                    $z++;
-                }
-            }
-            
-            $sd = scandir(G_PATH . $this->event_folder);
-            $tempus = Array(75,50,50,50); 
-            $i=0;
-            
-            foreach ($sd as $s){
-                if ( $s != "." && $s != ".." ) {
-                    if(strpos($s,$this->code."-S") !== false) {
-                        $frames2[] = G_PATH . $this->event_folder.$s;
-                        $time2[] = $tempus[$i];
-                        $i++;
-                    }
-                }
-            }
-            
-            $gif = new GIFEncoder($frames2, $time2, 0, 2, 0, 0, 0, "url");
-            
-            if(FWrite(FOpen(G_PATH . $this->event_folder.$this->code."GIF.gif", "wb" ), $gif->GetAnimation()) > 0){
-//                utils::log('Generated GIF', "logLookPhotos", "Generate Gif");
-                $exist = $this->photo_FilesModel->getFile($this->code."GIF.gif");
-//                utils::log('Seaching file in Photo_files: '.$this->code."GIF.gif", "logLookPhotos", "Generate Gif");
-                if(!$exist){
-//                    utils::log('Creating value', "logLookPhotos", "Generate Gif");
-                    $server_id = $this->CLD_ServersModel->getCLD_Servers('1and1');
-                    $server_id = $server_id[0]['id'];
-                    
-                    $this->entity->loadEntity('photo_Files');
-                    $this->entity->setValue("photoId", $this->photo_id);
-                    $this->entity->setValue("ServerId", $server_id);
-                    $this->entity->setValue("name", $this->code."GIF.gif");
-                    $this->entity->setValue("path", $this->event_folder.$this->code."GIF.gif");
-                    $this->entity->setValue("fileType", "gif");
-                    $this->entity->setValue("fileSize", filesize(G_PATH . $this->event_folder . $this->code . "GIF.gif"));
-                    $this->entity->setValue("photobooth", $this->pbs_id);
-                    $this->entity->setValue("dongle", $this->dongle_id);
-                    $this->entity->setValue("date", utils::get_datetime());
-                    
-//                    utils::log($this->entity->getAllValues(), "logLookPhotos", "Generate Gif");
-                    
-                    if(!$this->photo_FilesModel->insertphoto_Files()){
-                        utils::log('Not inserted', "logLookPhotos", "Generate Gif");
-                    }
-//                    else {
-//                        utils::log('Inserted', "logLookPhotos", "Generate Gif");
+//20250111gifEncoderFalla INICI
+//        } elseif ($this->tipusPhoto == 1 || $this->tipusPhoto == 2){
+//            $foto = imagecreatefromjpeg(G_PATH . $this->img);
+//            if($this->tipusPhoto == 1){
+//                list($w, $h) = getimagesize(G_PATH . $this->img);
+//
+//                
+//                $h_m = ($h/4) - 57;
+//                //TODO: Farem un calcul de $h/4 a la tira i calculem els 4 valors. De moment ho provem a la B5
+//                if($this->boothType == 'W'){
+//                    $h2 = Array(57,498,939,1380); 
+//                }else{
+//                    
+//                   
+//                 $h2 = Array(57,566,1075,1584);
+//                }
+//                
+//                
+//                $w -= 110;
+//                $z=0;
+//                while($z<4){
+//                    $destino = imagecreatetruecolor($w, $h_m);
+//                    $destino_name = G_PATH . $this->event_folder.$this->code."-S".$z.".gif";
+//                    imagecopyresampled($destino, $foto , 0, 0, 55, $h2[$z] , $w, $h_m , $w, $h_m);
+//                    imagegif($destino,$destino_name);
+//                    imagedestroy($destino);
+//                    $z++;
+//                }
+//            }   
+//            elseif($this->tipusPhoto == 2){
+//                list($w, $h) = getimagesize(G_PATH . $this->img);
+//
+//                $w_m = ($w/4) - 65;
+//                $w2 = Array(75,587,1095,1600);                
+//                $h -= 110;
+//                $z=0;
+//                while($z<4){
+//                    $destino = imagecreatetruecolor($w_m, $h);
+//                    $destino_name = G_PATH . $this->event_folder.$this->code."-S".$z.".gif";
+//                    imagecopyresampled($destino, $foto, 0, 0, $w2[$z] , 55,  $w_m, $h , $w_m, $h);   
+//                    imagegif($destino,$destino_name);       
+//                    imagedestroy($destino);
+//                    $z++;
+//                }
+//            }
+//            
+//            $sd = scandir(G_PATH . $this->event_folder);
+//            $tempus = Array(75,50,50,50); 
+//            $i=0;
+//            
+//            foreach ($sd as $s){
+//                if ( $s != "." && $s != ".." ) {
+//                    if(strpos($s,$this->code."-S") !== false) {
+//                        $frames2[] = G_PATH . $this->event_folder.$s;
+//                        $time2[] = $tempus[$i];
+//                        $i++;
 //                    }
-                }
-            }
-            
-            $x=0;
-            while($x<$i){
-                unlink(G_PATH . $this->event_folder.$this->code."-S".$x.".gif");
-                $x++;
-            }
-
-            $this->haveGif2D = true;
+//                }
+//            }
+//            
+//            $gif = new GIFEncoder($frames2, $time2, 0, 2, 0, 0, 0, "url");
+//            
+//            if(FWrite(FOpen(G_PATH . $this->event_folder.$this->code."GIF.gif", "wb" ), $gif->GetAnimation()) > 0){
+////                utils::log('Generated GIF', "logLookPhotos", "Generate Gif");
+//                $exist = $this->photo_FilesModel->getFile($this->code."GIF.gif");
+////                utils::log('Seaching file in Photo_files: '.$this->code."GIF.gif", "logLookPhotos", "Generate Gif");
+//                if(!$exist){
+////                    utils::log('Creating value', "logLookPhotos", "Generate Gif");
+//                    $server_id = $this->CLD_ServersModel->getCLD_Servers('1and1');
+//                    $server_id = $server_id[0]['id'];
+//                    
+//                    $this->entity->loadEntity('photo_Files');
+//                    $this->entity->setValue("photoId", $this->photo_id);
+//                    $this->entity->setValue("ServerId", $server_id);
+//                    $this->entity->setValue("name", $this->code."GIF.gif");
+//                    $this->entity->setValue("path", $this->event_folder.$this->code."GIF.gif");
+//                    $this->entity->setValue("fileType", "gif");
+//                    $this->entity->setValue("fileSize", filesize(G_PATH . $this->event_folder . $this->code . "GIF.gif"));
+//                    $this->entity->setValue("photobooth", $this->pbs_id);
+//                    $this->entity->setValue("dongle", $this->dongle_id);
+//                    $this->entity->setValue("date", utils::get_datetime());
+//                    
+////                    utils::log($this->entity->getAllValues(), "logLookPhotos", "Generate Gif");
+//                    
+//                    if(!$this->photo_FilesModel->insertphoto_Files()){
+//                        utils::log('Not inserted', "logLookPhotos", "Generate Gif");
+//                    }
+////                    else {
+////                        utils::log('Inserted', "logLookPhotos", "Generate Gif");
+////                    }
+//                }
+//            }
+//            
+//            $x=0;
+//            while($x<$i){
+//                unlink(G_PATH . $this->event_folder.$this->code."-S".$x.".gif");
+//                $x++;
+//            }
+//
+//            $this->haveGif2D = true;
+//20250111gifEncoderFalla FINAL
         }
     }
     
