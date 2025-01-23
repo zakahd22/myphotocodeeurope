@@ -74,7 +74,8 @@ if ($metode == 1 || $metode == 3) {
     
     $mini = substr($contacte,1);  
     $mini = ltrim($mini,"0 ");    
-    $telefonArray = split(' ',$mini);  
+//20250123split    $telefonArray = split(' ',$mini);  
+    $telefonArray = explode(' ',$mini); //20250123split 
     $prefix = $telefonArray[0];
     $telefon = $telefonArray[1];    
     $telefon = preg_replace("/[^0-9]/", "", $telefon );     //li treiem -  i . que deixa escriure el teclat wtf
