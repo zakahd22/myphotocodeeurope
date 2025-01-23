@@ -2,6 +2,8 @@
 include "../../../sessio.php";
 require_once G_PATH . 'common/conexio.php';
 
+error_log( "TO_DELETE sections/phoyobooths/list/list.php 01" );
+
 //$labels_apartat="photobooths";
 //include '../../../labels.php';
 if(isset($_GET['filters'])){

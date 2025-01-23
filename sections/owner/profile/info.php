@@ -4,9 +4,9 @@ include '../../../sessio.php';
 require_once G_PATH . 'common/conexio.php';
 //error_log( "TO_DELETE owner/profile/info 02" );
 require_once "../../../common/global.php";
-error_log( "TO_DELETE owner/profile/info 03" );
+//error_log( "TO_DELETE owner/profile/info 03" );
 $ID = $_POST["id"];
-error_log( "TO_DELETE owner/profile/info 04 $ID" );
+//error_log( "TO_DELETE owner/profile/info 04 $ID" );
 
 $baseController = new baseController;
 $baseController->createModel('rentals');
@@ -15,7 +15,7 @@ $baseController->createModel('CLD_ownerConnections');
 
 $rentals = $baseController->rentalsModel->getRentalsById($ID);
 
-error_log( "TO_DELETE owner/profile/info 05 $rentals" );
+//error_log( "TO_DELETE owner/profile/info 05 $rentals" );
 
 if ($rentals) {
     $companyName = stripslashes($rentals[0]["name"]);
