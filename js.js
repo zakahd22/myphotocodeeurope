@@ -367,8 +367,10 @@ function list(s) {
             $(".contingut").html(data);
             funcionsDespresDelCanvi();
         },
-        error: function() {
-
+//20250124PBlist            error: function() {
+        error: function(jqXHR, exception) {//20250124PBlist
+            var traceStatus = jqXHR.status;//20250124PBlist
+            var trace = exception;//20250124PBlist
         },
         // Form data
         cache: false,
@@ -791,10 +793,8 @@ function deletebootDCAllowed(id) {
             success: function(data) {
                 setSection('upgrade', 1);
             },
-//20250124PBlist            error: function() {
-            error: function(jqXHR, exception) {//20250124PBlist
-                var traceStatus = jqXHR.status;//20250124PBlist
-                var trace = exception;//20250124PBlist
+            error: function() {
+
             },
             // Form data
             cache: false,
