@@ -335,8 +335,10 @@ function profile(s, s2, id, trashed) {
             $.removeData();
             funcionsDespresDelCanvi();
         },
-        error: function() {
-
+//20250124PBinfo            error: function() {
+        error: function(jqXHR, exception) {//20250124PBinfo
+            var traceStatus = jqXHR.status;//20250124PBinfo
+            var trace = exception;//20250124PBinfo
         },
         // Form data
         cache: false,
