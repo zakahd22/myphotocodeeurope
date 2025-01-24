@@ -106,7 +106,10 @@ if ($metode == 1 || $metode == 3) {
     //21-D-07 Consum SMS i WhatsApp
     //RECOPILEM INFO COSTOS SMS o Whatsapp
      utils::log("$codiFoto --- Iniciem calculs... Calcular el cost", "logGestor");
-    $prefix = split(' ',$mini);    
+//20260124split    $prefix = split(' ',$mini);    
+    $prefix = explode(" ",$mini);//20260124split
+    
+    
     /* Whatsapp de moment no té  API per saber el cost en temps real. 
     * Hem fet aquest array amb preus a dia  9-12-2021
     * Si més endavant cal es pot mirar si ja tenen API, que sembla que no faràn perque depenen de Whatsapp.
