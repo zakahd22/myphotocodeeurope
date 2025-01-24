@@ -258,7 +258,8 @@ utils::log("Consulta amb getActiveDeviceAlertsByBooth".$this->get_sql_string(), 
             $i = 0;
             $result = array();
             
-        utils::log("Consulta amb getDeviceAlertsAllPBsHtml  ".$this->get_sql_string(), logMoment);
+//20250124PBlist        utils::log("Consulta amb getDeviceAlertsAllPBsHtml  ".$this->get_sql_string(), logMoment);
+        utils::log("Consulta amb getDeviceAlertsAllPBsHtml  ".$this->get_sql_string(), 'logMoment');//20250124PBlist
         /**
          * Generem Html DeviceMgt
          */ 
