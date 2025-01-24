@@ -39,6 +39,7 @@ if ($CLD_CON->FetchArray()) {
         $photosaved = $CLD_CON2->GetArrayField("Appusr_datetime");
     }
 
+    error_log( "TO_DELETE sections/phoyobooths/profile/info.php dis=$dis" );
 
     $CLD_CON2->OpenRs("SELECT Name FROM CLD_Distributors WHERE id=$dis");
     if($CLD_CON2->FetchArray()){
