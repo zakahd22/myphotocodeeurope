@@ -129,7 +129,7 @@ else{
         $html .= "</div>";
         $html .= "</div>";
         
-        $available = $CLD_CON->FetchArray();
+//20250124PBlist        $available = $CLD_CON->FetchArray();
         
     }
     
