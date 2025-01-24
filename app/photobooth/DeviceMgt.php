@@ -38,7 +38,9 @@ $sqlParams="";
 
 if(isset($_REQUEST['device'])){     $device = $_REQUEST['device'];          $sqlParams.=",device='$device' ";}
 if(isset($_REQUEST['modeldev'])){     $model = $_REQUEST['modeldev'];          $sqlParams.=",model='$model' ";}
-if(isset($_REQUEST['error'])){     $error = $_REQUEST['error'];          $sqlParams.=",error='$error' ";}
+//20250124DeviceMgt if(isset($_REQUEST['error'])){     $error = $_REQUEST['error'];          $sqlParams.=",error='$error' ";}
+if(isset($_REQUEST['error'])){     $error = $_REQUEST['error'];          $sqlParams.=",error='".str_replace("'","''",$error)."' ";}//20250124DeviceMgt 
+
 if(isset($_REQUEST['attempts'])){   $attempts = $_REQUEST['attempts'];      $sqlParams.=",attempts='$attempts' ";}
 if(isset($_REQUEST['resp'])){       $resp = $_REQUEST['resp'];              $sqlParams.=",resp='$resp' ";}
 if(isset($_REQUEST['action'])){     $action = $_REQUEST['action'];          $sqlParams.=",action='$action' ";}
