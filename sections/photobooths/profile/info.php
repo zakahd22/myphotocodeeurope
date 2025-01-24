@@ -1,6 +1,10 @@
 <?php
 
 include '../../../sessio.php';
+
+error_log( "TO_DELETE sections/phoyobooths/profile/info.php 01" );
+
+
 require_once G_PATH . 'common/conexio.php'; 
 $ID = $_POST["id"];
 $CLD_CON2 = clone($CLD_CON);

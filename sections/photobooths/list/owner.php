@@ -1,7 +1,6 @@
 <?php
 
 include '../../../sessio.php';
-error_log( "TO_DELETE sections/phoyobooths/list/owner.php 01" );
 
 require_once G_PATH . 'common/conexio.php'; 
 require_once G_PATH . "common/Classes/baseController.php";
