@@ -79,9 +79,9 @@ class mail {
         $this->mailer->Host = 'smtp.ionos.es';//20250117smtp
 	$this->mailer->Username = 'noreply@myphotocode.com';
 //20250117smtp	$this->mailer->Password = 'd1g1t4lc3ntr3&';
-//20250117smtp	$this->mailer->Port = '465';
+	$this->mailer->Port = '465';
 	$this->mailer->Password = 'MyP0t0C0d3$!';//20250117smtp
-	$this->mailer->Port = '587';//20250117smtp
+//20250117smtp	$this->mailer->Port = '587';//20250117smtp
         
         
 		
