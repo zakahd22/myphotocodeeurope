@@ -336,7 +336,8 @@ class lookPhotos extends baseController{
             $mail->addAttachment(G_PATH . $this->url);
             if(!$mail->send()){
                 $mail_ret = false;
-                utils::log($mail->retMsg, "logMail", "lookPhotos");
+//20250117smtp                utils::log($mail->retMsg, "logMail", "lookPhotos");
+                utils::log($mail->retMsg, "logMail", "lookPhotos {$this->customer_email}");//20250117smtp
                 $msg = "Can not send this Email.<br />
                         Please check if your Email is correct or try again later.";
             }
