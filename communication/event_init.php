@@ -55,6 +55,14 @@ function getFtpInfo($baseController, $event_id, $ftp_folder_id) {
     
 //    $host = "amazing-leavitt.82-223-15-221.plesk.page";//202412 a eliminar quan es modifiquin els registres de ftp_folders
     
+//20250201 INICI
+//    if (in_array(, [8777,8775,8778,8779])) {
+//
+//    }
+//Sense filtre!!! per a tots!!!!!
+    $host = "amazing-leavitt.82-223-15-221.plesk.page";
+//20250201 FINAL
+ 
     $user = $ftp_folder[0]['user'] . (G_TEST == 0 ? '' : '-sand');    //En el cas de sandbox, els usuaris han d'apuntar al directori de proves. Només si la maquina esta configurada.
     $path = $ftp_folder[0]['path'];
     $pass = $ftp_folder[0]['password'];
