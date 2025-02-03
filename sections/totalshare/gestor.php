@@ -421,6 +421,7 @@ $llistaWhatsapp = array();
                         }else{
                             //utils::log("$entryID --- Encara no ha passat el temps necessari, o ja s'ha fet un reintent sense éxit", "logGestor");
                         }
+                        break;//20250203breakGestor
                 case '7': //banUser
                         $enviar=false;
                         $CLD_CONBanned3 = getNewBdD();
