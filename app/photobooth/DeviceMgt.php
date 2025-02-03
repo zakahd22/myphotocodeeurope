@@ -55,6 +55,9 @@ $sql.= $sqlParams;
 if($APP_tactSql) $sql.=",pbs_time=$APP_tactSql "; //20170627tact
 $sql.=",db_time=$APP_araTimeSerial";//20170627dbtime
 
+
+error_log( "TO_DELETE sql: $sql" );
+
         $esOK = $APP_BdD->ExecuteInsert($sql);
         
         if(!$esOK) {
