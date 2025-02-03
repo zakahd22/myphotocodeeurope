@@ -36,10 +36,12 @@ $okMD = "";
 
 $sqlParams="";
 
-if(isset($_REQUEST['device'])){     $device = $_REQUEST['device'];          $sqlParams.=",device='$device' ";}
-if(isset($_REQUEST['modeldev'])){     $model = $_REQUEST['modeldev'];          $sqlParams.=",model='$model' ";}
+//20250124DeviceMgt if(isset($_REQUEST['device'])){     $device = $_REQUEST['device'];          $sqlParams.=",device='$device' ";}
+if(isset($_REQUEST['device'])){     $device = $_REQUEST['device'];          $sqlParams.=",device='".str_replace("'","''",$device)."' ";}//20250124DeviceMgt 
+//20250124DeviceMgt if(isset($_REQUEST['modeldev'])){     $model = $_REQUEST['modeldev'];          $sqlParams.=",model='$model' ";}
+if(isset($_REQUEST['modeldev'])){     $model = $_REQUEST['modeldev'];          $sqlParams.=",model='".str_replace("'","''",$model)."' ";}//20250124DeviceMgt 
 //20250124DeviceMgt if(isset($_REQUEST['error'])){     $error = $_REQUEST['error'];          $sqlParams.=",error='$error' ";}
-if(isset($_REQUEST['error'])){     $error = $_REQUEST['error'];          $sqlParams.=",error='".str_replace("'"," ",$error)."' ";}//20250124DeviceMgt 
+if(isset($_REQUEST['error'])){     $error = $_REQUEST['error'];          $sqlParams.=",error='".str_replace("'","''",$error)."' ";}//20250124DeviceMgt 
 
 if(isset($_REQUEST['attempts'])){   $attempts = $_REQUEST['attempts'];      $sqlParams.=",attempts='$attempts' ";}
 if(isset($_REQUEST['resp'])){       $resp = $_REQUEST['resp'];              $sqlParams.=",resp='$resp' ";}
