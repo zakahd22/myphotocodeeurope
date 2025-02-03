@@ -479,9 +479,12 @@ require_once G_PATH . 'common/mailer/class.phpmailer.php';
 
 	$from = "noreply@myphotocode.com";
 	$from_str = "noreply";
-	$host = "smtp.ionos.com";
+//20250203mail	$host = "smtp.ionos.com";
+	$host = "smtp.ionos.es";//20250203mail
+        
         $username = "noreply@myphotocode.com";
-	$password = "d1g1t4lc3ntr3&";
+//20250203mail	$password = "d1g1t4lc3ntr3&";
+	$password = "MyP0t0C0d3$!";//20250203mail
 
 foreach ($llistaEmail as $entry){
 

@@ -89,7 +89,8 @@ if(isset ($mail_pswremitent)) $password = $mail_pswremitent;
 //	$mail->IsMail(); // telling the class to use SMTP
 	$mail->IsSMTP();
 //	$mail->Host = $host;
-	$mail->Host = 'smtp.ionos.com';
+//20250203mail	$mail->Host = 'smtp.ionos.com';
+	$mail->Host = 'smtp.ionos.es';//20250203mail
 	$mail->SMTPAuth = true;   // enable SMTP authentication
 	$mail->SMTPSecure = 'ssl';
 	

@@ -40,10 +40,12 @@ if(!isset ($mail_subject)) $mail_subject = "Message from myphotocode";
 
 	$from = "noreply@myphotocode.com";
 	$from_str = "noreply";
-	$host = "smtp.ionos.com";
+//20250203mail	$host = "smtp.ionos.com";
+	$host = "smtp.ionos.es";//20250203mail
 //	$username = "noreplay@myphotocode.com";
 	$username = "noreply@myphotocode.com";
-	$password = "d1g1t4lc3ntr3&";
+//20250203mail	$password = "d1g1t4lc3ntr3&";
+	$password = "MyP0t0C0d3$!";//20250203mail
         
 //20130621 INICI intentem evitar missatges d'error, ja que volem tornar un xml        
         $mail_retMsg = "";
