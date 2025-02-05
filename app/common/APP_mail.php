@@ -9,6 +9,8 @@ Aqui concentrarem l'enviament de correu, variables:
  * 
  */
  
+
+error_log( "common/APP_mail.php" );
  
 
 if(!isset ($mail_email)) return;
