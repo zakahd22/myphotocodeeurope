@@ -21,7 +21,7 @@ if(!isset ($mail_subject)) $mail_subject = "Message from myphotocode";
 
  
 
-error_log( "common/APP_mail.php $mail_email,$mail_nom, $mail_subject " );//20250205mail
+error_log( "common/APP_mail.php $APP_idRental, $mail_email,$mail_nom, $mail_subject " );//20250205mail
 
 //20140519disclaimer
 if(!isset ($mail_disclaimer)) $mail_disclaimer ="
