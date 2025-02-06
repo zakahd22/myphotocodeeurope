@@ -10,10 +10,7 @@ Aqui concentrarem l'enviament de correu, variables:
  */
  
 
-error_log( "common/APP_mail.php" );
- 
-
-if(!isset ($mail_email)) return;
+if(!isset ($mail_email)) {return;}
 if(!isset ($mail_nom)) $mail_nom = "";
 if(!isset ($mail_cont)) $mail_cont = "";
 if(!isset ($mail_copianom)) $mail_copianom = "";
@@ -22,6 +19,9 @@ if(!isset ($mail_copianom2)) $mail_copianom2 = "";//20140329
 if(!isset ($mail_copianom3)) $mail_copianom3 = "";//20140329
 if(!isset ($mail_subject)) $mail_subject = "Message from myphotocode";
 
+ 
+
+error_log( "common/APP_mail.php $mail_email,$mail_nom, $mail_subject " );//20250205mail
 
 //20140519disclaimer
 if(!isset ($mail_disclaimer)) $mail_disclaimer ="

@@ -112,6 +112,7 @@ if($APP_common_alertError){
 //?                    include("../../common/APP_mail.php");
                     include(dirname(__FILE__) . '/../../common/APP_mail.php');
                     
+                    error_log( "APP_common_alertError.php mail_retMsg: $mail_retMsg " );//20250205mail
                     }
             
 //            APP_fesLog("eMail notification mail_email: $mail_email. mail_ret: $mail_retMsg");
