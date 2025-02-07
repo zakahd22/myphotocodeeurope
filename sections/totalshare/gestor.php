@@ -668,7 +668,8 @@ foreach ($llistaWhatsapp as $entry) {
 
     if (!curl_errno($curl)) {
         //guarda exit
-        utils::log("$id --- Whatsapp enviat", "logGestor");
+//20250207whatsapp        utils::log("$id --- Whatsapp enviat", "logGestor");
+        utils::log("$id --- Whatsapp enviat, response: $response", "logGestor");//20250207whatsapp
         $CLD_CONSMS = getNewBdD();
         if ($CLD_CONSMS->Execute("UPDATE gestor SET `last`= '$now', `state`=6 WHERE `id`=$id")) {
             //guardar log positiu
