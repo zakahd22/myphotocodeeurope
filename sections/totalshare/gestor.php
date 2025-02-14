@@ -630,7 +630,9 @@ foreach ($llistaWhatsapp as $entry) {
     $id = $id;
 
     utils::log("--- $id --- ", "logGestor");
-
+    
+    
+    error_log( "TO_DELETE gestor 20250214whatsapp, message: $message" );//20250214whatsapp
 
     $curl = curl_init();
 
