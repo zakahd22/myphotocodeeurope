@@ -632,7 +632,7 @@ foreach ($llistaWhatsapp as $entry) {
     utils::log("--- $id --- ", "logGestor");
     
     
-    error_log( "TO_DELETE gestor 20250214whatsapp, message: $message" );//20250214whatsapp
+//    error_log( "TO_DELETE gestor 20250214whatsapp, message: $message" );//20250214whatsapp
 
     $curl = curl_init();
 
@@ -657,7 +657,13 @@ foreach ($llistaWhatsapp as $entry) {
         //TODO: provar si el que diu la documentacio de twilio es cert i no es pot enviar adjunt realment sense haver rebut resposta de l'usuari ;)
         //    "MediaUrl0" => "https://www.myphotocode.com/events/2021092340241/W7UXM5X6G3.jpg",
         //    "MediaUrl1" => "https://www.myphotocode.com/events/2021092340241/W7UXM5X6G3.jpg",
-        "Body" => $message,
+        //20250214whatsapp INICI
+        //20250214whatsapp "Body" => $message,
+        "contentSid" => "HXd0711dc606369d837b4c7b7fdd63337b",
+        "ContentVariables" => { "1": $code }
+        
+        //20250214whatsapp FINAL
+        //contentVariables
     );
 
 
