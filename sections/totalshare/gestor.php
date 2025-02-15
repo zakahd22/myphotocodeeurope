@@ -660,7 +660,8 @@ foreach ($llistaWhatsapp as $entry) {
         //20250214whatsapp INICI
         //20250214whatsapp "Body" => $message,
         "contentSid" => "HXd0711dc606369d837b4c7b7fdd63337b",
-        "ContentVariables" => { "1": $code }
+//        "ContentVariables" => { "1": $code }
+        "ContentVariables" => array( "1" => $code ),
         
         //20250214whatsapp FINAL
         //contentVariables
