@@ -633,6 +633,8 @@ foreach ($llistaWhatsapp as $entry) {
     
     
 //    error_log( "TO_DELETE gestor 20250214whatsapp, message: $message" );//20250214whatsapp
+    
+    error_log( "TO_DELETE gestor 20250214whatsapp, $code: $code" );//20250214whatsapp
 
     $curl = curl_init();
 
@@ -673,6 +675,8 @@ foreach ($llistaWhatsapp as $entry) {
 
 
     $response = curl_exec($curl);
+    
+    error_log( "TO_DELETE gestor 20250214whatsapp,  curl response: $response" );//20250214whatsapp
 
 
     if (!curl_errno($curl)) {
