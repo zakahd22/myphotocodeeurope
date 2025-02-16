@@ -641,11 +641,14 @@ foreach ($llistaWhatsapp as $entry) {
     if (!$curl) {
         die("Couldn't initialize a cURL handle");
     }
+    
+    curl_setopt($curl, CURLOPT_POST, true);//20250216twilio
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);//20250216twilio
 
     // Set the file URL to fetch through cURL
     curl_setopt($curl, CURLOPT_URL, "https://api.twilio.com/2010-04-01/Accounts/ACa495bb879ddb69a2c3afbdd8eba6cfbf/Messages.json");
     
-    $content_variables = json_encode(["1" => $code]);//20250216twilio
+    $content_variables = array("1" => $code);//20250216twilio
 
     $data = array(
         "To" => "whatsapp:".$contact,
@@ -656,7 +659,8 @@ foreach ($llistaWhatsapp as $entry) {
          *      */
         //"From" => "whatsapp:+14155238886", //sender sandbox
         //"From" => "whatsapp:+15866857271", //sender twilio Approved by WhatsApp. També funcionaria
-        "MessagingServiceSid" => "MGa19ab83dcefdae8c6ed207158ab9c46e",
+//20250216twilio        "MessagingServiceSid" => "MGa19ab83dcefdae8c6ed207158ab9c46e",
+        "From" => "whatsapp:+15866857271",
         //Podem enviar les imatges així però no ho farem perque només està permés en cas que l'usuari respongui previament
         //TODO: provar si el que diu la documentacio de twilio es cert i no es pot enviar adjunt realment sense haver rebut resposta de l'usuari ;)
         //    "MediaUrl0" => "https://www.myphotocode.com/events/2021092340241/W7UXM5X6G3.jpg",
@@ -666,11 +670,11 @@ foreach ($llistaWhatsapp as $entry) {
         "contentSid" => "HXd0711dc606369d837b4c7b7fdd63337b",
 //        "ContentVariables" => { "1": $code }
 //20250216twilio        "ContentVariables" => array( "1" => $code ),
-        "ContentVariables" => $content_variables, //20250216twilio
+        "ContentVariables" => $content_variables); //20250216twilio
 
         //20250214whatsapp FINAL
         //contentVariables
-    );
+    
 
 
     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
@@ -680,7 +684,7 @@ foreach ($llistaWhatsapp as $entry) {
 
     $response = curl_exec($curl);
     
-    error_log( "TO_DELETE gestor 20250214whatsapp,  curl response: $response" );//20250214whatsapp
+    error_log( "TO_DELETE gestor 20250214whatsapp,  curl response: $response. Errno: " . curl_errno($curl) );//20250214whatsapp
 
 
     if (!curl_errno($curl)) {
