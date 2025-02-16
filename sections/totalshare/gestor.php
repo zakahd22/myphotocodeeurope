@@ -649,7 +649,10 @@ foreach ($llistaWhatsapp as $entry) {
     curl_setopt($curl, CURLOPT_URL, "https://api.twilio.com/2010-04-01/Accounts/ACa495bb879ddb69a2c3afbdd8eba6cfbf/Messages.json");
     
 //20250216twilio_02    $content_variables = array("1" => $code);//20250216twilio
-    $content_variables = array("1" => "\"$code\"");//20250216twilio_02
+ //20250216twilio_03   $content_variables = array("1" => "\"$code\"");//20250216twilio_02
+    $content_variables = json_encode(array("1" => "$code"));//20250216twilio_03
+    
+    error_log( "TO_DELETE gestor 20250216whatsapp, content_variables: $content_variables ");//20250216twilio_03
 
     $data = array(
         "To" => "whatsapp:".$contact,
