@@ -648,7 +648,8 @@ foreach ($llistaWhatsapp as $entry) {
     // Set the file URL to fetch through cURL
     curl_setopt($curl, CURLOPT_URL, "https://api.twilio.com/2010-04-01/Accounts/ACa495bb879ddb69a2c3afbdd8eba6cfbf/Messages.json");
     
-    $content_variables = array("1" => $code);//20250216twilio
+//20250216twilio_02    $content_variables = array("1" => $code);//20250216twilio
+    $content_variables = array("1" => "\"$code\"");//20250216twilio_02
 
     $data = array(
         "To" => "whatsapp:".$contact,
