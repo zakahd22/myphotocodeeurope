@@ -655,7 +655,8 @@ foreach ($llistaWhatsapp as $entry) {
     error_log( "TO_DELETE gestor 20250216whatsapp, content_variables: $content_variables ");//20250216twilio_03
 
     $data = array(
-        "To" => "whatsapp:".$contact,
+//20250216twilio_04        "To" => "whatsapp:".$contact,
+        "To" => $contact,//20250216twilio_04
         /*
            When sending a message with a messaging service, Twilio will immediately set the message’s status to accepted. 
          * Twilio will then determine the optimal From phone number from your service. 
