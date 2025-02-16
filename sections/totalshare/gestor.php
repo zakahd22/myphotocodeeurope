@@ -664,8 +664,8 @@ foreach ($llistaWhatsapp as $entry) {
          *      */
         //"From" => "whatsapp:+14155238886", //sender sandbox
         //"From" => "whatsapp:+15866857271", //sender twilio Approved by WhatsApp. També funcionaria
-//20250216twilio        "MessagingServiceSid" => "MGa19ab83dcefdae8c6ed207158ab9c46e",
-        "From" => "+15866857271",//20250216twilio_05
+        "MessagingServiceSid" => "MGa19ab83dcefdae8c6ed207158ab9c46e",
+//20250216twilio        "From" => "+15866857271",//20250216twilio_05
         //Podem enviar les imatges així però no ho farem perque només està permés en cas que l'usuari respongui previament
         //TODO: provar si el que diu la documentacio de twilio es cert i no es pot enviar adjunt realment sense haver rebut resposta de l'usuari ;)
         //    "MediaUrl0" => "https://www.myphotocode.com/events/2021092340241/W7UXM5X6G3.jpg",
