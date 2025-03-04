@@ -1708,8 +1708,7 @@ HTML;
         return $html;
     }
     
-    public function ActivityBySession($idBooth, $idOwner, $startDateTime, $endDateTime, $lastConn){
-
+    public function ActivityBySession($idBooth, $idOwner, $startDateTime, $endDateTime, $lastConn) {
         $html = "";
         $array_info = $this->RepdcModel->getActivityBySession($idBooth, $startDateTime, $endDateTime); 
         
@@ -1722,7 +1721,7 @@ HTML;
         }
         else{
             $html .= "<p><strong>Activity</strong></p>";
-
+    
             $_start_date = FALSE;
             $count_plays = 0;
             $count_errors = 0;
@@ -1745,26 +1744,26 @@ HTML;
                         $overPayment = 0;
                         $creditCard = $creditCard + $sumaOver;
                     }
-
+    
                     $extraPrints = ($activity["in4"]) ? $activity["in4"] : "0";
                     $playPrints  = ($activity["in8"]) ? $activity["in8"] : "0";
                     
                     if($activity["typeInfo"] == 10 || $activity["typeInfo"] == 20){
                         $stock =  ($activity["stock"])? $activity["stock"] : "0";
                     }
-
+    
                     if($activity["typeInfo"] == 10){
                         $currency_position = $activity['currency_position'];
                         $currency_symbol   = $activity['currency_symbol'];
-
+    
                         $count_prints += intval($extraPrints) + intval($playPrints);
                         $count_plays++;
                     }
-
+    
                     if($activity["typeInfo"] == 40){
                         $count_errors++;
                     }
-
+    
                     $count_cash  += intval($cash);
                     $count_card  += intval($card);
                     $count_net   += intval($net);
@@ -1774,14 +1773,14 @@ HTML;
                     if($activity["typeInfo"] == 50){
                         $_start_date = $activity["when"];
                     }
-
+    
                     if($activity["typeInfo"] == 60){
                         $_end_date = $activity["when"];
-
+    
                         if($_start_date == 0){
                             $_start_date = $startDateTime;
                         }
-
+    
                         $hours_operation = $_start_date->diff($_end_date);
                         
                         $hours_operation_time = sprintf(
@@ -1790,7 +1789,7 @@ HTML;
                             $hours_operation->i,
                             $hours_operation->s
                         );
-
+    
                         if($currency_symbol){
                             $count_cash  = utils::putCurrency($count_cash, $currency_symbol, $currency_position);
                             $count_card  = utils::putCurrency($count_card, $currency_symbol, $currency_position); 
@@ -1799,12 +1798,12 @@ HTML;
                             $count_overPayment = utils::putCurrency($count_overPayment, $currency_symbol, $currency_position);
                         }
                         
-                        if($_start_date)$_start_date->format('m/d/Y H:i');
-                        if($_end_date)$_end_date->format('m/d/Y H:i');
+                        $start_date_formatted = ($_start_date instanceof DateTime) ? $_start_date->format('m/d/Y H:i') : '';
+                        $end_date_formatted = ($_end_date instanceof DateTime) ? $_end_date->format('m/d/Y H:i') : '';
                         
                         $array[$i] = [
-                                "StartDate"      => $_start_date,
-                                "EndDate"        => $_end_date,
+                                "StartDate"      => $start_date_formatted,
+                                "EndDate"        => $end_date_formatted,
                                 "HoursOperation" => $hours_operation_time,
                                 "Errors"         => $count_errors,
                                 "Plays"          => $count_plays,   
@@ -1816,7 +1815,7 @@ HTML;
                                 "Overpayment"    => $count_overPayment,
                                 "Stock"          => $stock
                         ];
-
+    
                         $_start_date          = FALSE;
                         $_end_date            = 0;
                         $count_cash           = 0;
@@ -1830,16 +1829,19 @@ HTML;
                         $count_overPayment    = 0;
                         $currency_symbol = FALSE;
                         $lastInfo = 0;
-
-                        $i ++;
+    
+                        $i++;
                     }
                     
                     $z++;
                     
                     if($z == count($array_info)){
                         if($_start_date){
-                            if($lastConn > $endDateTime){$_end_date = $endDateTime;}
-                            else{$_end_date = $lastConn;}
+                            if($lastConn > $endDateTime){
+                                $_end_date = $endDateTime;
+                            } else {
+                                $_end_date = $lastConn;
+                            }
      
                             $hours_operation = $_start_date->diff($_end_date);
                             
@@ -1849,7 +1851,7 @@ HTML;
                                 $hours_operation->i,
                                 $hours_operation->s
                             );
-
+    
                             if($currency_symbol){
                                 $count_cash  = utils::putCurrency($count_cash, $currency_symbol, $currency_position);
                                 $count_card  = utils::putCurrency($count_card, $currency_symbol, $currency_position); 
@@ -1858,12 +1860,13 @@ HTML;
                                 $count_overPayment = utils::putCurrency($count_overPayment, $currency_symbol, $currency_position);
                             }
                             
-                            if($_start_date)$_start_date->format('m/d/Y H:i');
-                            if($_end_date)$_end_date->format('m/d/Y H:i');
+                    
+                            $start_date_formatted = ($_start_date instanceof DateTime) ? $_start_date->format('m/d/Y H:i') : '';
+                            $end_date_formatted = ($_end_date instanceof DateTime) ? $_end_date->format('m/d/Y H:i') : '';
                             
                             $array[$i] = [
-                                    "StartDate"      => $_start_date,
-                                    "EndDate"        => $_end_date,
+                                    "StartDate"      => $start_date_formatted,
+                                    "EndDate"        => $end_date_formatted,
                                     "HoursOperation" => $hours_operation_time,
                                     "Errors"         => $count_errors,
                                     "Plays"          => $count_plays,   
@@ -1875,7 +1878,7 @@ HTML;
                                     "Overpayment"    => $count_overPayment,
                                     "Stock"          => $stock
                             ];
-
+    
                             $_start_date          = FALSE;
                             $_end_date            = 0;
                             $count_cash           = 0;
@@ -1889,12 +1892,10 @@ HTML;
                             $count_overPayment    = 0;
                             $currency_symbol = FALSE;
                             $lastInfo = 0;
-
-                            $i ++;
+    
+                            $i++;
                         }
-                            
                     }
-                        
                 }
             }
             
@@ -1918,26 +1919,28 @@ HTML;
                     <td style='border-bottom:#000 solid 1px;font-weight:bold;padding:5px;text-align:center;'>Stock</td>
                 </tr>
             ";
-
-            foreach ($array as $session){            
-                $html .= "
-                <tr>
-                    <td style='padding-right:10px;text-align:center;'>{$session["StartDate"]}</td>
-                    <td style='padding:5px;text-align: center;'>{$session["EndDate"]}</td>
-                    <td style='padding:5px;text-align: center;'>{$session["HoursOperation"]}h</td>
-                    <td style='padding:5px;text-align: center;'>{$session["Errors"]}</td>
-                    <td style='padding:5px;text-align: center;'>{$session["Plays"]}</td>
-                    <td style='padding:5px;text-align: center;'>{$session["Prints"]}</td>
-                    <td style='padding:5px;text-align: center;'>{$session["Cash"]}</td>
-                    <td style='padding:5px;text-align: center;'>{$session["Card"]}</td>
-                    <td style='padding:5px;text-align: center;'>{$session["Net"]}</td>
-                    <td style='padding:5px;text-align: center;'>{$session["Total"]}</td>
-                    <td style='padding:5px;text-align: center;'>{$session["Overpayment"]}</td>
-                    <td style='padding:5px;text-align: center;'>{$session["Stock"]}</td>
-                </tr>
-                ";
+    
+            if (isset($array) && is_array($array)) {
+                foreach ($array as $session){            
+                    $html .= "
+                    <tr>
+                        <td style='padding-right:10px;text-align:center;'>{$session["StartDate"]}</td>
+                        <td style='padding:5px;text-align: center;'>{$session["EndDate"]}</td>
+                        <td style='padding:5px;text-align: center;'>{$session["HoursOperation"]}h</td>
+                        <td style='padding:5px;text-align: center;'>{$session["Errors"]}</td>
+                        <td style='padding:5px;text-align: center;'>{$session["Plays"]}</td>
+                        <td style='padding:5px;text-align: center;'>{$session["Prints"]}</td>
+                        <td style='padding:5px;text-align: center;'>{$session["Cash"]}</td>
+                        <td style='padding:5px;text-align: center;'>{$session["Card"]}</td>
+                        <td style='padding:5px;text-align: center;'>{$session["Net"]}</td>
+                        <td style='padding:5px;text-align: center;'>{$session["Total"]}</td>
+                        <td style='padding:5px;text-align: center;'>{$session["Overpayment"]}</td>
+                        <td style='padding:5px;text-align: center;'>{$session["Stock"]}</td>
+                    </tr>
+                    ";
+                }
             }
-
+    
             $html .= "
                 <tr>
                     <td style='border-top:#000 solid 1px;'>&nbsp</td>
@@ -1954,12 +1957,13 @@ HTML;
                     <td style='border-top:#000 solid 1px;'>&nbsp</td>
                 </tr>
                 ";
-
-            $html .= "<table>";
+    
+            $html .= "</table>";
         }
         
         return $html;
     }
+        
          
     private function calcPlays($plays, $freePlays) {
         
