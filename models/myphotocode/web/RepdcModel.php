@@ -967,46 +967,36 @@ class RepdcModel extends baseModel{
         return $result;
     }
     
-    public function getLastStockByPb($idPb, $startDate){
-        $result = FALSE;
+    public function getLastStockByPb($idPb, $startDate) {
+        $stock = null; 
         $filterByidPB = '';
-        
-        if($idPb != FALSE){
+    
+        if ($idPb !== false) {
             $filterByidPB = "AND App_info.`idBooth` = {$idPb}";
         }
-
+    
         $sql = "
-            SELECT 
-               
-                stock
-                
-            FROM (SELECT * FROM `App_info` ORDER BY App_info.`when` DESC) App_info
-            
-            WHERE (
-                App_info.`when` <= '{$startDate->format('Y-m-d H:i:s')}'
-                
-            )
+            SELECT stock
+            FROM App_info
+            WHERE App_info.`when` <= '{$startDate->format('Y-m-d H:i:s')}'
             AND stock IS NOT NULL
-            {$filterByidPB}            
-            
+            {$filterByidPB}
+            ORDER BY App_info.`when` DESC
             LIMIT 1
-        "; 
-                
-//         print  $sql;exit;         
+        ";
+    
         $query = $this->my_query($sql);
-
-        if($query){
-            $result = array();
-            while($info = $this->my_fetch_array($query)){
-               
-                $stock = $info['stock'];               
-                
-               
+    
+        if ($query) {
+            if ($info = $this->my_fetch_array($query)) { 
+                $stock = $info['stock'];
             }
+        } else {
+           
+            error_log("Error en la consulta: {$sql}"); 
         }
-       
-                
-        return $stock;
+    
+        return $stock; 
     }
         
     
