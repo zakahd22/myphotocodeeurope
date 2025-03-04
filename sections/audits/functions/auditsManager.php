@@ -831,7 +831,7 @@ HTML;
         } else {
             $html = $this->buildAlertMessage('danger', "This Photobooth has no registered data for this dates");
         }
-        if ($showSendBtn && $this->idUser == 7) {
+        if ($showSendBtn) {
             $html .= "<div id='bottom'>";
             $html .= "<button id='sendAuditMail' class='popup-confirm' idPb='{$idPb}' stdate='{$intervalStart}' endate='{$intervalEnd}' aunum='{$AuditNum}'><i class='fa fa-paper-plane-o icoSend' aria-hidden='true'></i> Resend E-mail </button>";
             $html .= "<img id='gifSendingMail' src='images/web/loading.gif' style='width: 8%!important; margin-top: 0px!important;'>";

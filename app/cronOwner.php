@@ -8,7 +8,7 @@ $mail_email = "victor.carretero@treemes.com";
 $mail_nom = "Jo mateix";
 $mail_subject = "Missatge à";
 $mail_cont = "<p>Prova de mail</p>";
-include("common/APP_mail.php");
+include("common/APP_mail.php"); 
 
 ////SELECT `idBooth`, `estat`, `type`, `owner`, `name`, `obs`, `serialnumber`,
 //// `location`, `latitude`, `longitude`, `alertOffline`, `hS`, `mS`, `hE`, `mE`, `report`, `cardReaderSN` FROM `App_booths` WHERE 1
