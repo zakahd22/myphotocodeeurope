@@ -29,6 +29,7 @@ class baseModel extends EntityUtility{
 //        $this->db = $this->connect->connection();
     }
     
+    
     public function getConnect() {
         return $this->connect;
     }
