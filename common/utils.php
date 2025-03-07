@@ -285,6 +285,11 @@ class utils {
         $sumHours = 0;
         $sumMinutes = 0;
         
+        $h1 = intval($h1);
+        $m1 = intval($m1);
+        $h2 = intval($h2);
+        $m2 = intval($m2);
+        
         $sumHours = $h1 + $h2;
         $sumMinutes = $m1 + $m2;
         
@@ -296,6 +301,7 @@ class utils {
         
         return array($sumHours, $sumMinutes);
     }
+    
     
     static function printHours($h, $m){
         return "{$h}:" . (($m < 10)? "0{$m}" : "{$m}");
