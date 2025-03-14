@@ -116,7 +116,7 @@ class App_boothsModel extends baseModel{
     }
     
     public function getPbsListFilter($serialnumber=false, $type=false, $status=false, $idbooth=false, $distributor=false, $owner=false){
-        utils::log("owner: {$owner}", logMoment);
+     //   utils::log("owner: {$owner}", logMoment);
         if($serialnumber){
             $this->setFilter("serialnumber", "LIKE", "%".$serialnumber."%");
         }
@@ -138,7 +138,7 @@ class App_boothsModel extends baseModel{
         }
         
         $result = $this->select('App_booths');
-        utils::log($this->get_sql_string(), logMoment);
+     //   utils::log($this->get_sql_string(), logMoment);
         
         return $result;
         
@@ -202,7 +202,7 @@ class App_boothsModel extends baseModel{
             
             WHERE  1=1 
             ".$filterString;
-        utils::log("Consulta amb UPGRADEids".$sql, logMoment);
+      //  utils::log("Consulta amb UPGRADEids".$sql, logMoment);
         $query = $this->my_query($sql);
         
        if($query){
