@@ -798,6 +798,7 @@ HTML;
                 //No data for sure
                 $dateString = ($PBLastConnection !== FALSE) ? "since {$PBLastConnection->format('m/d/Y H:i:s')}" : "";
                 $html .= $this->buildAlertMessage('danger', "**No data received from the photobooth**<br/> Audit not available because no data received {$dateString}");
+                $html .= "<button id='exportCsv' class='popup-confirm' idPb='{$idPb}' stdate='{$intervalStart}' endate='{$intervalEnd}' aunum='{$AuditNum}'><i class='fa fa-file-excel-o' aria-hidden='true'></i> Export CSV </button>"; // solucion temporal
             }
         } else {
             $html = $this->buildAlertMessage('danger', "This Photobooth has no registered data for this dates");
