@@ -190,6 +190,7 @@ HTML;
 
 function hiddenLeaf($items, $booths) {
     // List of items
+    $pdf = array();
     $baseController = new baseController();
     $baseController->createModel('manuals');
     $codi = "<div class='supergran'><h2>Items</h2>";
