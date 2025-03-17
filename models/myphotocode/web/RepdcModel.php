@@ -141,24 +141,27 @@ class RepdcModel extends baseModel{
         
         return $FirstDate;
     }
+    
     public function getFirstOwnerPbsLastConnection($idOwner){
         $OlderDate = FALSE;
-        
+         
         $sql = "
-            SELECT App_info.`when`
+            SELECT App_info.`idInfo`, App_info.`when`, App_info.`idBooth`, App_info.`idDongle`, App_info.`typeInfo`, App_info.`money`, App_info.`money2`, App_info.`currency`, App_info.`stock`, App_info.`i1`, App_info.`i2`, App_info.`i3`, App_info.`i4`, App_info.`i5`, App_info.`str1`, App_info.`str2`, App_info.`PBnew`, App_info.`in1`, App_info.`in2`, App_info.`in3`, App_info.`in4`, App_info.`in5`, App_info.`in6`, App_info.`in7`, App_info.`in8`, App_info.`pbs_time`, App_info.`db_time`
             FROM `App_info`
-            INNER JOIN `App_booths` ON App_info.`idBooth` = App_booths.`idBooth`
-            WHERE App_booths.`owner` = {$idOwner}
-            ORDER BY App_info.`when` ASC
-            LIMIT 1
-        ";
+            WHERE idBooth IN (
+                SELECT `idBooth` 
+                FROM `App_booths` 
+                WHERE `owner` = {$idOwner}
+            )
+        ";       
+        $this->setOrder('when', 'ASC');
+        $this->setLimit(1);
         
         $query = $this->my_query($sql);
-        
-        if ($result = $this->my_fetch_array($query)) {
+        if($result = $this->my_fetch_array($query)){
             $OlderDate = DateTime::createFromFormat('Y-m-d H:i:s', $result['when']);
         }
-    
+
         return $OlderDate;
     }
     
@@ -253,24 +256,26 @@ class RepdcModel extends baseModel{
     
     public function getTotalOwnerPbsLastConnection($idOwner){
         $OlderDate = FALSE;
-        
+         
         $sql = "
-            SELECT App_info.`when`
+            SELECT App_info.`idInfo`, App_info.`when`, App_info.`idBooth`, App_info.`idDongle`, App_info.`typeInfo`, App_info.`money`, App_info.`money2`, App_info.`currency`, App_info.`stock`, App_info.`i1`, App_info.`i2`, App_info.`i3`, App_info.`i4`, App_info.`i5`, App_info.`str1`, App_info.`str2`, App_info.`PBnew`, App_info.`in1`, App_info.`in2`, App_info.`in3`, App_info.`in4`, App_info.`in5`, App_info.`in6`, App_info.`in7`, App_info.`in8`, App_info.`pbs_time`, App_info.`db_time`
             FROM `App_info`
-            INNER JOIN `App_booths` ON App_info.`idBooth` = App_booths.`idBooth`
-            WHERE App_booths.`owner` = {$idOwner}
-            ORDER BY App_info.`when` DESC
-            LIMIT 1
-        ";
+            WHERE idBooth IN (
+                SELECT `idBooth` 
+                FROM `App_booths` 
+                WHERE `owner` = {$idOwner}
+            )
+        ";       
+        $this->setOrder('when', 'DESC');
+        $this->setLimit(1);
         
         $query = $this->my_query($sql);
-        if ($result = $this->my_fetch_array($query)) {
+        if($result = $this->my_fetch_array($query)){
             $OlderDate = DateTime::createFromFormat('Y-m-d H:i:s', $result['when']);
         }
     
         return $OlderDate;
     }
-    
     
     public function getYearSummaryReportByPb($idPb, $owner, $startDate, $endDate){
         $result = FALSE;

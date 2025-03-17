@@ -37,28 +37,15 @@ class utils {
         echo $content;
     }
     
- static function log($text, $file, $trace='logGlb', $jump=true) {
-    $file = G_PATH . "log/". $file;
-    
-    // Asegurarse de que el directorio de logs existe
-    $logDir = dirname($file);
-    if (!is_dir($logDir)) {
-        mkdir($logDir, 0755, true);
-    }
-    
-    // Verificar si el archivo existe antes de intentar obtener su tamaño
-    $fileExists = file_exists($file . ".dat");
-    
-    if($fileExists && filesize($file . ".dat") > 5000000) {
-        rename($file . ".dat", $file . "." . utils::get_rndm32(3) . ".bak");    
-        $fh = fopen($file . ".dat", 'w');
-    }
-    else { 
-        $fh = fopen($file . ".dat", 'a');             
-    }
-    
-    // Verificar si se pudo abrir el archivo
-    if ($fh !== false) {
+    static function log($text, $file, $trace='logGlb', $jump=true) {
+        $file= G_PATH . "log/". $file;
+        if(filesize($file . ".dat") > 5000000) {
+            rename( $file . ".dat", $file . "." . utils::get_rndm32(3) . ".bak" );    
+            $fh = fopen($file . ".dat", 'w');
+        }
+        else { 
+            $fh = fopen($file . ".dat", 'a');             
+        }
         try {
             if ($jump) {
                 fwrite($fh, date('Y-m-d H:i:s ') . 'TRACE ' . $trace . ': ' . var_export($text, true) . "\r\n");
@@ -67,18 +54,12 @@ class utils {
                 fwrite($fh, var_export($text, true));                   
             }
         } catch (Exception $e) {
-            // Corregir el orden de los argumentos en fwrite
-            fwrite($fh, "\r\n" . date('Y-m-d H:i:s ') . 'TRACE ' . $trace . ': ' . $e . "\r\n");
+            fwrite("\r\n" . $fh, date('Y-m-d H:i:s ') . 'TRACE ' . $trace . ': ' . $e . "\r\n");
         }
-        
-        // Cerrar el archivo después de escribir
-        fclose($fh);
-    } else {
-        // Registrar el error en el log de errores del sistema
-        error_log("No se pudo abrir el archivo de log: " . $file . ".dat");
+        /*finally {
+            fclose($fh);
+        }*/
     }
-}
-
     
     static function rm_log($file){
         unlink(G_PATH . "log/". $file . ".dat");
@@ -304,10 +285,10 @@ class utils {
         $sumHours = 0;
         $sumMinutes = 0;
         
-        $h1 = is_numeric($h1) ? intval($h1) : 0;
-        $m1 = is_numeric($m1) ? intval($m1) : 0;
-        $h2 = is_numeric($h2) ? intval($h2) : 0;
-        $m2 = is_numeric($m2) ? intval($m2) : 0;
+        $h1 = intval($h1);
+        $m1 = intval($m1);
+        $h2 = intval($h2);
+        $m2 = intval($m2);
         
         $sumHours = $h1 + $h2;
         $sumMinutes = $m1 + $m2;
@@ -320,6 +301,7 @@ class utils {
         
         return array($sumHours, $sumMinutes);
     }
+    
     
     static function printHours($h, $m){
         return "{$h}:" . (($m < 10)? "0{$m}" : "{$m}");

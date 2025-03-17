@@ -19,28 +19,6 @@ $(document).ready(function() {
     setAuditsListers();
 });
 
-function setExportCsvListener() {
-    $('#exportCsv').click(function(e) {
-        e.preventDefault();
-        
-        var idPb = $(this).attr('idPb');
-        var stdate = $(this).attr('stdate');
-        var endate = $(this).attr('endate');
-        var aunum = $(this).attr('aunum');
-        var formattedStdate = encodeURIComponent(stdate);
-        var formattedEndate = encodeURIComponent(endate);
-        
-        var url = 'sections/audits/functions/csvAudits.php?semana=' + aunum + 
-                  '&primDia=' + formattedStdate + 
-                  '&ultDia=' + formattedEndate + 
-                  '&download=true';
-        var iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = url;
-        document.body.appendChild(iframe);
-    });
-}
-
 function getAllAuditsPbsListener(){
     $('#allPbs').click(function (){
         $("#pbListTable > .selected").removeClass('selected');
@@ -155,8 +133,7 @@ function setAuditsInfoListers(){
 
 function setAuditsCardListers(){
     $('#gifSendingMail').hide();
-    setSendAuditMail();  
-    setExportCsvListener();   
+    setSendAuditMail();    
 }
 
 function setAuditsListers(){

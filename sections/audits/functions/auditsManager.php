@@ -834,7 +834,6 @@ HTML;
         if ($showSendBtn) {
             $html .= "<div id='bottom'>";
             $html .= "<button id='sendAuditMail' class='popup-confirm' idPb='{$idPb}' stdate='{$intervalStart}' endate='{$intervalEnd}' aunum='{$AuditNum}'><i class='fa fa-paper-plane-o icoSend' aria-hidden='true'></i> Resend E-mail </button>";
-            $html .= "<button id='exportCsv' class='popup-confirm' idPb='{$idPb}' stdate='{$intervalStart}' endate='{$intervalEnd}' aunum='{$AuditNum}'><i class='fa fa-file-excel-o' aria-hidden='true'></i> Export CSV </button>";
             $html .= "<img id='gifSendingMail' src='images/web/loading.gif' style='width: 8%!important; margin-top: 0px!important;'>";
             $html .= "</div>";
         }
