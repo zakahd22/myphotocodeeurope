@@ -73,7 +73,7 @@ if (!empty($typeID)) {
         $typeName = $CLD_CON2->GetArrayField("name");
     }
 } else {
-    $CLD_CON2->OpenRs("SELECT id , b.name FROM CLD_boothTypes WHERE b.char=$char LIMIT 1");
+    $CLD_CON2->OpenRs("SELECT id, name FROM CLD_boothTypes WHERE `char`='$char' LIMIT 1");
     if ($CLD_CON2->FetchArray()) {
         $typeName = $CLD_CON2->GetArrayField("name");
         $typeID = $CLD_CON2->GetArrayField("id");
