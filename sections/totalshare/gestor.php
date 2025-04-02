@@ -650,7 +650,7 @@ foreach ($llistaWhatsapp as $entry) {
     
 //20250216twilio_02    $content_variables = array("1" => $code);//20250216twilio
  //20250216twilio_03   $content_variables = array("1" => "\"$code\"");//20250216twilio_02
-     $content_variables = json_encode(array("1" => "https://www.myphotocode.com/photo/$code"));
+     $content_variables = json_encode(array("1" => "https://www.myphotocode.com/$token"));
 
     
     error_log( "TO_DELETE gestor 20250216whatsapp, content_variables: $content_variables ");//20250216twilio_03
