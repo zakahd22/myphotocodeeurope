@@ -51,7 +51,11 @@ if($metode == 1){
     $rand = rand(1000, 9999);
     $c = substr($codiFoto, -3);
     $token = 'SMS'.$c.$rand;
- } 
+ } elseif ($metode == 3){
+    $rand = rand(1000, 9999);
+    $c = substr($codiFoto, -3);
+    $token = 'WAPP'.$c.$rand;
+ }
 
 $sql = "SELECT id FROM `gestor` WHERE `code` = '$codiFoto' AND `contact` = '$contacte' AND `method`='$metode';";
 APP_fesLogDebbug("TRACE to delete PBnew_Share, sql check: $sql","logPBnew_Share");
