@@ -674,7 +674,7 @@ foreach ($llistaWhatsapp as $entry) {
         //    "MediaUrl1" => "https://www.myphotocode.com/events/2021092340241/W7UXM5X6G3.jpg",
         //20250214whatsapp INICI
         //20250214whatsapp "Body" => $message,
-        "ContentSid" => "HXd0711dc606369d837b4c7b7fdd63337b",
+        "ContentSid" => "HXa5b06d43981d595818485a00d889410d",
 //        "ContentVariables" => { "1": $code }
 //20250216twilio        "ContentVariables" => array( "1" => $code ),
         "ContentVariables" => $content_variables); //20250216twilio
