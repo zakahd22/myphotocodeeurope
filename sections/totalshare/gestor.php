@@ -655,6 +655,7 @@ foreach ($llistaWhatsapp as $entry) {
     
     error_log( "TO_DELETE gestor 20250216whatsapp, content_variables: $content_variables ");//20250216twilio_03
 
+    $contact = trim($contact);
     $data = array(
         "To" => "whatsapp:".$contact,
 //20250216twilio_04        "To" => $contact,//20250216twilio_04
