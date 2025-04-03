@@ -32,7 +32,7 @@ $operatorEstat = "<";
 $request = $baseController->App_boothsModel->getBoothAndBoothAlerts($arrayBooths, $typeAlert, $operatorEstat);
 
 //Alertes de FILM sense solucionar.
-$CLD_CON->OpenRs("SELECT b.serialnumber , b.name ba.when , ba.typeAlert FROM App_boothAlert ba   LEFT JOIN App_booths b ON b.idBooth = ba.idBooth WHERE ba.idBooth IN($IN) AND ba.estat<2 AND ba.typeAlert=51 ORDER BY ba.when DESC");
+$CLD_CON->OpenRs("SELECT b.serialnumber, b.name, ba.when, ba.typeAlert FROM App_boothAlert ba LEFT JOIN App_booths b ON b.idBooth = ba.idBooth WHERE ba.idBooth IN($IN) AND ba.estat<2 AND ba.typeAlert=51 ORDER BY ba.when DESC");
 $html .= "<div class='inContent'>";
 $html .="<h1>PRINTER <span style='background-color:#FF9999;color:#FF0000;'>ERRORS</span></h1>";
 $html .="<div class='noSolvedAlert'>";
@@ -56,7 +56,7 @@ $typeAlert  = array(51);
 $operatorEstat = "=";
 $request = $baseController->App_boothsModel->getBoothAndBoothAlerts($arrayBooths, $typeAlert, $operatorEstat);
 
-$CLD_CON->OpenRs("SELECT b.serialnumber , b.name ba.when , ba.typeAlert FROM App_boothAlert ba   LEFT JOIN App_booths b ON b.idBooth = ba.idBooth WHERE ba.idBooth IN($IN) AND ba.estat=2 AND ba.typeAlert=51 ORDER BY ba.when DESC");
+$CLD_CON->OpenRs("SELECT b.serialnumber, b.name, ba.when, ba.typeAlert FROM App_boothAlert ba LEFT JOIN App_booths b ON b.idBooth = ba.idBooth WHERE ba.idBooth IN($IN) AND ba.estat<2 AND ba.typeAlert=51 ORDER BY ba.when DESC");
 $html .= "<h1>SOLVED PRINTER ERRORS</h1>";
 $html .= "<div class='solvedAlert'>";
 if($CLD_CON->GetRsRows()==0){
