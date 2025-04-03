@@ -10,7 +10,7 @@ while ($CLD_CON->FetchArray()) {
 }
 $IN = substr($IN, 0, -1);
 //Alertes de FILM sense solucionar.
-$CLD_CON->OpenRs("SELECT b.serialnumber, b.name ba.when , ba.typeAlert FROM App_boothAlert ba   LEFT JOIN App_booths b ON b.idBooth = ba.idBooth WHERE ba.idBooth IN($IN) AND ba.estat<2 AND ba.typeAlert=53 ORDER BY ba.when DESC");
+$CLD_CON->OpenRs("SELECT b.serialnumber, b.name, ba.`when`, ba.typeAlert FROM App_boothAlert ba LEFT JOIN App_booths b ON b.idBooth = ba.idBooth WHERE ba.idBooth IN($IN) AND ba.estat<2 AND ba.typeAlert=53 ORDER BY ba.`when` DESC");
 echo "<div class='inContent'>";
 echo "<h1>CONTROL BOARD <span style='background-color:#FF9999;color:#FF0000;'>ERRORS</span></h1>";
 echo "<div class='noSolvedAlert'>";
@@ -29,7 +29,7 @@ while ($CLD_CON->FetchArray()) {
 }
 echo "</div>";
 
-$CLD_CON->OpenRs("SELECT b.serialnumber, b.name, ba.when, ba.typeAlert FROM App_boothAlert ba   LEFT JOIN App_booths b ON b.idBooth = ba.idBooth WHERE ba.idBooth IN($IN) AND ba.estat=2 AND ba.typeAlert=53 ORDER BY ba.when DESC");
+$CLD_CON->OpenRs("SELECT b.serialnumber, b.name, ba.`when`, ba.typeAlert FROM App_boothAlert ba LEFT JOIN App_booths b ON b.idBooth = ba.idBooth WHERE ba.idBooth IN($IN) AND ba.estat=2 AND ba.typeAlert=53 ORDER BY ba.`when` DESC");
 echo "<h1>SOLVED CONTROL BOARD ERRORS</h1>";
 echo "<div class='solvedAlert'>";
 if($CLD_CON->GetRsRows()==0){
