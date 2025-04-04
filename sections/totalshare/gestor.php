@@ -84,18 +84,16 @@ if(isset($_POST["data"])){
     
 }
 
+$token = "";
 if($metode == 1){
     $rand = rand(1000, 9999);
     $c = substr($codiFoto, -3);
     $token = 'SMS'.$c.$rand;
- } 
- 
- $token = "";
-if($metode == 1){
+ } elseif ($metode == 3){
     $rand = rand(1000, 9999);
     $c = substr($codiFoto, -3);
-    $token = 'SMS'.$c.$rand;
- } 
+    $token = 'WAPP'.$c.$rand;
+ }
 if ($metode == 1 || $metode == 3) {
 
     $mini = substr($contacte,1);
