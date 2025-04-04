@@ -1,7 +1,10 @@
-<?
+<?php
 
 require_once '../common/global.php';
 include G_PATH . "common/general.php";
+require_once G_PATH . "common/conexio.php";
+
+$conn = getNewBdD();
 
 function assign_rand_value($num) {
 
@@ -107,52 +110,58 @@ if (!$dongle_id)
 if (!$booth_type)
     die("ko#T");
 
-$booth = mysql_fetch_array(mysql_query("SELECT * FROM booths WHERE dongle='$dongle_id'"));
-if ($booth) {
-
-    //return string
-
-    die("ok#" . $booth['reference'] . "#" . $booth['rand_string']);
+$sql = "SELECT * FROM booths WHERE dongle='$dongle_id'";
+$conn->OpenRs($sql);
+$existingBooth = $conn->FetchRs();
+$conn->CloseRs();
+if ($existingBooth) {
+    die("ok#" . $existingBooth['reference'] . "#" . $existingBooth['rand_string']);
 } else {
-
-    //start get booth reference
-
+    // Get the last reference for this booth type
     $type_last_reference = 0;
-    $q = mysql_query("SELECT * FROM booths ORDER BY id DESC");
-    while ($booth = mysql_fetch_array($q)) {
-
-        $bt = substr($booth['reference'], 0, 1);
-        if ($bt == $booth_type && $type_last_reference == 0) {
-            $type_last_reference = (int) substr($booth['reference'], 1, 3);
+    $sqlAll = "SELECT * FROM booths ORDER BY id DESC";
+    $conn->OpenRs($sqlAll);
+    while ($row = $conn->FetchRs()) {
+        $bt = substr($row['reference'], 0, 1);
+        if ($bt === $booth_type && $type_last_reference === 0) {
+            $type_last_reference = (int) substr($row['reference'], 1, 3);
         }
     }
+    $conn->CloseRs();
 
     $type_last_reference++;
 
-    $booth_reference = $booth_type . $type_last_reference; //20131029VIC
-
-    if ($type_last_reference < 100)
-        $booth_reference = $booth_type . "0" . $type_last_reference;
-    if ($type_last_reference < 10)
+    // Build the booth reference, adding leading zeros if needed
+    if ($type_last_reference < 10) {
         $booth_reference = $booth_type . "00" . $type_last_reference;
-
-
-    //start get random string
-
-    $check_rand_string = 1;
-    while ($check_rand_string) {
-//20170515        $booth_rand_string = get_rand_id(3);
-        $booth_rand_string = utils::get_rndm32(3);//20170515
-        $check_rand_string = mysql_num_rows(mysql_query("SELECT * FROM booths WHERE rand_string='$booth_rand_string'"));
+    } elseif ($type_last_reference < 100) {
+        $booth_reference = $booth_type . "0" . $type_last_reference;
+    } else {
+        $booth_reference = $booth_type . $type_last_reference;
     }
 
+    // Generate a unique random string
+    do {
+        if (method_exists('utils', 'get_rndm32')) {
+            $booth_rand_string = utils::get_rndm32(3);
+        } else {
+            $booth_rand_string = get_rand_id(3);
+        }
+        $sqlRand = "SELECT * FROM booths WHERE rand_string='$booth_rand_string'";
+        $conn->OpenRs($sqlRand);
+        $found = $conn->FetchRs();
+        $conn->CloseRs();
+    } while ($found);
 
-    //sql insert
-
-    mysql_query("INSERT INTO booths SET dongle='$dongle_id', reference='$booth_reference', rand_string='$booth_rand_string', rental_id=1") or die("ko#insert");
-
-
-    //return string
+    // Insert the new booth record
+    $insert_sql = "INSERT INTO booths SET 
+                        dongle='$dongle_id', 
+                        reference='$booth_reference', 
+                        rand_string='$booth_rand_string', 
+                        rental_id=1";
+    if (!$conn->Execute($insert_sql)) {
+        die("ko#insert");
+    }
 
     die("ok#" . $booth_reference . "#" . $booth_rand_string);
 }
