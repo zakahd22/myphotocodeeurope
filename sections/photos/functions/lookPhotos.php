@@ -1610,9 +1610,8 @@ HTML;
         $html = <<<HTML
                     The photo $this->code is not available yet,<br/> would you like us to notify you as soon as it is ready?  <br><br>
                     <div id = 'sendOptions'>
-        <input type='image' src="images/icons/phone_60x75.png" onclick='avisaSMS();' id='si' value='Yes, send me a SMS'>
-        <!--21-D-03-Total-Share-Whatsapp-->
-        <input type='image' src="images/icons/whatsapp.png" onclick='avisaWhatsapp();' id='si' value='Yes, send me a WhatsApp'>
+        <!-- <input type='image' src="images/icons/phone_60x75.png" onclick='avisaSMS();' id='si' value='Yes, send me a SMS'>
+        <input type='image' src="images/icons/whatsapp.png" onclick='avisaWhatsapp();' id='si' value='Yes, send me a WhatsApp'> -->
         <input type='image' src="images/icons/email_60x75.png" onclick='avisaMail();' id='si' value='Yes, send me an email'>
         <input type='image' src="images/icons/cancel-blue_60x75.png" onclick="cancel()" value='No, thanks'><br><br>
     </div>
