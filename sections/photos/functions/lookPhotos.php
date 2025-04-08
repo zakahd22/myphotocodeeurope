@@ -1607,47 +1607,47 @@ HTML;
     }
 
     private function getPhotoboothLastConnection($code) {
+        // Extract the PB rand_string from the photo code: characters 2–4.
         $rand_string = substr($code, 1, 3);
-
-        // Query the booths table for the rand_string.
+    
+        // Query the booths table using the extracted rand_string.
         $CLD_CON = getNewBdD();
         $sql = "SELECT id FROM booths WHERE rand_string = '$rand_string' LIMIT 1";
         $CLD_CON->OpenRs($sql);
-        $boothRow = null;
+        $boothId = null;
         while ($CLD_CON->FetchArray()) {
-            $boothRow = $CLD_CON->GetArray();
+            $boothId = $CLD_CON->GetArrayField("id");
         }
-        if (!$boothRow) {
+        if (!$boothId) {
+            // The rand_string was not found → code is invalid.
             return null;
         }
-
-        // Query App_boothDongle using the booth id.
-        $idDongle = $boothRow['id'];
+    
+        // Query the App_boothDongle table using the obtained booth id.
         $CLD_CON2 = getNewBdD();
-        $sql2 = "SELECT idBooth FROM App_boothDongle WHERE idDongle = $idDongle LIMIT 1";
+        $sql2 = "SELECT idBooth FROM App_boothDongle WHERE idDongle = $boothId LIMIT 1";
         $CLD_CON2->OpenRs($sql2);
-        $dongleRow = null;
+        $idBooth = null;
         while ($CLD_CON2->FetchArray()) {
-            $dongleRow = $CLD_CON2->GetArray();
+            $idBooth = $CLD_CON2->GetArrayField("idBooth");
         }
-        if (!$dongleRow) {
+        if (!$idBooth) {
             return null;
         }
-
-        // Query App_booths to obtain lastConn.
-        $idBooth = $dongleRow['idBooth'];
+    
+        // Query the App_booths table for the last connection time (lastConn)
         $CLD_CON3 = getNewBdD();
         $sql3 = "SELECT lastConn FROM App_booths WHERE idBooth = $idBooth LIMIT 1";
         $CLD_CON3->OpenRs($sql3);
-        $boothsRow = null;
+        $lastConn = null;
         while ($CLD_CON3->FetchArray()) {
-            $boothsRow = $CLD_CON3->GetArray();
+            $lastConn = $CLD_CON3->GetArrayField("lastConn");
         }
-        if (isset($boothsRow['lastConn']) && !empty($boothsRow['lastConn'])) {
-            return $boothsRow['lastConn'];
+        if (isset($lastConn) && !empty($lastConn)) {
+            return $lastConn;
         }
         return null;
-    }
+    }    
 
     private function showDefaultPhotoNotAvailable() {
 
