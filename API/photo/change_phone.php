@@ -55,7 +55,7 @@ function findByContactAndCode($phone, $code, mysqli $db) {
 }
 
 function guardAgainstWrongHttpMethod() {
-  if ($_SERVER['REQUEST_METHOD'] != PUT) {
+  if ($_SERVER['REQUEST_METHOD'] != 'PUT') {
     exitWithError("invalid method");
   }
 }

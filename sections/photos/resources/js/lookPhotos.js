@@ -261,7 +261,7 @@ function updatePhotoEmailContactRequest(email, previousEmail, code){
             type: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify({'email':email, 'previous_email': previousEmail, 'code': code}),
-            success: sendContactSuccessCallback ()
+            success: sendContactSuccessCallback
         }).fail( function( jqXHR, textStatus, errorThrown ) {
             $('#complet').html('<p style="color:red;">An error occurred when changing the email address!</p>');
             $('#complet').show();
@@ -276,7 +276,7 @@ function updatePhotoPhoneContactRequest(phone, previousPhone, code){
             type: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify({'phone':phone, 'previous_phone': previousPhone, 'code': code}),
-            success: sendContactSuccessCallback ()
+            success: sendContactSuccessCallback
         }).fail( function( jqXHR, textStatus, errorThrown ) {
             $('#complet').html('<p style="color:red;">An error occurred when changing the phone!</p>');
             $('#complet').show();
@@ -300,7 +300,7 @@ function setPhotoContactRequest(data) {
             data: {
                 data: JSON.stringify(data),
             },
-            success: sendContactSuccessCallback ()
+            success: sendContactSuccessCallback 
         });
     }
 }
