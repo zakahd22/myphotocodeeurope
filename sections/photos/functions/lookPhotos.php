@@ -1606,41 +1606,118 @@ HTML;
         return null;
     }
 
+    private function getPhotoboothLastConnection($code) {
+        $rand_string = substr($code, 1, 3);
+
+        // Query the booths table for the rand_string.
+        $CLD_CON = getNewBdD();
+        $sql = "SELECT id FROM booths WHERE rand_string = '$rand_string' LIMIT 1";
+        $CLD_CON->OpenRs($sql);
+        $boothRow = null;
+        while ($CLD_CON->FetchArray()) {
+            $boothRow = $CLD_CON->GetArray();
+        }
+        if (!$boothRow) {
+            return null;
+        }
+
+        // Query App_boothDongle using the booth id.
+        $idDongle = $boothRow['id'];
+        $CLD_CON2 = getNewBdD();
+        $sql2 = "SELECT idBooth FROM App_boothDongle WHERE idDongle = $idDongle LIMIT 1";
+        $CLD_CON2->OpenRs($sql2);
+        $dongleRow = null;
+        while ($CLD_CON2->FetchArray()) {
+            $dongleRow = $CLD_CON2->GetArray();
+        }
+        if (!$dongleRow) {
+            return null;
+        }
+
+        // Query App_booths to obtain lastConn.
+        $idBooth = $dongleRow['idBooth'];
+        $CLD_CON3 = getNewBdD();
+        $sql3 = "SELECT lastConn FROM App_booths WHERE idBooth = $idBooth LIMIT 1";
+        $CLD_CON3->OpenRs($sql3);
+        $boothsRow = null;
+        while ($CLD_CON3->FetchArray()) {
+            $boothsRow = $CLD_CON3->GetArray();
+        }
+        if (isset($boothsRow['lastConn']) && !empty($boothsRow['lastConn'])) {
+            return $boothsRow['lastConn'];
+        }
+        return null;
+    }
+
     private function showDefaultPhotoNotAvailable() {
+
+        $cancelButton = '<input type="image" src="images/icons/cancel-blue_60x75.png" onclick="cancel()" value="No, thanks"><br><br>';
+
+        // Default message if the photo is not available yet.
+        $messageOutput = "The photo {$this->code} is not available yet,<br/> would you like us to notify you as soon as it is ready?<br><br>";
+
+        $lastConn = $this->getPhotoboothLastConnection($this->code);
+        if (!$lastConn) {
+            // If no last connection is found, it likely means the code is invalid.
+            $messageOutput = "The code you entered is invalid. Please check and try again.";
+            $html = <<<HTML
+                {$messageOutput}
+                <div id="sendOptions">
+                    {$cancelButton}
+                </div>
+            HTML;
+            return $html;
+        } else {
+            // Convert lastConn to a timestamp.
+            $lastConnTime = strtotime($lastConn);
+            $fifteenDaysAgo = strtotime("-15 days");
+            if ($lastConnTime < $fifteenDaysAgo) {
+                // If the photobooth hasn’t connected for more than 15 days, indicate that.
+                $messageOutput = "The photo you requested will not be available because the photobooth appears to have been offline for over 15 days. Please contact your local operator for assistance.";
+                $html = <<<HTML
+                    {$messageOutput}
+                    <div id="sendOptions">
+                        {$cancelButton}
+                    </div>
+                HTML;
+                return $html;
+            }
+        }
+
         $html = <<<HTML
-                    The photo $this->code is not available yet,<br/> would you like us to notify you as soon as it is ready?  <br><br>
-                    <div id = 'sendOptions'>
-        <!-- <input type='image' src="images/icons/phone_60x75.png" onclick='avisaSMS();' id='si' value='Yes, send me a SMS'>
-        <input type='image' src="images/icons/whatsapp.png" onclick='avisaWhatsapp();' id='si' value='Yes, send me a WhatsApp'> -->
-        <input type='image' src="images/icons/email_60x75.png" onclick='avisaMail();' id='si' value='Yes, send me an email'>
-        <input type='image' src="images/icons/cancel-blue_60x75.png" onclick="cancel()" value='No, thanks'><br><br>
-    </div>
-    <div id='dades'>
-        <div class="smsSend" style='display: none' id='sms'>
-            <!--<form >-->
-            {$this->getInputPhoneContactHtml()}
-            <!--</form>-->
-        </div>
-        <!--21-D-03-Total-Share-Whatsapp-->    
-        <div class="whatsappSend" style='display: none' id='whatsapp'>
-            <!--<form >-->
-            {$this->getInputWhatsappContactHtml()}
-            <!--</form>-->
-        </div>
-        <div class="emailSend" style='display: none' id='mail'>
-            {$this->getInputEmailContactHtml()}
-        </div>
-    </div>
-    <div id='complet' style='display: none'> You will recieve a message when the photo is uploaded </div>
-            
-HTML;
-      if(isset($this->emailContact) && !empty($this->emailContact->getValue())) {
-          setcookie('photo_contact_email', $this->emailContact->getValue(), time()+3600, '/');
-      }
-      if(isset($this->phoneContact) && !empty($this->phoneContact->getValue())) {
-        setcookie('photo_contact_phone', $this->phoneContact->getValue(), time() + 3600, '/');
-      }
-      return $html;
+            {$messageOutput}
+            <div id = "sendOptions">
+                <!-- For sending SMS reminder -->
+                <!-- <input type="image" src="images/icons/phone_60x75.png" onclick="avisaSMS();" id="si" value="Yes, send me a SMS"> -->
+                <!-- For sending whatsapp reminder -->
+                <!-- <input type="image" src="images/icons/whatsapp.png" onclick="avisaWhatsapp();" id="si" value="Yes, send me a WhatsApp"> -->
+                <input type="image" src="images/icons/email_60x75.png" onclick="avisaMail();" id="si" value="Yes, send me an email">
+                {$cancelButton}
+            </div>
+            <div id="dades">
+                <!-- For sending SMS -->
+                <!-- <div class="smsSend" style="display: none" id="sms">
+                    {$this->getInputPhoneContactHtml()}
+                </div> -->
+                <!-- For sending whatsapp -->
+                <!-- <div class="whatsappSend" style="display: none" id="whatsapp">
+                    {$this->getInputWhatsappContactHtml()}
+                </div> -->
+                <div class="emailSend" style="display: none" id="mail">
+                    {$this->getInputEmailContactHtml()}
+                </div>
+            </div>
+            <div id="complet" style="display: none"> You will recieve a message when the photo is uploaded </div>
+        HTML;
+
+        if(isset($this->emailContact) && !empty($this->emailContact->getValue())) {
+            setcookie("photo_contact_email", $this->emailContact->getValue(), time()+3600, "/");
+        }
+        // Uncomment the following lines if you want to set a cookie for the phone contact as well.
+        // if(isset($this->phoneContact) && !empty($this->phoneContact->getValue())) {
+        //     setcookie("photo_contact_phone", $this->phoneContact->getValue(), time() + 3600, "/");
+        // }
+        return $html;
     }
 
     private function getInputPhoneContactHtml() {
