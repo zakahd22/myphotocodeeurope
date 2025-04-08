@@ -1625,7 +1625,7 @@ HTML;
     
         // Query the App_boothDongle table using the obtained booth id.
         $CLD_CON2 = getNewBdD();
-        $sql2 = "SELECT idBooth FROM App_boothDongle WHERE idDongle = $boothId LIMIT 1";
+        $sql2 = "SELECT idBooth FROM App_boothDongle WHERE idDongle = $boothId ORDER BY datetimeS DESC LIMIT 1";
         $CLD_CON2->OpenRs($sql2);
         $idBooth = null;
         while ($CLD_CON2->FetchArray()) {
