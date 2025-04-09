@@ -1,0 +1,288 @@
+#contentDcFrames{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    -ms-justify-content: space-between;
+    justify-content: space-between;
+    
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    
+    -webkit-align-content: space-around;
+    -moz-align-content: space-around;
+    -ms-align-content: space-around;
+    align-content: space-around;
+    
+    width: 100%;
+    
+    
+}
+
+#arrow_right{
+    background-image: url(../../../../images/web/right-arrow.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    width: 61px;
+    height: 51px;
+    margin-left: 25px;
+    
+    cursor: pointer;
+    
+    
+}
+#arrow_left{
+    background-image: url(../../../../images/web/left-arrow.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    width: 61px;
+    height: 51px;
+    margin-right: 15px;
+    display: none;
+    cursor: pointer;
+    
+}
+.contentimgDcFrames{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    -ms-justify-content: space-between;
+    justify-content: space-between;
+    
+    -webkit-align-items: flex-start;
+    -moz-align-items: flex-start;
+    -ms-align-items: flex-start;
+    align-items: flex-start;
+    
+    -webkit-align-content: space-around;
+    -moz-align-content: space-around;
+    -ms-align-content: space-around;
+    align-content: space-around;
+    
+    margin-left: 10px;
+    
+    width: 113px;
+    height: 400px;
+    
+}
+
+.imgDcFrame{
+    height: 85px;
+    width: 113px;
+    margin-top:10px;
+    border: solid #333333 2px;
+}
+
+.hidden{
+    display: none;
+}
+
+.show{
+    
+}
+
+.checkboxframe{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+}
+
+.unchecked{
+    width: 30px;
+    height: 30px;
+    
+    cursor: pointer;
+    background-image: url(../../../../images/web/tic-no.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    
+}
+.checked{
+    width: 30px;
+    height: 30px;
+    
+    cursor: pointer;
+    background-image: url(../../../../images/web/tic-yes.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+.selectedFrames{
+    width: 400px;
+    align-self: center;
+    margin-left: 15%;
+    margin-top: -1%;
+}
+.selectedCollage{
+    width: 300px;
+    align-self: center;
+    margin-left: 67%;
+    margin-top: -4%;
+}
+#butons{
+    width: 70px;
+    margin-left: -70px;
+    margin-bottom: -23px;
+}
+.select_text{
+    background-color:rgba(255, 0, 0, 0.5);
+    color: red;
+    border-radius: 9px 9px 9px 9px;
+    -moz-border-radius: 9px 9px 9px 9px;
+    -webkit-border-radius: 9px 9px 9px 9px;
+    border: 2px solid #ff0000;
+    width: 260px;
+}
+
+#marcat{
+    text-align: center;
+    margin-top: 10px;
+}
+.imgDcCollage{
+    height: 147px;
+    width: 196px;
+    margin-top:10px;
+    border: solid #333333 2px;
+}
+
+.collagePreview2{
+      
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    
+    width: 200px;
+    height: 88px;
+    border:1px solid black;
+    
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.collagesADD{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    
+    /*width: 49%;
+    height: 70%;
+    border: 1px solid gray;*/
+    margin-bottom: 10px;
+}
+ 
+.DCCollage{
+    background-image: url(../../../../images/web/custom/collages.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 245px;
+    width: 240px;
+    cursor:pointer;
+}
+
+.CustomCollage{
+    background-image: url(../../../../images/web/custom/custom-collages.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 245px;
+    width: 240px;
+    cursor:pointer;
+}
+.DCFrames{
+    background-image: url(../../../../images/web/custom/frames1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 245px;
+    width: 240px;
+    cursor:pointer;
+}
+
+.CustomFrames{
+    background-image: url(../../../../images/web/custom/frames.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 245px;
+    width: 240px;
+    cursor:pointer;
+}
+
+.SelecdDCCollage{
+    background-image: url(../../../../images/icons/SelectCollages.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 180px;
+    height: 65px;
+    cursor:pointer;
+    margin-left: 30px;
+}
+.SelectDCFrame{
+    background-image: url(../../../../images/icons/SelectFrames.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 180px;
+    height: 65px;
+    cursor:pointer;
+    margin-left: 30px;
+}
+
+.UploadCustom{
+    background-image: url(../../../../images/icons/UploadCustom.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 180px;
+    height: 65px;
+    cursor:pointer;
+    margin-left: 30px;
+}
+
+.custom{
+    width:250px;
+    float:left;
+    display:inline;
+    
+    
+}
