@@ -39,7 +39,7 @@ app/user/photomobile/
 app/user/photowall/
 app/user/userimage/
 app/user/userqr/
-events/
+/events/
 phpmyadmin/
 phpmyadminEU/
 news/
