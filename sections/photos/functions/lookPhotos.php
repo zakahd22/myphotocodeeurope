@@ -1673,7 +1673,7 @@ HTML;
             $fifteenDaysAgo = strtotime("-15 days");
             if ($lastConnTime < $fifteenDaysAgo) {
                 // If the photobooth hasn’t connected for more than 15 days, indicate that.
-                $messageOutput = "The photo you requested will not be available because the photobooth appears to have been offline for over 15 days. Please contact your local operator for assistance.";
+                $messageOutput = "We regret to inform you that the photo you requested is unavailable due to the photobooth having been disconnected for an extended period. Please contact your local operator for assistance.";
                 $html = <<<HTML
                     {$messageOutput}
                     <div id="sendOptions">
