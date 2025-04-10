@@ -262,7 +262,7 @@ if(isset($contacte)){
  
 // Buscar entrades de les ultimes dues setmanes
 $CLD_CONDades = getNewBdD();
-    if ($CLD_CONDades->OpenRs("SELECT * FROM gestor WHERE `timestamp` > SUBTIME (NOW(), '14 0:00:00') AND `state` != 6 AND `state` != 7")){ //6 enviats 7 owner banejat
+    if ($CLD_CONDades->OpenRs("SELECT * FROM gestor WHERE `timestamp` > SUBTIME (NOW(), '14 0:00:00') AND `state` < 6")){ // Only get the entries with state less than 6
         utils::log("S'han trobat les entrades de les ultimes dues setmanes", "logGestor");
     }else{
         utils::log("No s'ha pogut extreure informació de la BBDD, abortant", "logGestor");
@@ -528,12 +528,30 @@ foreach ($llistaEmail as $entry){
         utils::log("$id --- L'email no s'ha pogut enviar", "logGestor");
         utils::log("$id --- ERROR: $mail->ErrorInfo", "logGestor");
         $CLD_CONMail = getNewBdD();
-        if ($CLD_CONMail->Execute("UPDATE gestor SET `last`= '$now', `state`=5, `error`='$mail->ErrorInfo' WHERE `id`=$id")) {
-            utils::log("$id --- UPDATE correcte", "logGestor");
-            //guardar log del error
+
+        if (strpos($mail->ErrorInfo, "You must provide at least one recipient email address.") !== false) {
+            // If the error is exactly about a missing recipient, update immediately to state 8.
+            if ($CLD_CONMail->Execute("UPDATE gestor SET `last`='$now', `state`=8, `error`='$mail->ErrorInfo' WHERE `id`=$id")) {
+                utils::log("$id --- EMAIL updated to state 8 (invalid email)", "logGestor");
+            } else {
+                utils::log("$id --- Failed to update EMAIL to state 8", "logGestor");
+            }
         } else {
-            //guardar log negatiu
-            utils::log("$id --- Ha fallat el UPDATE", "logGestor");
+            // If we're already in state 5 and the last attempt is older than 24 hours, update to state 8, permanently failed and stop retry.
+            if ($state == '5' && $lastTime < $s1dia) {
+                if ($CLD_CONMail->Execute("UPDATE gestor SET `last`= '$now', `state`=8, `error`='$mail->ErrorInfo' WHERE `id`=$id")) {
+                    utils::log("$id --- EMAIL updated to state 8 (permanent failure)", "logGestor");
+                } else {
+                    utils::log("$id --- Failed to update EMAIL to state 8", "logGestor");
+                }
+            } else {
+                // Else, update/keep it in state 5 to allow further retries.
+                if ($CLD_CONMail->Execute("UPDATE gestor SET `last`= '$now', `state`=5, `error`='$mail->ErrorInfo' WHERE `id`=$id")) {
+                    utils::log("$id --- Set EMAIL in state 5", "logGestor");
+                } else {
+                    utils::log("$id --- Failed to update EMAIL to state 5", "logGestor");
+                }
+            }
         }
     } else {
         //guarda éxit
@@ -600,12 +618,20 @@ foreach ($llistaSMS as $entry) {
         utils::log("$id --- No s'ha pogut enviar el SMS", "logGestor");
         $error .= '\n cURL error: ' . curl_error($curl);
         $CLD_CONSMS = getNewBdD();
-        if ($CLD_CONSMS->Execute("UPDATE gestor SET `last`= '$now', `state`=5, `error`=$error WHERE `id`=$id")) {
-            //guardar log del error
-            utils::log("$id --- UPDATE correcte", "logGestor");
+        // If we're already in state 5 and the last attempt is older than 24 hours, update to state 8, permanently failed and stop retry.
+        if ($state == '5' && $lastTime < $s1dia) {
+            if ($CLD_CONSMS->Execute("UPDATE gestor SET `last`='$now', `state`=8, `error`='$error' WHERE `id`=$id")) {
+                utils::log("$id --- SMS updated to state 8 (permanent failure)", "logGestor");
+            } else {
+                utils::log("$id --- Failed to update SMS to state 8", "logGestor");
+            }
         } else {
-            //guardar log negatiu
-            utils::log("$id --- Ha fallat el UPDATE", "logGestor");
+            // Else, update/keep it in state 5 to allow further retries.
+            if ($CLD_CONSMS->Execute("UPDATE gestor SET `last`='$now', `state`=5, `error`='$error' WHERE `id`=$id")) {
+                utils::log("$id --- Set SMS in state 5", "logGestor");
+            } else {
+                utils::log("$id --- Failed to update SMS to state 5", "logGestor");
+            }
         }
     }
 
@@ -709,12 +735,20 @@ foreach ($llistaWhatsapp as $entry) {
         utils::log("$id --- No s'ha pogut enviar el Whatsapp", "logGestor");
         $error .= '\n cURL error: ' . curl_error($curl);
         $CLD_CONSMS = getNewBdD();
-        if ($CLD_CONSMS->Execute("UPDATE gestor SET `last`= '$now', `state`=5, `error`=$error WHERE `id`=$id")) {
-            //guardar log del error
-            utils::log("$id --- UPDATE correcte", "logGestor");
+        // If we're already in state 5 and the last attempt is older than 24 hours, update to state 8, permanently failed and stop retry.
+        if ($state == '5' && $lastTime < $s1dia) {
+            if ($CLD_CONSMS->Execute("UPDATE gestor SET `last`='$now', `state`=8, `error`='$error' WHERE `id`=$id")) {
+                utils::log("$id --- Whatsapp updated to state 8 (permanent failure)", "logGestor");
+            } else {
+                utils::log("$id --- Failed to update Whatsapp to state 8", "logGestor");
+            }
         } else {
-            //guardar log negatiu
-            utils::log("$id --- Ha fallat el UPDATE", "logGestor");
+            // Else, update/keep it in state 5 to allow further retries.
+            if ($CLD_CONSMS->Execute("UPDATE gestor SET `last`='$now', `state`=5, `error`='$error' WHERE `id`=$id")) {
+                utils::log("$id --- Set Whatsapp in state 5", "logGestor");
+            } else {
+                utils::log("$id --- Failed to update Whatsapp to state 5", "logGestor");
+            }
         }
     }
 
@@ -763,12 +797,20 @@ foreach ($llistaTelegram as $entry){
         utils::log("$id --- No s'ha pogut enviar el Telegram", "logGestor");
         utils::log("$message --- no pot enviar Telegram entry -- $contact", "logGestor");
         $CLD_CONTel = getNewBdD();
-        if($CLD_CONTel->Execute("UPDATE gestor SET `last`= $now, `state`=5, `error`=$error WHERE `id`=$id")){
-            //guardar log del error
-            utils::log("$id --- UPDATE correcte", "logGestor");
-        }else{
-            //guardar log negatiu
-            utils::log("$id --- Ha fallat el UPDATE", "logGestor");
+        // If we're already in state 5 and the last attempt is older than 24 hours, update to state 8, permanently failed and stop retry.
+        if ($state == '5' && $lastTime < $s1dia) {
+            if ($CLD_CONTel->Execute("UPDATE gestor SET `last`= '$now', `state`=8, `error`='$error' WHERE `id`=$id")) {
+                utils::log("$id --- Telegram updated to state 8 (permanent failure)", "logGestor");
+            } else {
+                utils::log("$id --- Failed to update Telegram to state 8", "logGestor");
+            }
+        } else {
+            // Else, update/keep it in state 5 to allow further retries.
+            if ($CLD_CONTel->Execute("UPDATE gestor SET `last`= '$now', `state`=5, `error`='$error' WHERE `id`=$id")) {
+                utils::log("$id --- Set Telegram in state 5", "logGestor");
+            } else {
+                utils::log("$id --- Failed to update Telegram to state 5", "logGestor");
+            }
         }
         
     }
