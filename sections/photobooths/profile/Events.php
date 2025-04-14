@@ -8,7 +8,7 @@ $baseController->createModel('App_boothDongle');
 $baseController->createModel('events');
 $baseController->createModel('photos');
 
-$ID = $_POST['id'];
+$ID = filter_var($_POST['id'], FILTER_VALIDATE_INT);
 $dongles_ids = [];
 $i = 0;
 $user = FALSE;
@@ -26,7 +26,6 @@ foreach($booths as $booth){
 }
 $in = array();
 foreach ($dongles_ids as $arrDongle) {
-
     if (empty($arrDongle[2])) {
         $dateF = "3000-01-01";
     }
@@ -40,12 +39,13 @@ foreach ($dongles_ids as $arrDongle) {
     }
     else{
         $eventsid = $baseController->photosModel->getPhotosScript($arrDongle[0], $arrDongle[1], $dateF, true);
-        
     }
-    foreach($eventsid as $eventid){
-        $events[$x] = [$eventid["event_id"],  $eventid["code"]];
-        array_push($in, $events[$x][0]);
-        $x++;
+    if(is_array($eventsid)) {
+        foreach($eventsid as $eventid){
+            $events[$x] = [$eventid["event_id"], $eventid["code"]];
+            array_push($in, $events[$x][0]);
+            $x++;
+        }
     }
 }
 //$in .= "0";
@@ -63,56 +63,61 @@ echo "</div>";
 //    $z = count($baseController->eventsModel->getEventsIdIN($in));
 //}
 
-$z = count($events);
+$z = isset($events) && is_array($events) ? count($events) : 0;
 echo "<p>" . $z . " Events<p>";
 
-foreach ($events as $event1) {
-    $event = $event1[0];
-    $class = "regEventULRed";
-    $eventData = $baseController->eventsModel->getEvent($event);
-    //$CLD_CON->OpenRs("SELECT * FROM events WHERE id=$event");
-    if ($eventData) {
-        $eventData = $eventData[0];
-        $event_lastPhoto = $eventData['CLD_date_lastPhoto'];
-        $z++;
-        
-        $fecha = date("Y-m-d");
-        $DateDiff = date_diff(date_create($fecha), date_create($event_lastPhoto));
+if(isset($events) && is_array($events)) {
+    foreach ($events as $event1) {
+        $event = $event1[0];
+        $class = "regEventULRed";
+        $eventData = $baseController->eventsModel->getEvent($event);
+        //$CLD_CON->OpenRs("SELECT * FROM events WHERE id=$event");
+        if ($eventData) {
+            $eventData = $eventData[0];
+            $event_lastPhoto = $eventData['CLD_date_lastPhoto'];
+            $z++;
+            
+            $fecha = date("Y-m-d");
+            $DateDiff = date_diff(date_create($fecha), date_create($event_lastPhoto));
 
-        if($event_lastPhoto == null){
-            $class = "regEventULRed";
-        }
-        else{
-            $month = $DateDiff->days / 30;
-
-            if($month > 3){
+            if($event_lastPhoto == null){
                 $class = "regEventULRed";
             }
-            elseif($DateDiff->days > 7){
-                $class = "regEventULAmbar";
-            }
             else{
-                $class = "regEventUL";
+                $month = $DateDiff->days / 30;
+
+                if($month > 3){
+                    $class = "regEventULRed";
+                }
+                elseif($DateDiff->days > 7){
+                    $class = "regEventULAmbar";
+                }
+                else{
+                    $class = "regEventUL";
+                }
             }
+            
+            $idEvent = $eventData["id"];
+            $title = stripcslashes($eventData["title"]);
+            $date = $eventData["start_date"];
+            $date = date("F d, Y", strtotime($date));
+            $private = $eventData["private"];
+            
+            $photos = $baseController->photosModel->getPhotos($idEvent);
+            $numPhotos = is_array($photos) ? count($photos) : 0;
+            
+            echo "<ul class='$class' onclick='openLink(\"Events\" , $idEvent);'>";
+            echo "<li style='width:30%' title='Event Name'>" . htmlspecialchars($title) . "</li>";
+            echo "<li style='width:20%' title='Start Date'>$date</li>";
+            if ($private == 0) {
+                $private2 = "NO";
+            } else {
+                $private2 = "YES";
+            }
+            echo "<li style='width:20%'>PRIVATE: $private2</li>";
+            echo "<li style='width:20%'>$numPhotos photos</li>";
+            echo "</ul>";
         }
-        
-        $idEvent = $eventData["id"];
-        $title = stripcslashes($eventData["title"]);
-        $date = $eventData["start_date"];
-        $date = date("F d, Y", strtotime($date));
-        $private = $eventData["private"];
-        $numPhotos = count($baseController->photosModel->getPhotos($idEvent));
-        echo "<ul class='$class' onclick='openLink(\"Events\" , $idEvent);'>";
-        echo "<li style='width:30%' title='Event Name'>$title</li>";
-        echo "<li style='width:20%' title='Start Date'>$date</li>";
-        if ($private == 0) {
-            $private2 = "NO";
-        } else {
-            $private2 = "YES";
-        }
-        echo "<li style='width:20%'>PRIVATE: $private2</li>";
-        echo "<li style='width:20%'>$numPhotos photos</li>";
-        echo "</ul>";
     }
 }
 
