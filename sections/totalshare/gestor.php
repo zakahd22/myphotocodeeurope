@@ -222,13 +222,17 @@ if(isset($contacte)){
          * si es banned state=7 i no enviem res
          */
         $banned = 0;
-        $CLD_BdD_banned = getNewBdD();
-        $sql_banned = "SELECT `banned` FROM CLD_Login l WHERE l.`id_user` = $owner";
-        $CLD_BdD_banned->OpenRs($sql_banned);
-        while ($CLD_BdD_banned->FetchArray()) {
-            $banned = $CLD_BdD_banned->GetArrayField("banned");
-           
-        }  
+        // Check owner value before running banned check query
+        if ($owner !== null && $owner !== '' && is_numeric($owner)) {
+            $CLD_BdD_banned = getNewBdD();
+            $sql_banned = "SELECT `banned` FROM CLD_Login l WHERE l.`id_user` = $owner";
+            $CLD_BdD_banned->OpenRs($sql_banned);
+            while ($CLD_BdD_banned->FetchArray()) {
+                $banned = $CLD_BdD_banned->GetArrayField("banned");
+            }
+        } else {
+            utils::log("Warning: Empty or invalid owner value for Code: $codiFoto", "logGestor");
+        }
 
         if($banned){       
             $state = 7;
@@ -319,13 +323,17 @@ $llistaWhatsapp = array();
         } 
         
         $banned = 0;
-        $CLD_BdD_banned2 = getNewBdD();
-        $sql_banned = "SELECT `banned` FROM CLD_Login l WHERE l.`id_user` = $owner";
-        $CLD_BdD_banned2->OpenRs($sql_banned);
-        while ($CLD_BdD_banned2->FetchArray()) {
-            $banned = $CLD_BdD_banned2->GetArrayField("banned");
-           
-        }  
+        // Check owner value before running banned check query
+        if ($owner !== null && $owner !== '' && is_numeric($owner)) {
+            $CLD_BdD_banned2 = getNewBdD();
+            $sql_banned = "SELECT `banned` FROM CLD_Login l WHERE l.`id_user` = $owner";
+            $CLD_BdD_banned2->OpenRs($sql_banned);
+            while ($CLD_BdD_banned2->FetchArray()) {
+                $banned = $CLD_BdD_banned2->GetArrayField("banned");
+            }
+        } else {
+            utils::log("$id --- Warning: Empty or invalid owner value. ID: $id, Code: $code", "logGestor");
+        }
 
         if($banned){       
             $state = 7;
