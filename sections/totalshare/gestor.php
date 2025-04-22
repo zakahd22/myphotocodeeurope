@@ -690,6 +690,7 @@ foreach ($llistaWhatsapp as $entry) {
     $contact = trim($contact);
     $data = array(
         "To" => "whatsapp:".$contact,
+        "From" => "whatsapp:+15866857271",
 //20250216twilio_04        "To" => $contact,//20250216twilio_04
         /*
            When sending a message with a messaging service, Twilio will immediately set the message’s status to accepted. 
