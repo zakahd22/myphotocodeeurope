@@ -321,6 +321,20 @@ $llistaWhatsapp = array();
                 $idBooth = $CLD_CONowner->GetArrayField("pbs_id");
             }  
         } 
+
+        // ——— CONTACT CLEANUP for SMS and WHATSAPP
+        if ($method == 1 || $method == 3) {
+            // remove everything except digits and '+'
+            $contact = preg_replace('/[^\d\+]/', '', $contact);
+            // ensure thereis maximum one '+' in the contact start
+            $contact = preg_replace('/^\++/', '+', $contact);
+            // remove all other '+' after the first character
+            $contact = preg_replace('/(?!^)\+/', '', $contact);
+            // if there's no starting '+', add it
+            if (substr($contact, 0, 1) !== '+') {
+                $contact = '+' . $contact;
+            }
+        }
         
         $banned = 0;
         // Check owner value before running banned check query
@@ -595,7 +609,6 @@ foreach ($llistaSMS as $entry) {
 
     // Set the file URL to fetch through cURL
     curl_setopt($curl, CURLOPT_URL, "https://api.twilio.com/2010-04-01/Accounts/ACa495bb879ddb69a2c3afbdd8eba6cfbf/Messages.json");
-    $contact = preg_replace('/[^\d\+]/','', $contact);
 
     $data = array(
         "To" => $contact,
@@ -688,7 +701,6 @@ foreach ($llistaWhatsapp as $entry) {
     
     error_log( "TO_DELETE gestor 20250216whatsapp, content_variables: $content_variables ");//20250216twilio_03
 
-    $contact = preg_replace('/[^\d\+]/','', $contact);
     $data = array(
         "To" => "whatsapp:".$contact,
         "From" => "whatsapp:+15866857271",
