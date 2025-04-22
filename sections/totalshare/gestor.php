@@ -595,6 +595,7 @@ foreach ($llistaSMS as $entry) {
 
     // Set the file URL to fetch through cURL
     curl_setopt($curl, CURLOPT_URL, "https://api.twilio.com/2010-04-01/Accounts/ACa495bb879ddb69a2c3afbdd8eba6cfbf/Messages.json");
+    $contact = preg_replace('/[^\d\+]/','', $contact);
 
     $data = array(
         "To" => $contact,
@@ -687,7 +688,7 @@ foreach ($llistaWhatsapp as $entry) {
     
     error_log( "TO_DELETE gestor 20250216whatsapp, content_variables: $content_variables ");//20250216twilio_03
 
-    $contact = trim($contact);
+    $contact = preg_replace('/[^\d\+]/','', $contact);
     $data = array(
         "To" => "whatsapp:".$contact,
         "From" => "whatsapp:+15866857271",
