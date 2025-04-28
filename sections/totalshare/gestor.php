@@ -434,7 +434,7 @@ $llistaWhatsapp = array();
                 case '5': //(ha fallat al enviarse, retry)
 
                    // utils::log("$entryID --- Case 5: Ha fallat un envío, farem al menys un retry passades 24 hores", "logGestor");
-                        if ($elast!=null && $lastTime < $s1dia && $error!="No s'ha pogut enviar, esperant retry"){
+                        if ($lastTime < $s1dia && $error!="No s'ha pogut enviar, esperant retry"){
                             utils::log("$entryID --- Ja han passat les 24 hores i no s'ha enviat cap retry, preparant per reintentar", "logGestor");
                             $enviar=true;
                             $plantilla = "enviar.php";
