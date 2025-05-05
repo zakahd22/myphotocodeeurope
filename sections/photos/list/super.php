@@ -1,4 +1,5 @@
 <?php
+ini_set('memory_limit', '256M');
 require_once G_PATH . "common/Classes/StatisticsController.php";
 
 $baseController = new baseController();
