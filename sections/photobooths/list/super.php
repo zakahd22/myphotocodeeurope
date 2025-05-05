@@ -25,6 +25,20 @@ if(isset($_POST['filPage'])){
 }
 else{
     if (isset($_POST['fil'])) {
+        $allFieldsEmpty = empty($_POST['sn']) && 
+                         empty($_POST['owner']) &&
+                         empty($_POST['dStr']) && 
+                         ($_POST['type'] == "0" || $_POST['type'] == "") &&
+                         ($_POST['status'] == "N" || $_POST['status'] == "") &&
+                         ($_POST['distributor'] == "0" || $_POST['distributor'] == "") &&
+                         ($_POST['idPb'] == "0" || $_POST['idPb'] == "") &&
+                         ($_POST['UPGRADEid'] == "0" || $_POST['UPGRADEid'] == "");
+    
+        if ($allFieldsEmpty) {
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
+        }
+    
         $filters = "";
 
         $sn_f = $_POST['sn'];
