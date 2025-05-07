@@ -100,7 +100,7 @@ curl_setopt($curl, CURLOPT_URL, "https://pricing.twilio.com/v1/Messaging/Countri
     
 
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($curl, CURLOPT_USERPWD, "ACa495bb879ddb69a2c3afbdd8eba6cfbf:05aad8b9b2c4aa71f2e7ccb2ba014527");
+curl_setopt($curl, CURLOPT_USERPWD, "ACa495bb879ddb69a2c3afbdd8eba6cfbf:052be5831f08a3959e8498111ca5ee8e");
 
 
 $response = curl_exec($curl);
