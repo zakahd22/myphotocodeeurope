@@ -24,32 +24,64 @@ $content .= "<div style='margin-top:5px;' class='popup-row popup-center'>";
 $content .= "<div class='popup-col popup-center'>";
 $content .= "Current Background<br/>";
 if ($bgId == 99) {
-    $content .= "<img style='width:200px;' src='events/" . $dataEvent . $ID . "/background.jpg?version=$rnd' >";
+    // Custom background - check if file exists
+    $bg_found = false;
+    $background_path = G_PATH . "events/" . $dataEvent . $ID . "/background";
+
+    // Check for background file with different extensions
+    $extensions = ['jpg', 'jpeg, png'];
+    foreach ($extensions as $ext) {
+        // Check lowercase version
+        if (file_exists($background_path . '.' . $ext)) {
+            $content .= "<img style='width:200px;' src='events/" . $dataEvent . $ID . "/background.{$ext}?version=$rnd' onerror=\"this.src='assets/images/backgrounds/background-default.jpg?version=$rnd';\">";
+            $bg_found = true;
+            break;
+        }
+        
+        // Check uppercase version
+        $upper_ext = strtoupper($ext);
+        if (file_exists($background_path . '.' . $upper_ext)) {
+            $content .= "<img style='width:200px;' src='events/" . $dataEvent . $ID . "/background.{$upper_ext}?version=$rnd' onerror=\"this.src='assets/images/backgrounds/background-default.jpg?version=$rnd';\">";
+            $bg_found = true;
+            break;
+        }
+    }
+
+    // If no background file found, show default
+    if (!$bg_found) {
+        $content .= "<img style='width:200px;' src='assets/images/backgrounds/background-default.jpg?version=$rnd'>";
+    }
 }
 if ($bgId < 99 && $bgId > 0) {
+ // Get background from database using your model
+ $event_backgrounds = $baseController->event_backgroundsModel->getBackground($bgId);
     
-    $event_backgrounds = $baseController->event_backgroundsModel->getBackground($bgId);
+ if ($event_backgrounds) {
+     $color = $event_backgrounds[0]['color'];
+     $imgBg = $event_backgrounds[0]['image_url'];
+     $align_x = $event_backgrounds[0]['align_x'];
+     $align_y = $event_backgrounds[0]['align_y'];
+     $repeat = $event_backgrounds[0]['repeat'];
     
-    $CLD_CON->OpenRs("SELECT * FROM event_backgrounds WHERE id=$bgId");
-    $CLD_CON->FetchArray();
-
-    $color = $CLD_CON->GetArrayField('color');
-    $imgBg = $CLD_CON->GetArrayField('image_url');
-    $align_x = $CLD_CON->GetArrayField('align_x');
-    $align_y = $CLD_CON->GetArrayField('align_y');
-    $repeat = $CLD_CON->GetArrayField('repeat');
-   
-    $style = "background:";
-    if (!empty($color))
-         $style .=  "#" . $color;
-    if (!empty($imgBg))
-        $style .= " url('assets/images/backgrounds/" . $imgBg . "'?version=$rnd)";
-    $style .= " " . $align_x;
-    $style .= " " . $align_y;
-    $style .= " " . $repeat;
-    $style .= ";";
-    $style .= "border: 1px solid black;";
-    $content .= "<div style='$style'></div>";
+     $style = "background:";
+     if (!empty($color))
+          $style .=  "#" . $color;
+     
+     // Check if background image file exists
+     if (!empty($imgBg) && file_exists(G_PATH . "assets/images/backgrounds/" . $imgBg)) {
+         $style .= " url('assets/images/backgrounds/" . $imgBg . "?version=$rnd')";
+         $style .= " " . $align_x;
+         $style .= " " . $align_y;
+         $style .= " " . $repeat;
+     }
+     
+     $style .= ";";
+     $style .= "width:200px;height:200px;border: 1px solid black;";
+     $content .= "<div style='$style'></div>";
+ } else {
+     // Fallback if background not found in database
+     $content .= "<img src='assets/images/backgrounds/background-default.jpg?version=$rnd' style='height:200px;'>";
+ }
 }
 if ($bgId == 0) {
     $content .= "<img src='assets/images/backgrounds/background-default.jpg?version=$rnd' style='height:200px;'>";
@@ -104,8 +136,6 @@ $content .="</div>";
 
 $content .="</div>";
 
-//$content .="</div>";
-
 $content .= "<input type='hidden' id='dc' value=''>";
 
 $buttons .= "<input type='button' class='popup-confirm' value='Save'  onclick='saveBackground($ID);'>";
@@ -127,7 +157,7 @@ $content .= <<<HTML
                         } else {
                             var x = Math.floor((Math.random() * 1000000) + 1);
                             $("#dc").val("1");
-                            $(".preview").html("<img src='images/ownerIMG/tmp/" + e +"?version="+ x +"' height='243px' width='200px'>");
+                            $(".preview").html("<img src='images/ownerIMG/tmp/" + e +"?version="+ x +"' height='200px' width='243px' onerror=\"this.src='assets/images/backgrounds/background-default.jpg?version=$rnd';\">");
                             $(".preview").show(500);                            
                         }
                     },
