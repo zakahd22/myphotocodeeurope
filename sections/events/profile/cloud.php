@@ -108,27 +108,51 @@ $banner = $banners[0]["CLD_banner"];
 echo "<div style='display:block;float:left;width: 100%;'><center>";
 if($banner == 1){
     $banner_url = $banners[0]["CLD_banner_URL"];
-
+    $banner_displayed = false;
+    $banner_path = G_PATH . "events/" . $eventDate . $ID . "/banner";
+    
+    // Open URL link if it exists
     if(!empty($banner_url)){
         echo "<a href='$banner_url' target='_blank'>";
     }
-    if(file_exists(G_PATH . "events/" . $eventDate . $ID . "/banner.jpg")){
-        echo "<img style='margin-left:0px;margin-top:25px;margin-bottom:25px;'  class='banner'  src='events/" . $eventDate . $ID . "/banner.jpg?version=$rnd'>";
+    
+    // Array of possible extensions to check (lowercase only)
+    $extensions = ['jpg', 'jpeg', 'gif'];
+    $banner_found = false;
+    
+    // Loop through possible extensions
+    foreach($extensions as $ext) {
+        // Check lowercase version
+        if(file_exists($banner_path . '.' . $ext)) {
+            echo "<img style='margin-left:0px;margin-top:25px;margin-bottom:25px;' class='banner' 
+                 src='events/" . $eventDate . $ID . "/banner.{$ext}?version=$rnd' 
+                 onerror=\"this.onerror=null;this.src='images/web/banners/banner-default.gif?version=$rnd';\">";
+            $banner_displayed = true;
+            break;
+        }
+        
+        // Check uppercase version
+        $upper_ext = strtoupper($ext);
+        if(file_exists($banner_path . '.' . $upper_ext)) {
+            echo "<img style='margin-left:0px;margin-top:25px;margin-bottom:25px;' class='banner' 
+                 src='events/" . $eventDate . $ID . "/banner.{$upper_ext}?version=$rnd' 
+                 onerror=\"this.onerror=null;this.src='images/web/banners/banner-default.gif?version=$rnd';\">";
+            $banner_displayed = true;
+            break;
+        }
     }
-    else if(file_exists(G_PATH . "events/" . $eventDate . $ID . "/banner.gif")){
-        echo "<img style='margin-left:0px;margin-top:25px;margin-bottom:25px;' class='banner'  src='events/" . $eventDate . $ID . "/banner.gif'>";
-    }
-    else if(file_exists(G_PATH . "events/" . $eventDate . $ID . "/banner.JPG")){
-        echo "<img style='margin-left:0px;margin-top:25px;margin-bottom:25px;'  class='banner'  src='events/" . $eventDate . $ID . "/banner.JPG?version=$rnd'>";
-    }
-    else if(file_exists(G_PATH . "events/" . $eventDate . $ID . "/banner.GIF")){
-        echo "<img style='margin-left:0px;margin-top:25px;margin-bottom:25px;' class='banner'  src='events/" . $eventDate . $ID . "/banner.GIF'>";
+    
+    // If no banner files found, display the default banner
+    if(!$banner_displayed) {
+        echo "<img style='margin-left:0px;margin-top:25px;margin-bottom:25px;' class='banner' 
+             src='images/web/banners/banner-default.gif?version=$rnd'>";
     }
 
+    // Close URL link if it was opened
     if(!empty($banner_url)){
         echo "</a>";
     }
-} 
+}
 elseif ($banner == 0){
     $banner = $baseController->CLD_bannersModel->getEventCloudBanner($owner, $date2);
 //    $CLD_CON->OpenRs(

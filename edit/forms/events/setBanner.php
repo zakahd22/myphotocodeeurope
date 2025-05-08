@@ -21,12 +21,33 @@ if($event){
    
     if ($banner == 1) {
         $fld = $dataEvent . $ID;
-  
-       if (file_exists(G_PATH ."events/$fld/banner.jpg")) {
-            $banner_IMG = "<img src='events/" . $dataEvent . $ID . "/banner.jpg?version=$rnd' style='width:200px; height:auto;'>";
+        $banner_found = false;
+        $banner_path = G_PATH . "events/{$fld}/banner";
+        
+        // Array of possible extensions to check (lowercase only)
+        $extensions = ['jpg', 'jpeg', 'gif'];
+        
+        // Loop through possible extensions
+        foreach ($extensions as $ext) {
+            // Check lowercase version
+            if (file_exists($banner_path . '.' . $ext)) {
+                $banner_IMG = "<img src='events/{$fld}/banner.{$ext}?version={$rnd}' style='width:200px;height:auto;'>";
+                $banner_found = true;
+                break;
+            }
+            
+            // Check uppercase version
+            $upper_ext = strtoupper($ext);
+            if (file_exists($banner_path . '.' . $upper_ext)) {
+                $banner_IMG = "<img src='events/{$fld}/banner.{$upper_ext}?version={$rnd}' style='width:200px;height:auto;'>";
+                $banner_found = true;
+                break;
+            }
         }
-        if (file_exists(G_PATH . "/events/" . $dataEvent. $ID . "/banner.gif")) {
-            $banner_IMG = "<img src='events/" . $dataEvent . $ID . "/banner.gif?version=$rnd' style='width:200px; height:auto;'>";
+        
+        // If no banner files found, display the default banner
+        if (!$banner_found) {
+            $banner_IMG = "<img src='images/web/banners/banner-default.gif?version={$rnd}' style='width:200px;height:auto;'>";
         }
     }
     elseif ($banner == 0) {

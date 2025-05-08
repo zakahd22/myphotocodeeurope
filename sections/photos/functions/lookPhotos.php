@@ -716,21 +716,57 @@ class lookPhotos extends baseController{
     public function prepareBanner(){
         $this->path_common_imag = "images/web";
         $this->event_folder = "events/" . $this->eventDate . $this->event . "/";
+        $this->baner = ""; // Initialize banner variable
         
-        if ($this->banner== 1) {
-            if($this->banner_url){$this->baner .= "<a href='{$this->banner_url}' target='_blank'>";}
-
-            if(file_exists(G_PATH . $this->event_folder ."banner.jpg")){
-                $this->baner .="<img class='banner_img' src='{$this->event_folder}/banner.jpg'>";
-            }
-            elseif(file_exists(G_PATH . $this->event_folder ."banner.gif")){
-                $this->baner .="<img class='banner_img' src='{$this->event_folder}/banner.gif'>";
+        if ($this->banner == 1) {
+            // Custom banner case
+            $bannerFound = false;
+            $banner_path = G_PATH . $this->event_folder . "banner";
+            
+            // Array of possible extensions to check (lowercase only)
+            $extensions = ['jpg', 'jpeg', 'gif'];
+            
+            // Loop through possible extensions
+            foreach ($extensions as $ext) {
+                // Check lowercase version
+                if (file_exists($banner_path . '.' . $ext)) {
+                    if ($this->banner_url) {
+                        $this->baner .= "<a href='{$this->banner_url}' target='_blank'>";
+                    }
+                    $this->baner .= "<img class='banner_img' src='{$this->event_folder}/banner.{$ext}'>";
+                    if ($this->banner_url) {
+                        $this->baner .= "</a>";
+                    }
+                    $bannerFound = true;
+                    break;
+                }
+                
+                // Check uppercase version
+                $upper_ext = strtoupper($ext);
+                if (file_exists($banner_path . '.' . $upper_ext)) {
+                    if ($this->banner_url) {
+                        $this->baner .= "<a href='{$this->banner_url}' target='_blank'>";
+                    }
+                    $this->baner .= "<img class='banner_img' src='{$this->event_folder}/banner.{$upper_ext}'>";
+                    if ($this->banner_url) {
+                        $this->baner .= "</a>";
+                    }
+                    $bannerFound = true;
+                    break;
+                }
             }
             
-            if($this->banner_url){$this->baner .= "</a>";}
-        } elseif($this->banner== 0){
+            // If no banner found, fall back to default
+            if (!$bannerFound) {
+                $this->baner .= "<a href='{$this->banner_url}' target='_blank'>";
+                $this->baner .= "<img class='banner_img' src='{$this->path_common_imag}/banners/banner-default.gif'>";
+                $this->baner .= "</a>";
+            }
+        } 
+        else {
+            // Default banner case
             $this->baner .= "<a href='{$this->banner_url}' target='_blank'>";
-            $this->baner .= "<img class='banner_img' src='{$this->path_common_imag}/banners/banner-default.gif'";
+            $this->baner .= "<img class='banner_img' src='{$this->path_common_imag}/banners/banner-default.gif'>";
             $this->baner .= "</a>";
         }
     }
