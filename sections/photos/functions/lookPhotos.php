@@ -716,21 +716,57 @@ class lookPhotos extends baseController{
     public function prepareBanner(){
         $this->path_common_imag = "images/web";
         $this->event_folder = "events/" . $this->eventDate . $this->event . "/";
+        $this->baner = ""; // Initialize banner variable
         
-        if ($this->banner== 1) {
-            if($this->banner_url){$this->baner .= "<a href='{$this->banner_url}' target='_blank'>";}
-
-            if(file_exists(G_PATH . $this->event_folder ."banner.jpg")){
-                $this->baner .="<img class='banner_img' src='{$this->event_folder}/banner.jpg'>";
-            }
-            elseif(file_exists(G_PATH . $this->event_folder ."banner.gif")){
-                $this->baner .="<img class='banner_img' src='{$this->event_folder}/banner.gif'>";
+        if ($this->banner == 1) {
+            // Custom banner case
+            $bannerFound = false;
+            $banner_path = G_PATH . $this->event_folder . "banner";
+            
+            // Array of possible extensions to check (lowercase only)
+            $extensions = ['jpg', 'jpeg', 'gif'];
+            
+            // Loop through possible extensions
+            foreach ($extensions as $ext) {
+                // Check lowercase version
+                if (file_exists($banner_path . '.' . $ext)) {
+                    if ($this->banner_url) {
+                        $this->baner .= "<a href='{$this->banner_url}' target='_blank'>";
+                    }
+                    $this->baner .= "<img class='banner_img' src='{$this->event_folder}/banner.{$ext}'>";
+                    if ($this->banner_url) {
+                        $this->baner .= "</a>";
+                    }
+                    $bannerFound = true;
+                    break;
+                }
+                
+                // Check uppercase version
+                $upper_ext = strtoupper($ext);
+                if (file_exists($banner_path . '.' . $upper_ext)) {
+                    if ($this->banner_url) {
+                        $this->baner .= "<a href='{$this->banner_url}' target='_blank'>";
+                    }
+                    $this->baner .= "<img class='banner_img' src='{$this->event_folder}/banner.{$upper_ext}'>";
+                    if ($this->banner_url) {
+                        $this->baner .= "</a>";
+                    }
+                    $bannerFound = true;
+                    break;
+                }
             }
             
-            if($this->banner_url){$this->baner .= "</a>";}
-        } elseif($this->banner== 0){
+            // If no banner found, fall back to default
+            if (!$bannerFound) {
+                $this->baner .= "<a href='{$this->banner_url}' target='_blank'>";
+                $this->baner .= "<img class='banner_img' src='{$this->path_common_imag}/banners/banner-default.gif'>";
+                $this->baner .= "</a>";
+            }
+        } 
+        else {
+            // Default banner case
             $this->baner .= "<a href='{$this->banner_url}' target='_blank'>";
-            $this->baner .= "<img class='banner_img' src='{$this->path_common_imag}/banners/banner-default.gif'";
+            $this->baner .= "<img class='banner_img' src='{$this->path_common_imag}/banners/banner-default.gif'>";
             $this->baner .= "</a>";
         }
     }
@@ -1419,25 +1455,91 @@ HTML;
     
     public function background(){
         /*BACKGROUND*/
+        // Default fallback background
+        $default_background = "assets/images/backgrounds/background-default.jpg";
+        
         if ($this->background_id == 0) {
-            $this->background_url = "assets/images/backgrounds/background-default.jpg";
+            // Standard default background
+            $this->background_url = $default_background;
         } 
         else if($this->background_id > 0 && $this->background_id != 99){
+            // Predefined background from database
             $background = $this->event_backgroundsModel->getBackground($this->background_id);
             
             if($background){
-                $color =  $background[0]['color'];
-                $i =  $background[0]['image_url'];
-                $image = G_PAGE . "assets/images/backgrounds/" . $background['image_url'];
-                $repeat = $background[0]['repeat'];
+                $color = $background[0]['color'];
+                $i = $background[0]['image_url'];
                 
-                $this->basic_background = "<script>changeBackGround('$color', '$repeat')</script>";
+                // Check if image file exists before using it
+                if (!empty($i) && file_exists(G_PATH . "assets/images/backgrounds/" . $i)) {
+                    $image = G_PAGE . "assets/images/backgrounds/" . $i;
+                    $repeat = $background[0]['repeat'];
+                    
+                    $this->basic_background = "<script>changeBackGround('$color', '$repeat')</script>";
+                    $this->background_url = "assets/images/backgrounds/" . $i;
+                } else {
+                    // File doesn't exist, fall back to default
+                    $this->background_url = $default_background;
+                    // Still apply the color if available
+                    if (!empty($color)) {
+                        $this->basic_background = "<script>changeBackGround('$color', 'repeat')</script>";
+                    }
+                }
+            } else {
+                // Background record not found, fall back to default
+                $this->background_url = $default_background;
             }
         }
         else {
-            $this->background_url = "events/" . $this->eventDate . $this->event . "/background.jpg";
+            // Custom background (background_id = 99)
+            $background_path = G_PATH . "events/" . $this->eventDate . $this->event . "/background";
+            $background_found = false;
+            
+            // Array of possible extensions to check (lowercase only)
+            $extensions = ['jpg', 'jpeg'];
+            
+            // Loop through possible extensions
+            foreach ($extensions as $ext) {
+                // Check lowercase version
+                if (file_exists($background_path . '.' . $ext)) {
+                    $this->background_url = "events/" . $this->eventDate . $this->event . "/background.{$ext}";
+                    $background_found = true;
+                    break;
+                }
+                
+                // Check uppercase version
+                $upper_ext = strtoupper($ext);
+                if (file_exists($background_path . '.' . $upper_ext)) {
+                    $this->background_url = "events/" . $this->eventDate . $this->event . "/background.{$upper_ext}";
+                    $background_found = true;
+                    break;
+                }
+            }
+            
+            // If no background file found, fall back to default
+            if (!$background_found) {
+                $this->background_url = $default_background;
+            }
         }
+        
+        // Add a JavaScript fallback in case the background fails to load client-side
+        $this->basic_background .= <<<HTML
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Detect if background image failed to load and apply default
+        setTimeout(function() {
+            var bodyBg = document.body.style.backgroundImage;
+            if (!bodyBg || bodyBg === 'none') {
+                console.log('Background image failed to load, applying default');
+                change_background('{$default_background}');
+            }
+        }, 1000);
+    });
+    </script>
+    HTML;
     }
+
+
     /*desactivat temporalment buscar --!-- al document lookPhotos.php original*/
     public function url_get_contents($Url) {
         if (function_exists('curl_init')) {
