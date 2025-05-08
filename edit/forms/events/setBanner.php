@@ -21,12 +21,33 @@ if($event){
    
     if ($banner == 1) {
         $fld = $dataEvent . $ID;
-  
-       if (file_exists(G_PATH ."events/$fld/banner.jpg")) {
-            $banner_IMG = "<img src='events/" . $dataEvent . $ID . "/banner.jpg?version=$rnd' style='width:200px; height:auto;'>";
+        $banner_found = false;
+        $banner_path = G_PATH . "events/{$fld}/banner";
+        
+        // Array of possible extensions to check (lowercase only)
+        $extensions = ['jpg', 'jpeg', 'gif'];
+        
+        // Loop through possible extensions
+        foreach ($extensions as $ext) {
+            // Check lowercase version
+            if (file_exists($banner_path . '.' . $ext)) {
+                $banner_IMG = "<img src='events/{$fld}/banner.{$ext}?version={$rnd}' style='width:200px;height:auto;'>";
+                $banner_found = true;
+                break;
+            }
+            
+            // Check uppercase version
+            $upper_ext = strtoupper($ext);
+            if (file_exists($banner_path . '.' . $upper_ext)) {
+                $banner_IMG = "<img src='events/{$fld}/banner.{$upper_ext}?version={$rnd}' style='width:200px;height:auto;'>";
+                $banner_found = true;
+                break;
+            }
         }
-        if (file_exists(G_PATH . "/events/" . $dataEvent. $ID . "/banner.gif")) {
-            $banner_IMG = "<img src='events/" . $dataEvent . $ID . "/banner.gif?version=$rnd' style='width:200px; height:auto;'>";
+        
+        // If no banner files found, display the default banner
+        if (!$banner_found) {
+            $banner_IMG = "<img src='images/web/banners/banner-default.gif?version={$rnd}' style='width:200px;height:auto;'>";
         }
     }
     elseif ($banner == 0) {
@@ -50,7 +71,7 @@ if($event){
     }
 
     if ($XX) {        $content .= "<div class='popup-text'>The banner is <span style='color:green;'> &nbsp;ON</span>.</div>";
-        $content .= "In order to fit with all the screens, the banner must be of 500x150px";
+        $content .= "In order to fit with all the screens, the banner must be of 500x150px and maximum 2MB";
         //$content .= "<p><img src='images/web/preferenceOK.png' style='width:32px;height:32px;cursor:pointer;position:relative;top:4px;' title='Deactivate' onclick='OnOffBanner($ID , 2);'> The banner is <span style='color:green;'>ON</span>.  </p>";
 
         $content .= "<div class='popup-row popup-nowrap'>";
@@ -72,11 +93,11 @@ if($event){
         $content .= "</div>";
 
         $content .= "<div class='popup-row popup-center'>";
-            //$content .= "<img src='images/web/flecha.png' style='width: 60%;height: 75px'>";
-            $content .= "<form id='bnForm' action='edit/functions/events/uploadbnnr.php' enctype='multipart/form-data'>";
-                $content .= "<input type='file' name='imgFile' id='imgFile'>";
-                $content .= "<input type='hidden' value='$ID' name='id'>";
-            $content .= "</form>";
+        $content .= "<form id='bnForm' action='edit/functions/events/uploadbnnr.php' enctype='multipart/form-data'>";
+        $content .= "<input type='file' name='imgFile' id='imgFile' accept='image/jpeg,image/gif'>";
+        $content .= "<input type='hidden' value='$ID' name='id'>";
+        $content .= "</form>";
+        $content .= "<div class='upload-status' style='display:none;margin-top:5px;color:#666;font-size:12px;'></div>";
         $content .= "</div>";
 
         $content .= "<div class='popup-row popup-center'>";
@@ -96,91 +117,143 @@ if($event){
 }
 $content .= <<<HTML
 <script>
-HTML;
-if ($XX) {
-$content .= <<<HTML
-        $(document).ready(function() {
-            $("#imgFile").on("change", function() {
-                if ($("#imgFile").val() === "") {
-                } else {
-                    $("#bnForm").ajaxForm({
-                        beforeSend: function() {
-
-                        },
-                        success: function(e) {
-                            if (e === "ERROR") {
-                                alert("Error");
-                            } else {
-                                var x = Math.floor((Math.random() * 1000000) + 1);
-                                $("#urlBN").val(e);
-                                $(".preview").html("<img src='images/ownerIMG/tmp/" + e +"?version="+ x +"' style='width:100%; height:auto;' >");
-                                $(".preview").show(500);
-                            }
-                        },
-                        error: function(e) {
-
-                        }
-                    });
-                    $("#bnForm").submit();
-
-                }
-            });
-        });
-HTML;
-}
-$content .= <<<HTML
-    function OnOffBanner(id, onoff) {
-        var ajaxData = {id: id, onoff: onoff};
+$(document).ready(function() {
+    $("#imgFile").on("change", function() {
+        if ($("#imgFile").val() === "") {
+            return;
+        }
+        
+        // Client-side file size validation (2MB limit)
+        var fileSize = this.files[0].size / 1024 / 1024; // size in MB
+        if (fileSize > 2) {
+            $(".preview").html("<div style='color:red;padding:10px;'>Error: File is too large.<br>Maximum size is 2MB. Your file is " + 
+                fileSize.toFixed(2) + "MB.</div>");
+            $(".upload-status").text("Error: File too large (max 2MB)");
+            // Clear the file input
+            $(this).val('');
+            return;
+        }
+        
+        // Show file size and upload indicator
+        $(".preview").html("<div style='text-align:center;padding:20px;'>Uploading " + fileSize.toFixed(1) + "MB...<br><div class='progress-bar' style='width:100%;background:#eee;height:20px;'><div style='width:0%;background:#4CAF50;height:20px;transition:width 0.5s;'></div></div></div>");
+        $(".upload-status").text("Starting upload...").show();
+        
+        var progressBar = $(".progress-bar div");
+        var progressInterval = setInterval(function() {
+            var width = parseInt(progressBar.width() / progressBar.parent().width() * 100);
+            if (width < 90) {
+                progressBar.css('width', (width + 5) + '%');
+            }
+        }, 500);
+        
+        // Use FormData for more reliable uploads
+        var formData = new FormData(document.getElementById('bnForm'));
+        
         $.ajax({
-            url: 'edit/functions/events/OnOffBanner.php',
+            url: 'edit/functions/events/uploadbnnr.php',
             type: 'POST',
-            //Ajax events
-            success: function(data) {
-                if (data === "OK") {
-                    edit(17 , id);
-                    hidePopupv2();
-                    profile("events" , "cloud" , id);
-                }
-                else {
-                    swal('Error', data, 'error');
+            data: formData,
+            processData: false,
+            contentType: false,
+            xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function(evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total * 100;
+                        progressBar.css('width', percentComplete + '%');
+                    }
+                }, false);
+                return xhr;
+            },
+            success: function(response) {
+                clearInterval(progressInterval);
+                $(".upload-status").text("Upload complete!");
+                
+                console.log("Upload response:", response);
+                
+                if (response.indexOf("ERROR") === 0) {
+                    $(".preview").html("<div style='color:red;padding:10px;'>Upload failed:<br>" + 
+                        response.replace("ERROR:", "") + "</div>");
+                    $(".upload-status").text("Error: " + response.replace("ERROR:", ""));
+                } else {
+                    var randomParam = Math.floor(Math.random() * 1000000 + 1);
+                    $("#urlBN").val(response);
+                    
+                    // Fix URL construction
+                    var imgUrl = 'images/ownerIMG/tmp/' + response;
+                    
+                    $(".preview").html("<img src='" + imgUrl + "' style='width:100%; height:auto;' onerror=\"this.onerror=null;this.src='images/web/banners/banner-default.gif';\">");
+                    $(".preview").show(500);
                 }
             },
-            // Form data
-            data: ajaxData,
-            contentType: 'application/x-www-form-urlencoded'
+            error: function(xhr, status, error) {
+                clearInterval(progressInterval);
+                console.error("Upload error:", status, error);
+                $(".preview").html("<div style='color:red;padding:10px;'>Upload failed:<br>" + error + "</div>");
+                $(".upload-status").text("Error: " + error);
+            }
         });
-    }
+    });
+});
 
-    function saveBanner(id) {
-        var bnIMG = $("#urlBN").val();
-        var link = $("#linkBN").val();
-        
-        if (bnIMG === "" &  link === "" ) {
-            closePopup();
-            profile("events", "cloud", id);
-        } 
-        else {
-            var ajaxData = {id: id, bn: bnIMG , link : link};
-            $.ajax({
-                url: 'edit/functions/events/saveBanner.php',
-                type: 'POST',
-                //Ajax events
-                success: function(data) {
-                    if (data === "OK") {
-                        closePopup();
-                        hidePopupv2();
-                        profile("events", "cloud", id);
-                    }
-                    else {
-                        swal('Error', data, 'error');
-                    }
-                },
-                // Form data
-                data: ajaxData,
-                contentType: 'application/x-www-form-urlencoded'
-            });
+function OnOffBanner(id, onoff) {
+    var statusText = (onoff == 2) ? "OFF" : "ON";
+    
+    $(".upload-status").text("Turning banner " + statusText + "...").show();
+    
+    $.ajax({
+        url: 'edit/functions/events/OnOffBanner.php',
+        type: 'POST',
+        data: {id: id, onoff: onoff},
+        success: function(data) {
+            $(".upload-status").hide();
+            if (data === "OK") {
+                edit(17, id);
+                hidePopupv2();
+                profile("events", "cloud", id);
+            } else {
+                swal('Error', data, 'error');
+            }
+        },
+        error: function(xhr, status, error) {
+            $(".upload-status").hide();
+            swal('Error', 'Failed to update banner status: ' + error, 'error');
         }
+    });
+}
+
+function saveBanner(id) {
+    var bnIMG = $("#urlBN").val();
+    var link = $("#linkBN").val();
+    
+    if (bnIMG === "" && link === "") {
+        closePopup();
+        profile("events", "cloud", id);
+        return;
     }
+    
+    $(".upload-status").text("Saving banner...").show();
+    
+    $.ajax({
+        url: 'edit/functions/events/saveBanner.php',
+        type: 'POST',
+        data: {id: id, bn: bnIMG, link: link},
+        success: function(data) {
+            $(".upload-status").hide();
+            if (data === "OK") {
+                closePopup();
+                hidePopupv2();
+                profile("events", "cloud", id);
+            } else {
+                swal('Error', data, 'error');
+            }
+        },
+        error: function(xhr, status, error) {
+            $(".upload-status").hide();
+            swal('Error', 'Failed to save banner: ' + error, 'error');
+        }
+    });
+}
 </script>
 HTML;
 
