@@ -76,7 +76,7 @@ $html = "";
 if ($pbs === FALSE || empty($pbs)) {
     $html .= "No results found";
 } else {
-    $html .= "<link rel='stylesheet' href='sections/photobooths/resources/css/photobooths.css' type='text/css'>";
+   $html .= "<link rel='stylesheet' href='sections/photobooths/resources/css/photobooths.css?v=2' type='text/css'>";
     $html .= "<div id='positional_div'></div>";
     $html .= "<button id='toggle-list-view' onclick='toggleListView()'>List View</button>"; 
     $html .= "<div id='booth-container'>"; 
