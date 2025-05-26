@@ -85,6 +85,9 @@ class index_view{
                     ga('create', 'UA-54469059-1', 'auto');
                     ga('send', 'pageview');
                 </script>
+
+                <!-- Leadfeeder Website Tracker -->
+                 <script> (function(ss,ex){ window.ldfdr=window.ldfdr||function(){(ldfdr._q=ldfdr._q||[]).push([].slice.call(arguments));}; (function(d,s){ fs=d.getElementsByTagName(s)[0]; function ce(src){ var cs=d.createElement(s); cs.src=src; cs.async=1; fs.parentNode.insertBefore(cs,fs); }; ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js'); })(document,'script'); })('DzLR5a5rldx8BoQ2'); </script>
                 
                 <meta name="author" tyle='margin-top: 10px;' content="IT Department -  Digital Centre">
                 <meta name="description" content="MyPhotoCode">
