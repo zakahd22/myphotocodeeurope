@@ -173,6 +173,28 @@ class lookPhotos extends baseController{
     public function indexAction(){       
         $r = $this->checkParams();
         switch ($r){
+            case 'statusCheck':
+                $code = isset($_POST['photocode'])
+                    ? trim(strtoupper($_POST['photocode']))
+                    : '';
+                $lastConn    = $this->getPhotoboothLastConnection($code);
+                $boothOnline = ($lastConn && strtotime($lastConn) >= time() - 3600); // 1 hour
+
+                $this->code       = $code;
+                $this->getPhotoValues();
+                $this->getEventValues();
+                $this->getElements();
+                $jpg = G_PATH . $this->event_folder . $code . '.jpg';
+                $uploaded = file_exists($jpg);
+
+                header('Content-Type: application/json');
+                ob_end_clean();
+                echo json_encode([
+                'boothOnline' => $boothOnline,
+                'uploaded'    => $uploaded
+                ]);
+                exit;
+
             case 'popupView':
                 $event = $_POST['i']; 
                 $fileType = $_POST['t'];                
@@ -416,13 +438,80 @@ class lookPhotos extends baseController{
     }
     
     public function viewAction(){
+        // 1) Grab the code (sets $this->code)
+        $this->getCode();
+
+        // 2) Check for a pending K-code
+        if ( strtoupper($this->code)[0] === 'K' ) {
+            $lastConn = $this->getPhotoboothLastConnection($this->code);
+            if ($lastConn && strtotime($lastConn) >= time() - 86400) {
+                // figure out where the JPG would live
+                $this->getPhotoValues();
+                $this->getEventValues();
+                $this->getElements();   // populates $this->event_folder
+                $jpg = G_PATH . $this->event_folder . $this->code . '.jpg';
+
+                // if it’s still not there, send only the spinner page
+                if (! file_exists($jpg)) {
+                    // 2a) Output the <head> (so your CSS & JS still load)
+                    echo $this->getHead();
+                    // 2b) Blank body with centered spinner
+                    echo "<body style='margin:0;padding:0;background:#b4ee10;'>";
+                    echo "<div id='spinner' style=
+                    'position:fixed;top:0;left:0;right:0;bottom:0;
+                    display:flex;align-items:center;justify-content:center;
+                    background:#b4ee10;z-index:99999;transition:opacity 0.5s ease-out;'>
+                    <img src='images/web/logo-Katana-loader.gif' alt='Loading…'>
+                    </div>";
+                    // 2c) Background poll + swap logic
+                    $c = $this->code;
+                    echo <<<JS
+                    <script>
+                        function checkUploaded() {
+                        fetch('/sections/photos/functions/lookPhotos.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: 'f=statusCheck&photocode=$c'
+                        })
+                        .then(response => {
+                            if (!response.ok) throw new Error("Network response was not ok");
+                            return response.json();
+                        })
+                        .then(res => {
+                            if (res.uploaded) {
+                                // Add fade-out transition before redirect
+                                var spinner = document.getElementById('spinner');
+                                spinner.style.opacity = '0';
+                                
+                                // Wait for the fade-out to complete before redirecting
+                                setTimeout(function() {
+                                    window.location.href = '/photo/' + '$c';
+                                }, 500);
+                            } else {
+                                setTimeout(checkUploaded, 5000);
+                            }
+                        })
+                        .catch(err => {
+                            setTimeout(checkUploaded, 5000);
+                        });
+                        }
+
+                        // Start the first check right away:
+                        checkUploaded();
+                    </script>
+                    JS;
+                    echo "</body></html>";
+                    return;
+                }
+            }
+        }
+
+        // 3) Otherwise, normal full‐page render
         $this->prepareView();
-        
-        if(!$this->error){ 
+        if (!$this->error) {
             echo $this->get_view();
             $this->saveStatics();
-        }
-        else{ 
+        } else {
             echo $this->retMsg;
         }
     }
@@ -1775,7 +1864,7 @@ HTML;
             $fifteenDaysAgo = strtotime("-15 days");
             if ($lastConnTime < $fifteenDaysAgo) {
                 // If the photobooth hasn’t connected for more than 15 days, indicate that.
-                $messageOutput = "We regret to inform you that the photo you requested is unavailable due to the photobooth having been disconnected for an extended period. Please contact your local operator for assistance.";
+                $messageOutput = "We regret to inform you that the photo you requested is unavailable due to the photobooth having been disconnected for an extended period. For assistance, please contact the photobooth operator using the contact details on the machine.";
                 $html = <<<HTML
                     {$messageOutput}
                     <div id="sendOptions">
