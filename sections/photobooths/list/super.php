@@ -82,10 +82,16 @@ else{
         }
  
         if (!empty($dongle_f)) {
-            $idboo = $baseController->boothsModel->getBoothRandString($dongle_f);
-            
-            $idboo = $idboo[0]['idBooth'];
-            if(!$idboo){$idboo=FALSE;}
+            $idbooData = $baseController->boothsModel->getBoothRandString($dongle_f);
+            if (!empty($idbooData)) {
+                $idboo = $idbooData[0]['idBooth'];
+            } else {
+                $pbs = NULL;
+                $idboo = FALSE;
+                $owner_null = 0;
+                echo "No results found";
+                exit();
+            }
         }
         
         if(!empty($idPB_f)){
