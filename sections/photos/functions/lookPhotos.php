@@ -441,8 +441,12 @@ class lookPhotos extends baseController{
         // 1) Grab the code (sets $this->code)
         $this->getCode();
 
+        // 2) Check for a pending K-code - but skip spinner if we already timed out previously
+        $cookieName = "spinner_timeout_" . $this->code;
+        $alreadyTimedOut = isset($_COOKIE[$cookieName]) && $_COOKIE[$cookieName] == "1";
+
         // 2) Check for a pending K-code
-        if ( strtoupper($this->code)[0] === 'K' ) {
+        if ( strtoupper($this->code)[0] === 'K' && !$alreadyTimedOut) {
             $lastConn = $this->getPhotoboothLastConnection($this->code);
             if ($lastConn && strtotime($lastConn) >= time() - 86400) {
                 // figure out where the JPG would live
@@ -467,33 +471,49 @@ class lookPhotos extends baseController{
                     $c = $this->code;
                     echo <<<JS
                     <script>
+                        var attemptCount = 0;
+                        var MAX_ATTEMPTS = 6;
                         function checkUploaded() {
-                        fetch('/sections/photos/functions/lookPhotos.php', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                            body: 'f=statusCheck&photocode=$c'
-                        })
-                        .then(response => {
-                            if (!response.ok) throw new Error("Network response was not ok");
-                            return response.json();
-                        })
-                        .then(res => {
-                            if (res.uploaded) {
-                                // Add fade-out transition before redirect
+                            attemptCount++;
+
+                            if (attemptCount > MAX_ATTEMPTS) {
+                                // Set a cookie to remember we've already shown the spinner
+                                document.cookie = "$cookieName=1; path=/; max-age=604800";
+
                                 var spinner = document.getElementById('spinner');
                                 spinner.style.opacity = '0';
-                                
-                                // Wait for the fade-out to complete before redirecting
+
                                 setTimeout(function() {
-                                    window.location.href = '/photo/' + '$c';
+                                    window.location.href = '/photo/{$c}?timeout=1';
                                 }, 500);
-                            } else {
-                                setTimeout(checkUploaded, 5000);
+                                return;
                             }
-                        })
-                        .catch(err => {
-                            setTimeout(checkUploaded, 5000);
-                        });
+                            fetch('/sections/photos/functions/lookPhotos.php', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                body: 'f=statusCheck&photocode=$c'
+                            })
+                            .then(response => {
+                                if (!response.ok) throw new Error("Network response was not ok");
+                                return response.json();
+                            })
+                            .then(res => {
+                                if (res.uploaded) {
+                                    // Add fade-out transition before redirect
+                                    var spinner = document.getElementById('spinner');
+                                    spinner.style.opacity = '0';
+                                    
+                                    // Wait for the fade-out to complete before redirecting
+                                    setTimeout(function() {
+                                        window.location.href = '/photo/' + '$c';
+                                    }, 500);
+                                } else {
+                                    setTimeout(checkUploaded, 5000);
+                                }
+                            })
+                            .catch(err => {
+                                setTimeout(checkUploaded, 5000);
+                            });
                         }
 
                         // Start the first check right away:
