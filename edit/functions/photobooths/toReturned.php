@@ -2,6 +2,7 @@
 
 include '../../../sessio.php';
 require_once G_PATH . 'common/conexio.php';
+require_once 'boothWiper.php';
 
 $coment = addslashes($_POST['coment']);
 $ID = $_POST['id'];
@@ -45,6 +46,15 @@ if ($CLD_CON2->Execute("UPDATE App_booths SET CLD_Status=$toID , owner=1 WHERE i
     if ($CLD_CON->FetchArray()) {
         $dongleID = $CLD_CON->GetArrayField("idDongle");
         $CLD_CON2->Execute("UPDATE booths SET rental_id=1 WHERE id=$dongleID AND rental_id=$owner");
+    }
+
+    // Wipe the booth data using the boothWiper class
+    $boothWiper = new boothWiper($ID);
+    $wipeResults = $boothWiper->wipeBoothData();
+    
+    // Log wiping results but don't stop the process
+    if (!$wipeResults['success']) {
+        error_log("Warning: Booth $ID returned but data wiping had issues: " . json_encode($wipeResults['errors']));
     }
 
     echo "OK";
