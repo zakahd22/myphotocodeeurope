@@ -70,6 +70,15 @@ else{
         
         if (!empty($owner_f)) {
             $rentals = $baseController->rentalsModel->getRental('%'.$owner_f.'%');
+
+            // Early termination if no owners found
+            if (empty($rentals)) {
+                echo "No owners found matching: " . htmlspecialchars($owner_f);
+                exit(); // Stop processing
+            }
+
+            $owners = array();
+            $owner_null = 0;
             foreach ($rentals as $rental){
                 $idO = $rental["id"];
                 if (empty($owners)) {
