@@ -30,6 +30,7 @@
 *.jpg
 *.png
 *.bmp
+.env
 
 nbproject
 usbs/

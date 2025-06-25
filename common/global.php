@@ -52,6 +52,8 @@ require_once G_PATH . "common/mail.php";
 
 require_once G_PATH . "common/Classes/EntityController.php";
 
+require_once G_PATH . '/vendor/autoload.php';
+
 
 //require_once G_PATH . "common/dictionary.php";
 //require_once G_PATH . "common/mail.php";

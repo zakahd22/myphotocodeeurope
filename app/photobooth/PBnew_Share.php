@@ -12,6 +12,19 @@
 //20181010 require_once '../../common/conexio.php';
 require("common.php");
 include_once '../../common/conexio.php';
+try {
+    // path to the folder that contains .env
+    $envPath = G_PATH . '/../env';
+
+    // only load if that folder exists and the .env file is inside it
+    if (class_exists('Dotenv\Dotenv') && file_exists($envPath . '/.env')) {
+        $dotenv = Dotenv\Dotenv::createImmutable($envPath);
+        $dotenv->load();
+    }
+} catch (Exception $e) {
+    // Log the error but don’t break the site
+    error_log('Error loading .env file: ' . $e->getMessage());
+}
 $APP_BdD_banned = getNewBdD();
 
 if($APP_common_error){
@@ -137,7 +150,7 @@ if ($metode == 1 || $metode == 3) {
 
 
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_USERPWD, "ACa495bb879ddb69a2c3afbdd8eba6cfbf:052be5831f08a3959e8498111ca5ee8e");
+        curl_setopt($curl, CURLOPT_USERPWD, $_ENV['TWILIO_ACCOUNT_SID'] . ":" . $_ENV['TWILIO_AUTH_TOKEN']);
 
 
         $responseCost = curl_exec($curl);
