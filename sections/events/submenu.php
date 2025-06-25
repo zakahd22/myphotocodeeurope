@@ -25,11 +25,11 @@ if($type == 2){
     
     else{
         if($_SESSION['USERTYPE'] <= 6){
-            $html .= "<img id='no-menu' class='no-menu' src='images/web/customization.png' style='position: absolute;z-index: 0;height: 175%;top: -80%;left: 8%;'>";
+            $html .= "<img id='no-menu' class='no-menu' src='images/web/customization.PNG' style='position: absolute;z-index: 0;height: 175%;top: -80%;left: 8%;'>";
             $html .= "<img src='images/icons/submenu/infoVerd.png' class='dMenuSelected2' onclick='profile(\"events\" , \"info\" , $ID)' id='info'>";
         }
         else{
-            $html .= "<img id='no-menu' class='no-menu'  src='images/web/customization.png' style='position: absolute;z-index: 0;height: 179%;top: -80%;left:5%;'>";
+            $html .= "<img id='no-menu' class='no-menu'  src='images/web/customization.PNG' style='position: absolute;z-index: 0;height: 179%;top: -80%;left:5%;'>";
         }
         if($_SESSION['USERTYPE'] != 6){
         $html .= "<img src='images/icons/submenu/cloud.png' class='dMenu2' onclick='profile(\"events\" , \"cloud\" , $ID)' id='cloud'>";
