@@ -12,6 +12,13 @@
 //20181010 require_once '../../common/conexio.php';
 require("common.php");
 include_once '../../common/conexio.php';
+require_once "../../common/global.php";
+
+$twilioSid   = $_ENV['TWILIO_ACCOUNT_SID'] ?? getenv('TWILIO_ACCOUNT_SID');
+$twilioToken = $_ENV['TWILIO_AUTH_TOKEN'] ?? getenv('TWILIO_AUTH_TOKEN');
+
+$authString = $twilioSid . ':' . $twilioToken;
+
 $APP_BdD_banned = getNewBdD();
 
 if($APP_common_error){
@@ -137,7 +144,7 @@ if ($metode == 1 || $metode == 3) {
 
 
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_USERPWD, "ACa495bb879ddb69a2c3afbdd8eba6cfbf:052be5831f08a3959e8498111ca5ee8e");
+        curl_setopt($curl, CURLOPT_USERPWD, $authString);
 
 
         $responseCost = curl_exec($curl);
