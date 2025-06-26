@@ -5,6 +5,13 @@ require_once "../../common/global.php";
 require_once '../../common/conexio.php';
 //error_log( "TO_DELETE gestor 02" );
 require_once "telegram.php";
+
+$twilioSid   = $_ENV['TWILIO_ACCOUNT_SID'] ?? getenv('TWILIO_ACCOUNT_SID');
+$twilioToken = $_ENV['TWILIO_AUTH_TOKEN'] ?? getenv('TWILIO_AUTH_TOKEN');
+
+$authString = $twilioSid . ':' . $twilioToken;
+$urlTwilio = "https://api.twilio.com/2010-04-01/Accounts/{$twilioSid}/Messages.json";
+
 ob_start();
 //error_reporting(E_ALL);
 //ini_set('display_errors',1);
@@ -159,7 +166,7 @@ if ($metode == 1 || $metode == 3) {
 
 
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_USERPWD, "ACa495bb879ddb69a2c3afbdd8eba6cfbf:052be5831f08a3959e8498111ca5ee8e");
+        curl_setopt($curl, CURLOPT_USERPWD, $authString);
 
 
         $responseCost = curl_exec($curl);
@@ -608,7 +615,7 @@ foreach ($llistaSMS as $entry) {
     }
 
     // Set the file URL to fetch through cURL
-    curl_setopt($curl, CURLOPT_URL, "https://api.twilio.com/2010-04-01/Accounts/ACa495bb879ddb69a2c3afbdd8eba6cfbf/Messages.json");
+    curl_setopt($curl, CURLOPT_URL, $urlTwilio);
 
     $data = array(
         "To" => $contact,
@@ -618,7 +625,7 @@ foreach ($llistaSMS as $entry) {
 
 
     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-    curl_setopt($curl, CURLOPT_USERPWD, "ACa495bb879ddb69a2c3afbdd8eba6cfbf:052be5831f08a3959e8498111ca5ee8e");
+    curl_setopt($curl, CURLOPT_USERPWD, $authString);
 
 
     $response = curl_exec($curl);
@@ -692,7 +699,7 @@ foreach ($llistaWhatsapp as $entry) {
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);//20250216twilio
 
     // Set the file URL to fetch through cURL
-    curl_setopt($curl, CURLOPT_URL, "https://api.twilio.com/2010-04-01/Accounts/ACa495bb879ddb69a2c3afbdd8eba6cfbf/Messages.json");
+    curl_setopt($curl, CURLOPT_URL, $urlTwilio);
     
 //20250216twilio_02    $content_variables = array("1" => $code);//20250216twilio
  //20250216twilio_03   $content_variables = array("1" => "\"$code\"");//20250216twilio_02
@@ -732,7 +739,7 @@ foreach ($llistaWhatsapp as $entry) {
 
     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
-    curl_setopt($curl, CURLOPT_USERPWD, "ACa495bb879ddb69a2c3afbdd8eba6cfbf:052be5831f08a3959e8498111ca5ee8e");
+    curl_setopt($curl, CURLOPT_USERPWD, $authString);
 
 
     $response = curl_exec($curl);

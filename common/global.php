@@ -52,6 +52,25 @@ require_once G_PATH . "common/mail.php";
 
 require_once G_PATH . "common/Classes/EntityController.php";
 
+require_once G_PATH . '/vendor/autoload.php';
+
+try {
+    // G_PATH ends in …/httpdocs
+    $appRoot = dirname(rtrim(G_PATH, '/'));  // …/myphotocode.com
+    $envDir  = $appRoot . '/env';            // …/myphotocode.com/env
+    $envFile = $envDir . '/.env';
+
+    if (class_exists('\Dotenv\Dotenv') && file_exists($envFile)) {
+        \Dotenv\Dotenv::createImmutable($envDir)->load();
+    } else {
+        error_log("Dotenv not loaded; exists? "
+            . (file_exists($envFile) ? 'Yes' : 'No')
+        );
+    }
+} catch (\Exception $e) {
+    error_log('Error loading .env: ' . $e->getMessage());
+}
+
 
 //require_once G_PATH . "common/dictionary.php";
 //require_once G_PATH . "common/mail.php";
