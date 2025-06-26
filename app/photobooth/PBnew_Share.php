@@ -12,6 +12,7 @@
 //20181010 require_once '../../common/conexio.php';
 require("common.php");
 include_once '../../common/conexio.php';
+require_once "../../common/global.php";
 try {
     // path to the folder that contains .env
     $envPath = G_PATH . '/../env';
