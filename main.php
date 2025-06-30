@@ -49,7 +49,7 @@ function get_head($USERTYPE){
             <script src="//code.jquery.com/jquery-1.10.2.js"></script>
             <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
             
-            <script src="https://api.html5media.info/1.1.8/html5media.min.js"></script>
+            <script src="lib/html5media.min.js"></script>
             <script src="includes/jquery.form.js"></script>
             <script src="includes/jquery.anyslider.js"></script>
             <script> 
