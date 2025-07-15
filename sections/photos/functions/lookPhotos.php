@@ -688,34 +688,44 @@ class lookPhotos extends baseController{
         $hImg = 0;
         
         list($wImg, $hImg) = getimagesize(G_PATH .$this->img);
+
+        // Detectar 620x877 (vertical) y 877x620 (horizontal)
+        if ((abs($wImg - 620) < 30) && (abs($hImg - 877) < 30)) {
+            $this->tipusPhoto = 4; // vertical
+        } else if ((abs($wImg - 877) < 30) && (abs($hImg - 620) < 30)) {
+            $this->tipusPhoto = 6; // horizontal
+        }
         //segons les mides tindrem el tipus de foto 1:tira vertical   2: tira horitzontal   3:4x6 horitzontal   4:4x6 vertical
         ////deixem un marge en les comparacions
-        if($this->boothType == 'V') {
+        else if($this->boothType == 'V') {
             $this->tipusPhoto = 4;
-        } else if($this->boothType == 'W'){// B5, que mostri com la strip mentre no ajustem les mides
-            //TODO: quan sapigues les mides 
-            //if(abs($wImg - 708) < 50){
-            //else if(abs($wImg - 708) < 50){ //posa aqui la amplada
-            //TODO: Aplicar regla general a tots els PB, no només la B5. Quan fem el projecte 20-D-16   MPC no mostra bé les fotos perquè tenen una mida diferent a Britta 9550   
-            //De moment ho provem a la B5 per a arreglar el problema que té que no es mostren bé i no calcula bé el GIF            
+        } else if($this->boothType == 'W'){
             $factor = $wImg / $hImg;
             if($factor < 0.5) {
-                    $this->tipusPhoto = 1;
+                $this->tipusPhoto = 1;
             } else if($factor < 1.0) {
-                    $this->tipusPhoto = 4;
+                $this->tipusPhoto = 4;
             } else if($factor < 2.0) {
-                    $this->tipusPhoto = 3;
+                $this->tipusPhoto = 3;
             } else if($factor < 3.0) {
-                    $this->tipusPhoto = 2;
+                $this->tipusPhoto = 2;
             } else if($factor < 4.0) {
-                    $this->tipusPhoto = 5;
+                $this->tipusPhoto = 5;
             } else{
-                    $this->tipusPhoto = 6;
+                $this->tipusPhoto = 6;
             }
-            
-
-            //$this->tipusPhoto = 1;
-        } else if((abs($wImg - 1050) < 50) && (abs($hImg - 708) < 50)) {//
+        } 
+        // NUEVA CONDICIÓN PARA IMÁGENES GRANDES
+        else if($wImg >= 2000 && $hImg >= 3000) {
+            // Si la imagen es muy grande, asigna tipo vertical u horizontal según la proporción
+            $factor = $wImg / $hImg;
+            if ($factor > 1.2) {
+                $this->tipusPhoto = 6; // horizontal grande
+            } else {
+                $this->tipusPhoto = 5; // vertical grande
+            }
+        }
+        else if((abs($wImg - 1050) < 50) && (abs($hImg - 708) < 50)) {//
             $this->tipusPhoto = 3;
         } else if(abs($wImg - 708) < 50){//
             $this->tipusPhoto = 1;
@@ -1066,11 +1076,11 @@ class lookPhotos extends baseController{
             $gif = new GIFEncoder($frames, $time, 0, 2, 0, 0, 0, "url");
             
             if(FWrite(FOpen(G_PATH . $this->event_folder . $this->code . "-T3D.gif", "wb" ), $gif->GetAnimation()) > 0){
-//                utils::log('Generated GIF', "logLookPhotos", "Generate Gif");
+////                utils::log('Generated GIF', "logLookPhotos", "Generate Gif");
                 $exist = $this->photo_FilesModel->getFile($this->code."-T3D.gif");
-//                utils::log('Seaching file in Photo_files: '.$this->code."-T3D.gif", "logLookPhotos", "Generate Gif");
+////                utils::log('Seaching file in Photo_files: '.$this->code."-T3D.gif", "logLookPhotos", "Generate Gif");
                 if(!$exist){
-//                    utils::log('Creating value', "logLookPhotos", "Generate Gif");
+////                    utils::log('Creating value', "logLookPhotos", "Generate Gif");
                     $server_id = $this->CLD_ServersModel->getCLD_Servers('1and1');
                     $server_id = $server_id[0]['id'];
                     
@@ -1085,14 +1095,14 @@ class lookPhotos extends baseController{
                     $this->entity->setValue("dongle", $this->dongle_id);
                     $this->entity->setValue("date", utils::get_datetime());
                     
-//                    utils::log($this->entity->getAllValues(), "logLookPhotos", "Generate Gif");
+////                    utils::log($this->entity->getAllValues(), "logLookPhotos", "Generate Gif");
                     
                     if(!$this->photo_FilesModel->insertphoto_Files()){
                         utils::log('Not inserted', "logLookPhotos", "Generate Gif");
                     }
-//                    else {
-//                        utils::log('Inserted', "logLookPhotos", "Generate Gif");
-//                    }
+////                    else {
+////                        utils::log('Inserted', "logLookPhotos", "Generate Gif");
+////                    }
                 }
             }
             
@@ -1303,6 +1313,11 @@ HTML;
             $html .= '<img id="strip_mega_img" src="'.$this->event_folder . $this->code.'.jpg" style="width:600px;">';
             $html .= '</div>';
         }
+         elseif($this->tipusPhoto == 4){
+            $html = '<div class="strips_4x6_vertical">';
+            $html .= '<img id="strip_4x6_vertical_img" src="'.$this->event_folder . $this->code.'.jpg" style="width:600px;">';
+            $html .= '</div>';
+        }
          elseif($this->tipusPhoto == 5){
             $html = '<div class="strips_6x9">';
             $html .= '<img id="strip_6x9_vertical" src="'.$this->event_folder . $this->code.'.jpg" style="width:600px;">';
@@ -1464,11 +1479,6 @@ HTML;
                     </a>
                     <input type='hidden' value='$urlVideoTwitter' id='videoTwitter'>
                 </div>
-HTML;
-        }
-        
-        if($this->haveVideo3D){
-//            $textTwitter = 'Look the video I posted of the "' . $this->eventTitle . '" event!';
 //            $textTwitter = str_replace(" ", "+", $textTwitter);
             $urlVideoTwitter = "https://twitter.com/intent/tweet?url=".G_PAGE.$this->video3D."&text={$textTwitter}&hashtags={$this->getHashtagsTwitter()}";
             $urlVideoTwitter = filter_var($urlVideoTwitter, FILTER_SANITIZE_URL);
@@ -1549,7 +1559,7 @@ HTML;
         $html = "";
         if($this->isPrivate == 0){
             $html .="<div id='private_div'><span class='bSp' onclick='openPhotosAllPhotos($this->event);'>See all photos</span></div>";
-            $html .= "<div id='popupWait'><img src='assets/images/loading.gif' width='24' height='24' /></div>";
+            $html .= "<div id='popupWait><img src='assets/images/loading.gif' width='24' height='24' /></div>";
             $html .= "<div id='popup'></div>";
             $html .= "<div id='AllPhotoDiv' style='display:none;'></div>";
             $html .= "<div id='backgroundPopup'></div></div>";
