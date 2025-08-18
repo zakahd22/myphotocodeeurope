@@ -1479,6 +1479,7 @@ HTML;
                     </a>
                     <input type='hidden' value='$urlVideoTwitter' id='videoTwitter'>
                 </div>
+                HTML;
 //            $textTwitter = str_replace(" ", "+", $textTwitter);
             $urlVideoTwitter = "https://twitter.com/intent/tweet?url=".G_PAGE.$this->video3D."&text={$textTwitter}&hashtags={$this->getHashtagsTwitter()}";
             $urlVideoTwitter = filter_var($urlVideoTwitter, FILTER_SANITIZE_URL);
