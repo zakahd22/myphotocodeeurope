@@ -355,7 +355,9 @@ class lookPhotos extends baseController{
             }
             $mail->addTemplateField("#nameOfLocation#", ($nameOfLocation != ""?'at '. $nameOfLocation:""));
             $mail->applyTempplateFields();
-            $mail->addAttachment(G_PATH . $this->url);
+            if ($this->fileType === 'video') {
+                $mail->addAttachment(G_PATH . $this->url);
+            }
             if(!$mail->send()){
                 $mail_ret = false;
 //20250117smtp                utils::log($mail->retMsg, "logMail", "lookPhotos");
