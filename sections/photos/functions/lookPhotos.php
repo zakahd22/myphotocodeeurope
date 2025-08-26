@@ -348,7 +348,9 @@ class lookPhotos extends baseController{
             $mail->addTemplateField("#text2#", $text2);
             $mail->addTemplateField("#hastags#", $hashtags3);
             if($this->fileType != "video"){
-                $mail->addTemplateField("#urlFile#", '<img src="'.G_PAGE . $this->url.'" />');
+                // To embed the gif or photo in the email, uncomment the line below
+                // $mail->addTemplateField("#urlFile#", '<img src="'.G_PAGE . $this->url.'" />');
+                $mail->addTemplateField("#urlFile#", '<a href="'.G_PAGE . $this->url.'">Click here to view your file</a>');
             }
             else {
                 $mail->addTemplateField("#urlFile#", 'You can find your video in the mail attachments.');
