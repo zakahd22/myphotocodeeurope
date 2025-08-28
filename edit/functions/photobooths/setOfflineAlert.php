@@ -26,7 +26,7 @@ $me = $_POST['me'];
 //temps segons el timeZone del server, primer fixem segons el del PB
   //problemes a conf.php!!!!!      $ara = new DateTime("now"); $serverTzone = $ara->getTimezone();//time zone del server
         //
-        $serverTzone = new DateTimeZone("America/New_York");
+        $serverTzone = new DateTimeZone("Europe/Madrid");
         $araStart = new DateTime("now",new DateTimeZone($timeZone));//time zone del PB
         $araStart->setTime($hs, $ms, 0);
         $araStart->setTimezone($serverTzone);
