@@ -683,6 +683,23 @@ foreach ($llistaWhatsapp as $entry) {
     $id = $id;
 
     utils::log("--- $id --- ", "logGestor");
+
+    // --- HARD DISABLE WHATSAPP: set state=8 and skip Twilio ---
+    $CLD_CONWapp = getNewBdD();
+    $errorMsg = addslashes("WhatsApp disabled globally; skipping Twilio send.");
+    if ($CLD_CONWapp->Execute(
+        "UPDATE gestor
+         SET `last`=NOW(),
+             `state`=8,
+             `error`=CONCAT(IFNULL(`error`,''),' | $errorMsg')
+         WHERE `id`=$id"
+    )) {
+        utils::log("$id --- Whatsapp set to state 8 (global disable)", "logGestor");
+    } else {
+        utils::log("$id --- Failed to update Whatsapp to state 8", "logGestor");
+    }
+    continue;
+    // --- END HARD DISABLE BLOCK ---
     
     
 //    error_log( "TO_DELETE gestor 20250214whatsapp, message: $message" );//20250214whatsapp
@@ -699,7 +716,7 @@ foreach ($llistaWhatsapp as $entry) {
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);//20250216twilio
 
     // Set the file URL to fetch through cURL
-    curl_setopt($curl, CURLOPT_URL, $urlTwilio);
+    // curl_setopt($curl, CURLOPT_URL, $urlTwilio);
     
 //20250216twilio_02    $content_variables = array("1" => $code);//20250216twilio
  //20250216twilio_03   $content_variables = array("1" => "\"$code\"");//20250216twilio_02
@@ -739,7 +756,7 @@ foreach ($llistaWhatsapp as $entry) {
 
     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
-    curl_setopt($curl, CURLOPT_USERPWD, $authString);
+    // curl_setopt($curl, CURLOPT_USERPWD, $authString);
 
 
     $response = curl_exec($curl);
