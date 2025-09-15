@@ -329,6 +329,17 @@ $llistaWhatsapp = array();
             }  
         } 
 
+
+        if (($owner !== null && $owner !== '' && is_numeric($owner)) && 
+            ($idBooth !== null && $idBooth !== '' && is_numeric($idBooth))) {
+            $CLD_CONUpdate = getNewBdD();
+            $CLD_CONUpdate->Execute(
+                "UPDATE gestor SET owner = '$owner', idBooth = '$idBooth' WHERE id = $id"
+            );
+        } else {
+            utils::log("$id --- Warning: Invalid owner or idBooth values for update. Owner: $owner, Booth: $idBooth, Code: $code", "logGestor");
+        }
+
         // ——— CONTACT CLEANUP for SMS and WHATSAPP
         if ($method == 1 || $method == 3) {
             // remove everything except digits and '+'
