@@ -231,7 +231,7 @@ echo "</div>";
 echo "</div>";
 
 /* LOCATION !! */
-echo "<h1 style='margin-top: 380px;'>LOCATION</h1>";
+echo "<h1 style='margin-top: 400px;'>LOCATION</h1>";
 echo "<div class='box'>";
 echo "<div class='imgProfileBooth'>";
 if ($latitude == "-" || $longitude == "-") {
