@@ -29,14 +29,31 @@ $from_text = " " . $BOOTHS_TYPE_STATUS[$from] . " ";
 $to_text = " " . $BOOTHS_TYPE_STATUS[2] . " ";
 $date = date("Y-m-d H:i:s");
 $f1 = "";
+$f2 = "";
 
+// Check if we're coming from status 1 (new) or need to check current distributor
 if ($from == 1) {
-    $f1 = ", CLD_Distributor=$dis ,  CLD_date_sold='$date' ";
-    $f2 = ",data_distributor='$date'";
-    $c = "The Photobooth sent to Distributor $disName ,";
-
-}else{
+    // New booth from production
+    $f1 = ", CLD_Distributor=$dis, CLD_date_sold='$date'";
+    $f2 = ", data_distribuidor='$date'";
+    $c = "The Photobooth sent to Distributor $disName,";
+} else {
+    // Get current distributor to see if it's changing
+    $currentDis = null;
+    $CLD_CON3->OpenRs("SELECT CLD_Distributor FROM App_booths WHERE idBooth=$ID");
+    if ($CLD_CON3->FetchArray()) {
+        $currentDis = $CLD_CON3->GetArrayField("CLD_Distributor");
+    }
     
+    // If distributor is changing, update the timestamp
+    if ($currentDis != $dis) {
+        $f1 = ", CLD_Distributor=$dis";
+        $f2 = ", data_distribuidor='$date'"; // New distributor gets timestamp
+        $c = "The Photobooth returned to new Distributor $disName";
+    } else {
+        $f1 = ", CLD_Distributor=$dis";
+        $c = "The Photobooth returned to same Distributor $disName";
+    }
 }
 
 if ($CLD_CON->Execute("UPDATE App_booths SET  CLD_Status=2 $f1 WHERE idBooth=$ID")) {
