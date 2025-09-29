@@ -1399,12 +1399,12 @@ HTML;
                     <img class="photoButton" id="img2D" src="{$this->path_common_imag}/icon-download.png">
 
                 </a>
-                    
+              <!--        
                 <a class="links_share" href="https://www.facebook.com/dialog/feed?app_id=127533357397300&redirect_uri=http://www.myphotocode.com&link=www.myphotocode.com/index.php?code={$this->code}&picture=$photo_url">
                     <img class="photoButton facebook" id="img2D" src="{$this->path_common_imag}/button-facebook.png" style=''/>
 
                 </a> 
-                    
+                 -->   
                    
                 <a class="links_share mail_links_share" event='{$this->event}' code='{$this->code}' type='photo' url='{$this->img}'>
                     <img class="photoButton" id="email2D" src="{$this->path_common_imag}/icon-mail.png">
@@ -1686,9 +1686,11 @@ HTML;
             <a href='$this->gif' class="links_share" download>
                 <img class="photoButton" id="img2D" src="{$this->path_common_imag}/icon-download.png">
             </a>
+               <!--  
             <a class="links_share" href="https://www.facebook.com/dialog/feed?app_id=127533357397300&redirect_uri=http://www.myphotocode.com&link=www.myphotocode.com/index.php?code={$this->code}&picture=$photo_url">
                 <img class="photoButton facebook" id="img2D" src="{$this->path_common_imag}/button-facebook.png" style=''/>
             </a> 
+            -->
             <a class="links_share mail_links_share" event='{$this->event}' code='{$this->code}' type='photo' url='{$this->gif}'>
                 <img class="photoButton" id="email2D" src="{$this->path_common_imag}/icon-mail.png">
             </a>
