@@ -1258,6 +1258,7 @@ HTML;
                 <div class="title">
                    <h1>$this->eventTitle</h1>
                    <h2>$this->eventDateFormat</h2>
+                   <p style="font-style: italic; font-size: 16px; margin-top: 5px; color: #ffffff; text-shadow: none; font-weight: normal;">*Remember that your photo will be available online for 7 days.</p>
                 </div>
                 
                 <div class="fb-login-button likeFB" data-max-rows="1" data-size="small" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"></div> 
