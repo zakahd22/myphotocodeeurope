@@ -421,7 +421,10 @@ class lookPhotos extends baseController{
 
                 if ($photoExist === FALSE){
                     $this->error = true;
-                    $this->retMsg = "#Error It has been an error loading this photo, please contact the Photobooth's owner";
+                    $html = $this->getHead();
+                    $this->getContactFromGestor();
+                    $html .= $this->showDefaultPhotoNotAvailable();
+                    $this->retMsg = " #Error $html";
                 }
 
                 $this->prepareTitle();
@@ -1875,46 +1878,219 @@ HTML;
             return $lastConn;
         }
         return null;
+    }
+
+    /**
+     * Check if photo file exists in the event folder
+     * Returns true if the photo file exists, false otherwise
+     */
+    private function photoFileExists() {
+        if (empty($this->code)) {
+            return false;
+        }
+        
+        // Get event folder path
+        $eventFolder = $this->getEventFolderPath();
+        if (!$eventFolder) {
+            return false;
+        }
+        
+        $photoPath = G_PATH . $eventFolder . $this->code . '.jpg';
+        return file_exists($photoPath);
+    }
+    
+    /**
+     * Get the event folder path for a photo code
+     * Returns the folder path or null if event not found
+     */
+    private function getEventFolderPath() {
+        // If event_folder is already set, use it
+        if (!empty($this->event_folder)) {
+            return $this->event_folder;
+        }
+        
+        // Otherwise, look up the event from the photo code
+        $photo = $this->photosModel->getPhoto($this->code);
+        if (!$photo || !isset($photo[0]['event_id'])) {
+            return null;
+        }
+        
+        $eventId = $photo[0]['event_id'];
+        $event = $this->eventsModel->getEvent($eventId);
+        if (!$event || !isset($event[0]['start_date'])) {
+            return null;
+        }
+        
+        $eventDate = $event[0]['start_date'];
+        return "events/" . $eventDate . $eventId . "/";
+    }
+
+    /**
+     * Check if photo was uploaded to database (even if file was deleted)
+     * Returns the upload datetime if photo exists in DB, null otherwise
+     */
+    private function getPhotoUploadDate() {
+        if (empty($this->code)) {
+            return null;
+        }
+        $photo = $this->photosModel->getPhoto($this->code);
+        if ($photo && isset($photo[0]['Appusr_datetime'])) {
+            return $photo[0]['Appusr_datetime'];
+        }
+        return null;
+    }
+
+    /**
+     * Determine the error case based on photo status and booth connection
+     * Returns array with case number and relevant data
+     */
+    private function determineErrorCase() {
+        // First check if the code format is valid by checking booth existence
+        $lastConn = $this->getPhotoboothLastConnection($this->code);
+        
+        if (!$lastConn) {
+            // Case 6: Invalid code - booth doesn't exist
+            return ['case' => 6, 'data' => null];
+        }
+
+        // Check if photo was uploaded to database
+        $uploadDate = $this->getPhotoUploadDate();
+        
+        // Check if photo file exists
+        $fileExists = $this->photoFileExists();
+
+        if ($uploadDate && !$fileExists) {
+            // Photo was uploaded but file doesn't exist anymore
+            // Case 0: Photo deleted (older than 15 days)
+            $uploadTimestamp = strtotime($uploadDate);
+            $fifteenDaysAgo = strtotime("-15 days");
+            
+            if ($uploadTimestamp < $fifteenDaysAgo) {
+                return ['case' => 0, 'data' => ['uploadDate' => $uploadDate]];
+            }
+        }
+
+        // If we reach here, photo hasn't been uploaded yet
+        // Determine case based on booth last connection time
+        $lastConnTime = strtotime($lastConn);
+        $now = time();
+        $timeDiff = $now - $lastConnTime;
+
+        // Time thresholds in seconds
+        // Add 1 hour buffer to account for timezone/daylight saving differences
+        $oneHour = 3600 + 3600; // 2 hours to be safe
+        $oneDay = 86400;
+        $twoDays = 172800;
+        $sevenDays = 604800;
+
+        if ($timeDiff < $oneHour) {
+            // Case 5: Active less than 2 hours ago (includes timezone buffer)
+            return ['case' => 5, 'data' => ['lastConn' => $lastConn]];
+        } elseif ($timeDiff < $oneDay) {
+            // Case 4: Recent activity 1-24 hours
+            return ['case' => 4, 'data' => ['lastConn' => $lastConn]];
+        } elseif ($timeDiff < $twoDays) {
+            // Case 3: Booth inactive 1-2 days
+            return ['case' => 3, 'data' => ['lastConn' => $lastConn]];
+        } elseif ($timeDiff < $sevenDays) {
+            // Case 2: Booth inactive 2-7 days
+            return ['case' => 2, 'data' => ['lastConn' => $lastConn]];
+        } else {
+            // Case 1: Booth offline more than 7 days
+            return ['case' => 1, 'data' => ['lastConn' => $lastConn]];
+        }
     }    
 
     private function showDefaultPhotoNotAvailable() {
+        // Determine which error case applies
+        $errorCase = $this->determineErrorCase();
+        $caseNumber = $errorCase['case'];
+        $caseData = $errorCase['data'];
 
+        // Build the appropriate message based on the case
+        switch ($caseNumber) {
+            case 0:
+                // Case 0: Photo Deleted (Older than 15 days)
+                return $this->buildErrorMessage(
+                    'Photo No Longer Available',
+                    'This photo has been automatically removed from our servers.<br/>For privacy and security reasons, we store photos online for a maximum of 7 days.',
+                    false // No notification option
+                );
+
+            case 1:
+                // Case 1: Booth offline more than 7 days
+                return $this->buildErrorMessage(
+                    'Photobooth Offline',
+                    'We regret to inform you that the photo you requested is unavailable because this photobooth has been offline for an extended period.<br/>For assistance, please contact the photobooth operator using the details displayed on the machine.',
+                    false // No notification option
+                );
+
+            case 2:
+                // Case 2: Booth inactive 2-7 days
+                return $this->buildErrorMessage(
+                    'Photo Pending Upload',
+                    'Your photo has not been uploaded yet.<br/>This usually occurs when the photobooth has lost internet connection.<br/>We can notify you when it becomes available.',
+                    true // Show notification option
+                );
+
+            case 3:
+                // Case 3: Booth inactive 1-2 days
+                return $this->buildErrorMessage(
+                    'Upload in Progress',
+                    'Your photo is being processed.<br/>This may be caused by temporary connectivity or network issues affecting the photobooth.<br/>We can notify you when it becomes available.',
+                    true // Show notification option
+                );
+
+            case 4:
+                // Case 4: Recent activity 1-24 hours
+                return $this->buildErrorMessage(
+                    'Photo Is Being Processed',
+                    'Your photo is currently in the processing queue.<br/>Your photo will be available shortly.<br/>We can notify you when it becomes available.',
+                    true // Show notification option
+                );
+
+            case 5:
+                // Case 5: Active less than 2 hour ago
+                return $this->buildErrorMessage(
+                    'Your Photo Will Be Available Soon',
+                    'Your photo will be available shortly.<br/>We can notify you when it becomes available.',
+                    true // Show notification option
+                );
+
+            case 6:
+            default:
+                // Case 6: Invalid Code
+                return $this->buildErrorMessage(
+                    'Invalid Code',
+                    'The code you entered does not match any of our photobooths.<br/>Please make sure you typed the code correctly and try again.',
+                    false // No notification option
+                );
+        }
+    }
+
+    /**
+     * Build error message HTML with title, message, and optional notification form
+     */
+    private function buildErrorMessage($title, $message, $showNotificationOption) {
         $cancelButton = '<input type="image" src="images/icons/cancel-blue_60x75.png" onclick="cancel()" value="No, thanks"><br><br>';
 
-        // Default message if the photo is not available yet.
-        $messageOutput = "The photo {$this->code} is not available yet,<br/> would you like us to notify you as soon as it is ready?<br><br>";
-
-        $lastConn = $this->getPhotoboothLastConnection($this->code);
-        if (!$lastConn) {
-            // If no last connection is found, it likely means the code is invalid.
-            $messageOutput = "The code you entered is invalid. Please check and try again.";
+        if (!$showNotificationOption) {
+            // Simple error message without notification option
             $html = <<<HTML
-                {$messageOutput}
-                <div id="sendOptions">
+                <div class="error-title" style="font-weight: bold; font-size: 1.2em; margin-bottom: 15px;">{$title}</div>
+                <div class="error-message">{$message}</div>
+                <div id="sendOptions" style="margin-top: 20px;">
                     {$cancelButton}
                 </div>
             HTML;
             return $html;
-        } else {
-            // Convert lastConn to a timestamp.
-            $lastConnTime = strtotime($lastConn);
-            $fifteenDaysAgo = strtotime("-15 days");
-            if ($lastConnTime < $fifteenDaysAgo) {
-                // If the photobooth hasn’t connected for more than 15 days, indicate that.
-                $messageOutput = "We regret to inform you that the photo you requested is unavailable due to the photobooth having been disconnected for an extended period. For assistance, please contact the photobooth operator using the contact details on the machine.";
-                $html = <<<HTML
-                    {$messageOutput}
-                    <div id="sendOptions">
-                        {$cancelButton}
-                    </div>
-                HTML;
-                return $html;
-            }
         }
 
+        // Error message with notification option
         $html = <<<HTML
-            {$messageOutput}
-            <div id = "sendOptions">
+            <div class="error-title" style="font-weight: bold; font-size: 1.2em; margin-bottom: 15px;">{$title}</div>
+            <div class="error-message">{$message}</div>
+            <div id="sendOptions" style="margin-top: 20px;">
                 <!-- For sending SMS reminder -->
                 <!-- <input type="image" src="images/icons/phone_60x75.png" onclick="avisaSMS();" id="si" value="Yes, send me a SMS"> -->
                 <!-- For sending whatsapp reminder -->
@@ -1935,7 +2111,7 @@ HTML;
                     {$this->getInputEmailContactHtml()}
                 </div>
             </div>
-            <div id="complet" style="display: none"> You will recieve a message when the photo is uploaded </div>
+            <div id="complet" style="display: none"> You will receive a message when the photo is uploaded </div>
         HTML;
 
         if(isset($this->emailContact) && !empty($this->emailContact->getValue())) {
