@@ -200,6 +200,10 @@ function avisaWhatsapp(){
 }
 
 function cancel(){
+    // Restore body scroll
+    $("body").css("overflow", "");
+    
+    $('#errorOverlay').fadeOut(200);
     $('.errorsPestanya').hide();
 }
 

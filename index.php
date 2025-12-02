@@ -204,6 +204,7 @@ HTML;
 HTML;
         }                    
         $this->body .= <<<HTML
+                    <div id="errorOverlay" onclick="cancel()"></div>
                     <div class="errorsPestanya" id='pestError' style='display: none'>
                         <p id='pError'></p>
                     </div>
