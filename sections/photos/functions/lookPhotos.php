@@ -1946,7 +1946,13 @@ HTML;
      * Returns array with case number and relevant data
      */
     private function determineErrorCase() {
-        // First check if the code format is valid by checking booth existence
+        // First check if the code is exactly 10 characters long
+        if (strlen($this->code) !== 10) {
+            // Case 6: Invalid code - wrong length
+            return ['case' => 6, 'data' => null];
+        }
+        
+        // Check if the code format is valid by checking booth existence
         $lastConn = $this->getPhotoboothLastConnection($this->code);
         
         if (!$lastConn) {
@@ -2021,16 +2027,16 @@ HTML;
             case 1:
                 // Case 1: Booth offline more than 7 days
                 return $this->buildErrorMessage(
-                    'Photobooth Offline',
-                    'We regret to inform you that the photo you requested is unavailable because this photobooth has been offline for an extended period.<br/>For assistance, please contact the photobooth operator using the details displayed on the machine.',
+                    'Photobooth Disconnected',
+                    'The photo you requested is unavailable. This photobooth has been offline for a long period.<br/>For assistance, please contact the photobooth operator using the details on the machine.',
                     false // No notification option
                 );
 
             case 2:
                 // Case 2: Booth inactive 2-7 days
                 return $this->buildErrorMessage(
-                    'Photo Pending Upload',
-                    'Your photo has not been uploaded yet.<br/>This usually occurs when the photobooth has lost internet connection.<br/>We can notify you when it becomes available.',
+                    'Photo Waiting For Upload',
+                    'The photobooth has lost internet connection but will upload your photo as soon as connection is restored.<br/>We can notify you when your photo becomes available.',
                     true // Show notification option
                 );
 
@@ -2038,7 +2044,7 @@ HTML;
                 // Case 3: Booth inactive 1-2 days
                 return $this->buildErrorMessage(
                     'Upload in Progress',
-                    'Your photo is being processed.<br/>This may be caused by temporary connectivity or network issues affecting the photobooth.<br/>We can notify you when it becomes available.',
+                    'This may be caused by temporary connectivity or network issues affecting the photobooth.<br/>We can notify you when your photo becomes available.',
                     true // Show notification option
                 );
 
@@ -2046,7 +2052,7 @@ HTML;
                 // Case 4: Recent activity 1-24 hours
                 return $this->buildErrorMessage(
                     'Photo Is Being Processed',
-                    'Your photo is currently in the processing queue.<br/>Your photo will be available shortly.<br/>We can notify you when it becomes available.',
+                    'Your photo will be available shortly.<br/>We can notify you when it becomes available.',
                     true // Show notification option
                 );
 
@@ -2063,7 +2069,7 @@ HTML;
                 // Case 6: Invalid Code
                 return $this->buildErrorMessage(
                     'Invalid Code',
-                    'The code you entered does not match any of our photobooths.<br/>Please make sure you typed the code correctly and try again.',
+                    'Please make sure you typed the code correctly and try again.',
                     false // No notification option
                 );
         }
@@ -2073,31 +2079,32 @@ HTML;
      * Build error message HTML with title, message, and optional notification form
      */
     private function buildErrorMessage($title, $message, $showNotificationOption) {
-        $cancelButton = '<input type="image" src="images/icons/cancel-blue_60x75.png" onclick="cancel()" value="No, thanks"><br><br>';
-
         if (!$showNotificationOption) {
             // Simple error message without notification option
             $html = <<<HTML
-                <div class="error-title" style="font-weight: bold; font-size: 1.2em; margin-bottom: 15px;">{$title}</div>
-                <div class="error-message">{$message}</div>
-                <div id="sendOptions" style="margin-top: 20px;">
-                    {$cancelButton}
-                </div>
+                <button id="errorCloseBtn" onclick="cancel()">×</button>
+                <div class="error-header-red">ERROR</div>
+                <div class="error-title" style="font-weight: bold; font-size: 1.5em; margin-bottom: 15px;">{$title}</div>
+                <div class="error-message" style="font-weight: normal;">{$message}</div>
             HTML;
             return $html;
         }
 
         // Error message with notification option
         $html = <<<HTML
-            <div class="error-title" style="font-weight: bold; font-size: 1.2em; margin-bottom: 15px;">{$title}</div>
-            <div class="error-message">{$message}</div>
+            <button id="errorCloseBtn" onclick="cancel()">×</button>
+            <div class="error-header-red">ERROR</div>
+            <div class="error-title" style="font-weight: bold; font-size: 1.5em; margin-bottom: 15px;">{$title}</div>
+            <div class="error-message" style="font-weight: normal;">{$message}</div>
             <div id="sendOptions" style="margin-top: 20px;">
                 <!-- For sending SMS reminder -->
                 <!-- <input type="image" src="images/icons/phone_60x75.png" onclick="avisaSMS();" id="si" value="Yes, send me a SMS"> -->
                 <!-- For sending whatsapp reminder -->
                 <!-- <input type="image" src="images/icons/whatsapp.png" onclick="avisaWhatsapp();" id="si" value="Yes, send me a WhatsApp"> -->
-                <input type="image" src="images/icons/email_60x75.png" onclick="avisaMail();" id="si" value="Yes, send me an email">
-                {$cancelButton}
+                <button type="button" class="email-icon-button" onclick="avisaMail();" id="si">
+                    <span class="email-icon">✉</span>
+                    <span>EMAIL ME</span>
+                </button>
             </div>
             <div id="dades">
                 <!-- For sending SMS -->
@@ -2153,11 +2160,11 @@ HTML;
 
   private function getInputEmailContactHtml() {
     if(isset($this->emailContact) && !empty($this->emailContact->getValue())) {
-      $html = "<input type='text' class=\"emailText\" id='txtmail' value=\"{$this->emailContact->getValue()}\">";
+      $html = "<input type='email' class='email-input' id='txtmail' value='{$this->emailContact->getValue()}' placeholder='Your email'>";
     } else {
-      $html =  "<input type='text' class=\"emailText\" id='txtmail'  placeholder=' Your e-mail'>";
+      $html =  "<input type='email' class='email-input' id='txtmail' placeholder='Your email'>";
     }
-    $html .= "<input type='image' class=\"sendButton\" src=\"images/icons/send_60x133.png\" onclick='envia(\"{$this->code}\", 0);' id='enviamail' value='send'>";
+    $html .= "<button type='button' class='send-button' onclick='envia(\"{$this->code}\", 0);' id='enviamail'>SEND</button>";
     return $html;
   }
 }
