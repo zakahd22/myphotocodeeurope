@@ -581,6 +581,131 @@ a>img {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Email Notification Styling */
+.email-input {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.email-input:focus {
+    outline: none;
+    border-color: #3e72e8;
+}
+
+.send-button {
+    background-color: #3e72e8;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-left: 10px;
+}
+
+.send-button:hover {
+    background-color: #2d5dd4;
+    transform: translateY(-2px);
+}
+
+.send-button:active {
+    transform: translateY(0);
+}
+
+.email-icon-button {
+    background: linear-gradient(135deg, #3e72e8 0%, #2d5dd4 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(62, 114, 232, 0.3);
+}
+
+.email-icon-button:hover {
+    background: linear-gradient(135deg, #2d5dd4 0%, #1e4abc 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(62, 114, 232, 0.4);
+}
+
+.email-icon-button:active {
+    transform: translateY(0);
+}
+
+.email-icon {
+    font-size: 32px;
+}
+
+.success-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: normal;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    z-index: 10001;
+    display: none;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        top: -50px;
+        opacity: 0;
+    }
+
+    to {
+        top: 20px;
+        opacity: 1;
+    }
+}
+
+.error-message-inline {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+
+.emailSend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#dades {
+    margin-top: 15px;
+}
+
+#complet {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #28a745;
+    font-weight: normal;
+}
+
 .errorsPestanya2 {
     text-align: center;
     padding: 16px 20px 0px;

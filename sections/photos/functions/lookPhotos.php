@@ -2101,7 +2101,10 @@ HTML;
                 <!-- <input type="image" src="images/icons/phone_60x75.png" onclick="avisaSMS();" id="si" value="Yes, send me a SMS"> -->
                 <!-- For sending whatsapp reminder -->
                 <!-- <input type="image" src="images/icons/whatsapp.png" onclick="avisaWhatsapp();" id="si" value="Yes, send me a WhatsApp"> -->
-                <input type="image" src="images/icons/email_60x75.png" onclick="avisaMail();" id="si" value="Yes, send me an email">
+                <button type="button" class="email-icon-button" onclick="avisaMail();" id="si">
+                    <span class="email-icon">✉</span>
+                    <span>EMAIL ME</span>
+                </button>
             </div>
             <div id="dades">
                 <!-- For sending SMS -->
@@ -2157,11 +2160,11 @@ HTML;
 
   private function getInputEmailContactHtml() {
     if(isset($this->emailContact) && !empty($this->emailContact->getValue())) {
-      $html = "<input type='text' class=\"emailText\" id='txtmail' value=\"{$this->emailContact->getValue()}\">";
+      $html = "<input type='email' class='email-input' id='txtmail' value='{$this->emailContact->getValue()}' placeholder='Your email'>";
     } else {
-      $html =  "<input type='text' class=\"emailText\" id='txtmail'  placeholder=' Your e-mail'>";
+      $html =  "<input type='email' class='email-input' id='txtmail' placeholder='Your email'>";
     }
-    $html .= "<input type='image' class=\"sendButton\" src=\"images/icons/send_60x133.png\" onclick='envia(\"{$this->code}\", 0);' id='enviamail' value='send'>";
+    $html .= "<button type='button' class='send-button' onclick='envia(\"{$this->code}\", 0);' id='enviamail'>SEND</button>";
     return $html;
   }
 }
