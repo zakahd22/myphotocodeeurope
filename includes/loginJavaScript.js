@@ -427,11 +427,11 @@ function askQuestions() {
 function error(text) {
     $("#pError").html(text);
 
-    $("#pestError").slideDown(500);
-    $("#pestError").animate({
-        padding: "20px 0px 10px 0px"
-
-    }, 500);
+    // Prevent body scroll on mobile (without breaking layout)
+    $("body").css("overflow", "hidden");
+    
+    $("#errorOverlay").fadeIn(300);
+    $("#pestError").css("display", "block");
 
 //    setTimeout(function () {
 //        errorClose();

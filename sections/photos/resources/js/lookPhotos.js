@@ -200,7 +200,26 @@ function avisaWhatsapp(){
 }
 
 function cancel(){
+    // Restore body scroll
+    $("body").css("overflow", "");
+    
+    $('#errorOverlay').fadeOut(200);
     $('.errorsPestanya').hide();
+}
+
+function showSuccessToast(message) {
+    // Create toast if it doesn't exist
+    if ($('#successToast').length === 0) {
+        $('body').append('<div id="successToast" class="success-toast"></div>');
+    }
+    
+    // Show the toast with message
+    $('#successToast').html(message).fadeIn(300);
+    
+    // Auto-hide after 3 seconds
+    setTimeout(function() {
+        $('#successToast').fadeOut(300);
+    }, 3000);
 }
 
 function envia(code, metode){
@@ -285,10 +304,11 @@ function updatePhotoPhoneContactRequest(phone, previousPhone, code){
 }
 
 function sendContactSuccessCallback(){
-    $('#sendOptions').hide();
-    $('#complet').html('You will receive a message when the photo is uploaded');
-    $('#complet').show();
-    $('#dades').hide();
+    // Close the error popup
+    cancel();
+    
+    // Show success toast
+    showSuccessToast('Email saved! We will notify you when your photo is ready.');
 }
 
 function setPhotoContactRequest(data) {
@@ -362,12 +382,25 @@ function createWhatsappDataValues() {
 }
 
 function createEmailDataValues() {
-    var dades = document.getElementById('txtmail').value;
+    var dades = document.getElementById('txtmail').value.trim();
+    
+    // Check if email is empty
     if (typeof dades == undefined || dades == "") {
-        $('#complet').html('Fill in an email address, please');
-        $('#complet').css('text-color', 'red');
+        $('#complet').html('Please enter an email address');
+        $('#complet').css('color', 'red');
+        $('#complet').show();
         return null;
     }
+    
+    // Validate email format with regex
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(dades)) {
+        $('#complet').html('Please enter a valid email address');
+        $('#complet').css('color', 'red');
+        $('#complet').show();
+        return null;
+    }
+    
     return [dades, "web"];
 }
 
