@@ -85,7 +85,10 @@ function login() {
 }
 function lookPhoto(sino) {
     if ($("#photocode").val() == "") {
-        error("PLEASE, WRITE YOUR PHOTO CODE");
+        error('<button id="errorCloseBtn" onclick="cancel()">×</button>' +
+              '<div class="error-header-red">ERROR</div>' +
+              '<div class="error-title" style="font-weight: bold; font-size: 1.5em; margin-bottom: 15px;">Missing Code</div>' +
+              '<div class="error-message" style="font-weight: normal;">Please enter your photo code</div>');
     } else {
         var url = 'sections/photos/functions/lookPhotos.php?' + $("#photoCodeForm").serialize();
         if (sino !== undefined) {
@@ -830,6 +833,10 @@ $("#contingutConfirma").height('220');
 
 }
 function cancel() {
+    // Restore body scroll
+    $("body").css("overflow", "");
+    
+    $('#errorOverlay').fadeOut(200);
     $('.errorsPestanya').hide();
 }
 
