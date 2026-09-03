@@ -1,0 +1,5 @@
+[user]
+	name = prod
+	email = prod@dc-image.com
+[push]
+	default = simple

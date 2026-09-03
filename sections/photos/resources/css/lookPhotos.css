@@ -798,3 +798,215 @@ a.fb-button {
     margin-top: 20px;
     background-image: url('../../../../images/web/botons-SHARE-GIF.png');
 }
+
+/* ===== Galería de fotos IA (extraproduct) ===== */
+/* ===== Galería de fotos IA (extraproduct) — versión simple, sin overlay ===== */
+/* ===== Galería de fotos IA (extraproduct) — versión simple, sin overlay ===== */
+.ai_photos_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+  padding: 0 10px;
+}
+
+.ai_photo_item {
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.35);
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+
+.ai_photo_img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+}
+
+/* La barra de compartir ya NO flota encima de la foto: va debajo, fija */
+.ai_photo_item .share.s_photo {
+  position: static !important;
+  background: rgba(0,0,0,0.06) !important;
+  background-image: none !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px !important;
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  margin: 0 !important;
+}
+
+.ai_photo_item .share.s_photo .cove_img {
+  display: none !important;
+}
+
+.ai_photo_item .photoButton {
+  width: 22px !important;
+  height: 22px !important;
+  padding: 5px;
+}
+
+/* Móvil / táctil: sin hover, botones siempre visibles */
+@media (hover: none) {
+  .ai_photo_item .share.s_photo {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =====================================================================
+   REDISEÑO GENERAL: foto principal, gif, video, S3 y galería IA
+   Pega esto AL FINAL de lookPhotos.css (después de todo lo demás)
+   ===================================================================== */
+
+/* ---------- Layout general centrado y responsive ---------- */
+.wrapper {
+  width: 100% !important;
+  max-width: 1000px;
+  margin: 0 auto !important;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+#photo_content {
+  gap: 24px;
+}
+
+.second {
+  width: auto !important;
+  gap: 18px;
+}
+
+h1, h2 {
+  width: 100% !important;
+  max-width: 480px;
+}
+
+/* ---------- Foto principal / tira / mega / 4x6 / 6x9: tarjeta responsive ---------- */
+.strips,
+.strips_horitzontal,
+.strips_mega,
+.strips_4x6_vertical,
+.strips_6x9,
+.s3 {
+  width: auto !important;
+  height: auto !important;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+  margin: 0 auto;
+}
+
+.strips img,
+.strips_horitzontal img,
+.strips_mega img,
+.strips_4x6_vertical img,
+.strips_6x9 img,
+#s3_img {
+  width: 100% !important;
+  max-width: 320px;
+  height: auto !important;
+  display: block;
+}
+
+/* Foto 3D (con capas superpuestas): que no se salga de su caja */
+#photo3dConten {
+  width: auto !important;
+  max-width: 220px;
+  height: auto !important;
+}
+#photo3dConten img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- Botones de compartir: UN SOLO estilo para todos
+   (foto, foto3D, video, video3D, gif, gif horizontal, s3) ---------- */
+.share {
+  background: rgba(255,255,255,0.08) !important;
+  background-image: none !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 40px;
+  padding: 10px 16px !important;
+  gap: 12px;
+  width: auto !important;
+  height: auto !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,.3);
+  margin: 8px auto;
+}
+
+/* el div .cove_img era un espaciador del sprite viejo, ya no hace falta */
+.cove_img {
+  display: none !important;
+}
+
+.photoButton {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 7px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+  object-fit: contain;
+  transition: transform .15s ease;
+  cursor: pointer;
+}
+.photoButton:hover {
+  transform: scale(1.12);
+}
+
+/* ---------- GIF: tarjeta oscura en vez del recuadro gris antiguo ---------- */
+.gif_container,
+.gif_container_hor,
+.s3_gif_c {
+  background-color: rgba(255,255,255,0.06) !important;
+  background-image: none !important;
+  width: auto !important;
+  max-width: 340px;
+  height: auto !important;
+  padding: 12px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+}
+
+.gif,
+.s3_gif {
+  max-width: 100%;
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 8px;
+  display: block;
+}
+
+.share_gif,
+.share_gif_hor {
+  background: none !important;
+  width: auto !important;
+  height: auto !important;
+  flex-direction: row !important;
+  gap: 10px;
+}
+
+/* ---------- Banner inferior: responsive ---------- */
+.banner_img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 22px;
+}
+
+/* ---------- Móvil: todo un poco más compacto ---------- */
+@media (max-width: 600px) {
+  .wrapper { padding: 0 10px; }
+  .share { padding: 8px 12px !important; gap: 8px; }
+  .photoButton { width: 28px !important; height: 28px !important; }
+  h1 { font-size: 20pt; }
+  h2 { font-size: 14pt; }
+}

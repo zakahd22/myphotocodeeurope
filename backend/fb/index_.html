@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Facebook Login JavaScript Example</title>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../assets/js/facebook_login.js"></script>
+<style>
+
+.centered {
+    display: flex;
+    flex-wrap: wrap; /* Optional. only if you want the items to wrap */
+    justify-content: center; /* For horizontal alignment */
+    align-items: center; /* For vertical alignment */
+}
+
+.bottom {
+    margin-top : 10px;
+}
+
+body {
+    background-color: black;
+}
+
+.main{
+    margin: auto;
+    margin-top: auto;
+    position: relative;
+    width: 60vw;
+    height: 50vh;
+    /*border: 2px solid gainsboro;*/
+    /*margin-top: 5%;*/
+    _margin-left: 40%;
+    /*box-shadow: 5px 5px 18px black;*/
+    border-radius: 10px;
+    padding: 90px;
+    align-items: center;
+}
+
+/*input{
+    box-shadow: 5px 5px 18px black !important;
+    border-radius: 10px !important;
+    width: 90vw;
+    margin: auto;
+    display: block;
+    padding-left: 10px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: bolder;
+}*/
+
+#pestanya_mssg {
+    text-align: center;
+    margin: auto auto 20px auto;
+    position: relative;
+    height: 20vw;
+    /*border: 2px solid gainsboro;*/
+    margin-top: 3%;
+    _margin-left: 30%;
+    /*box-shadow: 5px 5px 18px black;*/
+    border-radius: 10px;
+    padding: 20px;
+    width: 60vw;
+}
+
+#mssg {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-family: "arial";
+    font-size: 25pt;
+    color: #fefb3b;
+}
+
+#fb_token {
+    width: 60vw;
+    align-items: center;
+}
+
+#dtoken {
+    width: 40vw;
+    font-size: 12pt;
+    text-align: center;    
+}
+
+#write_text {
+    display: flex;
+    flex-wrap: wrap; /* Optional. only if you want the items to wrap */
+    justify-content: center; /* For horizontal alignment */
+    align-items: center; /* For vertical alignment */
+    height: 15vw;
+    margin-top: 5pt;
+    align-content: center;
+    width: 60vw;
+    font-size: 6vw;
+}
+/*
+#token {
+    height: 15vw;
+    width: 60vw;
+    text-transform: uppercase;
+    font-size: 8vw;
+    text-align: center;
+}*/
+
+#fb_container {
+    display: flex;
+    flex-wrap: wrap; /* Optional. only if you want the items to wrap */
+    justify-content: center; /* For horizontal alignment */
+    align-items: center; /* For vertical alignment */
+    transform: scale(2, 2);
+}
+
+.text-block {
+  position: absolute;
+  bottom: 16px;
+/*  right: 20px;
+  background-color: black;
+  color: white;*/
+  padding-left: 95px;
+  padding-right: 20px;
+  /*height: 60%;*/
+  width: 72%;
+  height: 90px;
+}
+
+.container {
+  position: relative;
+}
+
+#token {
+    width: 97%;
+    height: 76%;
+    font-size: 33px;
+    color: #0aeaf6;
+    text-align: center;
+    background-color: black;
+    border-block-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    border-top-style: none;
+    border-bottom: none;
+    text-transform: uppercase;
+}
+.error {
+    font-family: "arial";
+    font-size: 25pt;
+    color: #fefb3b;
+}
+</style>
+
+
+</head>
+<body>
+    <div class='main'>
+        <div id="fb_token">
+            <div id="write_text">
+                <img src='../images/web/facebook_print.png'>
+            </div>
+            <div id="write_text">
+                <img src='../images/web/facebook_code.png'>
+            </div>
+<!--            <div>
+                <div id="dtoken" style="background-image: url(../images/web/facebook_box.png)">
+                    <input type="text" id="token">
+                </div>
+            </div>-->
+
+            <div class="container">
+                <img src="../images/web/facebook_box.png" alt="Nature" style="width:80%; margin-left: 60px; height: 130px;">
+                <div class="text-block">
+                        <input type="text" id="token" >
+                </div>
+            </div>
+
+            <br/>
+            <br/>
+            <div id="fb_container">
+                <div class="centered bottom" id='div_f' hidden>
+                    <fb:login-button id="fb-login-button" data-size="large" data-button-type="continue_with" scope="user_photos" onlogin="checkLoginState();" ></fb:login-button>
+                </div>
+            </div>
+        </div>
+    <!--</div>-->
+        <!--<div id="pestanya_mssg" style="display: none">-->
+        <div id="pestanya_mssg" style="display: none">
+            <div id="mssg" class='centred'>
+                <img src='../images/web/facebook_error.png' style="margin-top: 17px; margin-left: -510px;">
+                <p style="margin-top: -62px; margin-left: 47px">ERROR - INCORRECT CODE </p>
+            </div>
+        </div>
+    </div>
+    <div class="centered" id="status"></div>
+    <div class="centered" id="photos"></div>
+</body>
+</html>

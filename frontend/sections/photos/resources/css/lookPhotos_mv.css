@@ -1,0 +1,1303 @@
+html {
+    /*font-family: 'Revalia', cursive;*/
+    font-family: 'Paytone One', sans-serif;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-y: auto !important;
+}
+
+body {
+    background-color: #D8D8D8;
+    /*background-image: url('../../../../assets/images/backgrounds/background-default.jpg');*/
+    overflow-y: auto;
+    color: #3e72e8;
+    background-color: #eaf7fc;
+    margin: 0px;
+    padding: 0px;
+
+    /*responsive*/
+    font-size: 11pt;
+    overflow: scroll;
+}
+
+.wrapper {
+    min-width: 320px;
+}
+
+div {
+    margin: 0;
+}
+
+.login {
+
+    margin: auto;
+    margin-top: auto;
+    position: relative;
+    width: 62%;
+    height: 250px;
+    border: 2px solid gainsboro;
+    margin-top: 20%;
+    _margin-left: 40%;
+    box-shadow: 5px 5px 18px black;
+    border-radius: 10px;
+    padding: 20px;
+
+}
+
+.page2 {
+    width: 0;
+    height: 100%;
+    overflow: hidden;
+    display: inline;
+    float: left;
+}
+
+#pagePhoto {
+    height: 100%;
+    display: block;
+    float: left;
+    overflow: visible !important;
+}
+
+h3 {
+    margin-left: 20px;
+    font-size: 15pt;
+    text-shadow: 1px 1px 0px white;
+}
+
+.photoButton {
+    margin-bottom: 20px;
+    border: 0px;
+    margin-right: 0px;
+    cursor: pointer;
+
+    /*responsive*/
+    width: 30px;
+    margin-top: 18px;
+
+}
+
+.photoButton2 {
+    width: 20%;
+    margin: 0px;
+    border: 0px;
+    margin-top: 7px;
+}
+
+.banner2D {
+    display: block;
+    max-width: 500px;
+    border-radius: 22px;
+
+    /*responsive*/
+    width: 340px;
+    margin-top: 70px;
+    margin-left: -145px;
+}
+
+.banner3D {
+    position: absolute;
+    display: block;
+    max-width: 500px;
+    border-radius: 22px;
+
+    /*responsive*/
+    width: 340px;
+    margin-top: 80px;
+    margin-left: -145px;
+}
+
+.share {
+    display: inline;
+    float: left;
+    text-align: center;
+    background-repeat: no-repeat;
+
+    /*responsive*/
+    height: 100px;
+}
+
+#videoShare {
+    background-image: url('../../../../images/web/shareVideo.png');
+    float: left;
+
+    /*responsive*/
+    background-size: 210px 70px;
+    width: 237px;
+    margin-left: -10px;
+    padding-left: 0px;
+}
+
+#videoShare3D {
+    background-image: url('../../../../images/web/shareVideo3D.png');
+    float: right;
+    display: none;
+
+    /*responsive*/
+    background-size: 203px 70px;
+    width: 199px;
+    padding-left: 0px;
+}
+
+#photoShare {
+    float: left;
+    background-image: url('../../../../images/web/sharePhoto2D.png');
+    *padding-right: 25px;
+    _padding-right: 25px;
+
+    /*responsive*/
+    background-size: 195px;
+    padding-left: 0px;
+    margin-left: 0px;
+    width: 215px;
+    height: 75px;
+    margin-top: 10px;
+}
+
+#photoShareMega {
+    float: left;
+    background-image: url('../images/web/sharePhoto.png');
+    padding-left: 70px;
+    width: 330px;
+    margin-left: 9px;
+}
+
+
+#photoShare .photoButton {
+    margin-left: 3px;
+}
+
+#photoShare2D {
+    float: left;
+    background-image: url('../images/web/sharePhoto2D.png');
+
+    /*responsive*/
+    background-size: 210px;
+    width: 237px;
+    margin-left: -10px;
+    padding-left: 0px;
+}
+
+
+#photoShare2D .photoButton {
+    margin-left: 3px;
+}
+
+#photoShare3D {
+    float: left;
+    background-image: url('../../../../images/web/sharePhoto3D.png');
+    padding-left: 10px;
+    display: none;
+
+    /*responsive*/
+    background-size: 210px 70px;
+    margin-left: 0px;
+    width: 185px;
+}
+
+#photoShare3D .photoButton {
+    margin-left: 3px;
+}
+
+.share a {
+    margin-right: 0px;
+
+}
+
+.share a {
+    margin-right: 0px;
+
+}
+
+.actions1 {
+    display: inline-block;
+
+    /*responsive*/
+    margin-top: 0px;
+    width: 100%;
+}
+
+.actions2 {
+    width: 85%;
+    _width: 85%;
+    *width: 85%;
+    display: inline-block;
+    float: left;
+    padding-left: 8%;
+    _padding-left: 22%;
+    *padding-left: 22%;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.actions3 {
+    display: inline-block;
+    float: left;
+    margin-top: 25px;
+    text-align: center;
+
+    /*responsive*/
+    width: 95%;
+    margin-left: 5px;
+}
+
+.errorsPestanya {
+    text-align: center;
+    margin: 0;
+    position: fixed;
+    top: 20px;
+    left: 50vw;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+    min-height: 200px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border: 4px solid #dc3545;
+    background-color: white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 40px 20px 20px 20px;
+    z-index: 10000;
+    display: none;
+}
+
+#closeErrors {
+    width: 30px;
+    margin-bottom: -12px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.content-popup2 {
+    background-color: rgba(0, 0, 0, 0);
+    height: 65%;
+    left: 34%;
+    margin: auto;
+    opacity: 1;
+    position: absolute;
+    text-shadow: none;
+    top: 18%;
+    width: 31%;
+    z-index: 104;
+}
+
+.content-popup {
+    z-index: 104;
+    width: 60%;
+    height: 65%;
+    position: absolute;
+    left: 20%;
+    top: 18%;
+    margin: auto;
+    opacity: 1;
+    text-shadow: none;
+    font-size: 12pt;
+    border-radius: 20px;
+    background-color: #AEEFFF;
+    box-shadow: 1px 1px 10px gray;
+}
+
+.content-popup p {
+    margin-left: 10px;
+}
+
+.content-popup input[type='text'] {
+    width: 60%;
+    margin-left: 29PX;
+}
+
+.content-popup input[type='radio'] {
+    margin-left: 20%;
+
+}
+
+.content-popup hr {
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: white;
+    padding: 1px;
+    border: 1px solid #0CF;
+}
+
+.popup {
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: black;
+    opacity: 0.6;
+}
+
+.photoOfAll {
+    width: 20%;
+    margin: 1%;
+    overflow: hidden;
+    display: inline;
+    float: left;
+    height: 250px;
+    cursor: pointer;
+}
+
+.allPhotos {
+    display: none;
+    width: 99%;
+    margin-left: 3px;
+    height: 100%;
+    background-color: #005580;
+    border: 2px solid white;
+    overflow: auto;
+}
+
+.bSp {
+    background-color: black;
+    border-radius: 7px 7px 7px 7px;
+    color: white;
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+    height: 20px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.info {
+    border: 2px solid black;
+    height: auto;
+    background-color: floralwhite;
+    color: black;
+    _margin-left: 40%;
+    box-shadow: 5px 5px 18px black;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 2% auto;
+    position: relative;
+    width: 250px;
+    display: none;
+}
+
+
+/*SHOOPPPP 20141105**/
+
+.miniShop {
+    width: 90%;
+    height: auto;
+    border: 2px solid gray;
+    border-radius: 20px;
+    overflow: hidden;
+    display: block;
+    margin-left: 5%;
+    background-color: white;
+    margin-bottom: 20px;
+    margin-top: -85px;
+}
+
+.shop {
+    position: absolute;
+    width: 30%;
+    right: 0;
+    top: 13%;
+    background-image: url('../shop/images/bgShop.jpg');
+    border-radius: 10px 0px 0px 10px;
+}
+
+.pestanyaShop {
+    position: relative;
+    left: -83px;
+    top: 20px;
+    width: 86px;
+    height: 199px;
+    background-image: url('../shop/images/bgShop.jpg');
+    cursor: pointer;
+    padding: 20px 0px;
+    font-weight: bolder;
+    font-size: 31pt;
+    text-align: center;
+    border-radius: 10px 0px 0px 10px;
+    color: white;
+    text-shadow: 0px 0px 2px black;
+    padding-bottom: 46px;
+}
+
+.productMiniShop {
+    position: relative;
+    display: block;
+    float: left;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.imgProduct {
+    position: absolute;
+    width: 100%;
+    top: -16px;
+    left: 0;
+    z-index: 2;
+}
+
+.photoMini {
+    position: relative;
+    z-index: 1;
+}
+
+#AllPhotoDiv {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: transparent;
+    position: absolute;
+    z-index: 200;
+    top: 0px;
+    left: 0px;
+}
+
+#img_left_div {
+    margin-left: 7.5%;
+    display: inline;
+    float: left;
+    position: relative;
+    cursor: pointer;
+
+    /*responsive */
+    width: 28%;
+    margin-top: 80px;
+}
+
+#band3d {
+    top: 0px;
+    left: -12%;
+    z-index: 9;
+    position: absolute;
+    width: 20%;
+}
+
+#band {
+    top: 20px;
+    left: 0;
+    z-index: 11;
+    position: absolute;
+    width: 20%;
+}
+
+#f3d {
+    position: absolute;
+    z-index: 12;
+    width: 35%;
+    left: -28%;
+
+    /*responsive*/
+    top: 180px;
+}
+
+#photo_div {
+    width: 135px;
+    margin-left: 7.5%;
+    display: inline;
+    float: left;
+
+    /*responsive*/
+    margin-top: 85px;
+    width: 29%;
+}
+
+#content_div {
+    display: inline;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 50%;
+}
+
+#backoption {
+    position: absolute;
+    right: 20px;
+    z-index: 102;
+}
+
+#video2D {}
+
+#gif2D {
+    margin-left: 3%;
+    position: relative;
+
+    /*responsive*/
+    margin-top: 20px;
+    width: 77%;
+}
+
+.likeFB {
+    width: 100px;
+    height: 65px;
+    position: absolute;
+    border: none;
+    overflow: hidden;
+
+    /*responsive*/
+    top: 10px;
+    left: 25px;
+    right: auto;
+    visibility: hidden;
+}
+
+#gif_download_btn {
+    display: block;
+
+    /*responsive*/
+    width: 31px;
+    margin: 22px auto -10px auto;
+}
+
+#gif_mail_btn {
+    display: block;
+
+    /*responsive*/
+    width: 28px;
+    margin: 23px auto -10px auto;
+}
+
+#gif_twitter_btn {
+    display: block;
+
+    /*responsive*/
+    width: 29px;
+    margin: 23px auto -10px auto;
+}
+
+#back_btn {
+    width: 85px;
+    right: 15px;
+    float: right;
+    margin-right: 15px;
+}
+
+#videoshare3d_download_btn {
+    margin-left: 40px;
+}
+
+.videoM {
+    /* responsive */
+    width: 300px;
+}
+
+#videoM {
+    width: 300px;
+}
+
+.content-popup2 {
+    /* responsive */
+    left: 7%;
+    width: 200px;
+}
+
+#photoShareMega {
+    float: left;
+    background-image: url('../images/web/sharePhoto.png');
+
+    /*responsive*/
+    background-size: 195px;
+    padding-left: 0px;
+    margin-left: 0px;
+    width: 190px;
+    height: 75px;
+}
+
+.strip {
+    width: 140px;
+    margin-left: 7.5%;
+    margin-top: 20px;
+    display: inline;
+    float: left;
+    position: relative;
+    cursor: pointer;
+}
+
+
+
+/*ferran*/
+
+.title {
+    width: 100%;
+}
+
+
+h1 {
+    text-shadow: 2px 2px 0px black;
+    color: white;
+    font-size: 18pt;
+    width: 100%;
+    text-align: center;
+    margin-left: 0px;
+}
+
+h2 {
+    color: white;
+    font-size: 20pt;
+    width: 100%;
+    text-align: center;
+    margin-left: 0px;
+}
+
+.strips {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.second {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-align-content: flex-start;
+    -moz-align-content: flex-start;
+    -ms-align-content: flex-start;
+    align-content: flex-start;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+    height: auto;
+    width: 100% !important;
+    margin-bottom: 15px;
+}
+
+.share {
+    display: inline;
+    text-align: center;
+    height: 50px;
+}
+
+.share_photo {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-align-content: flex-start;
+    -moz-align-content: flex-start;
+    -ms-align-content: flex-start;
+    align-content: flex-start;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+    width: 360px !important;
+    height: 85px;
+    margin-bottom: 15px;
+}
+
+.gif {
+    width: auto;
+    height: 185px;
+}
+
+.others_container {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+
+
+    height: 200px;
+    width: auto;
+    border-radius: 10px;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+}
+
+.gif_container {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.share_gif_hor {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-align-content: center;
+    -moz-align-content: center;
+    -ms-align-content: center;
+    align-content: center;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+    width: 73px;
+    height: 155px;
+
+
+    background-image: url("../../../../images/web/shareGIF.png");
+    background-repeat: no-repeat;
+    background-size: 74px 160px;
+    background-position: 0 center;
+
+}
+
+#gif_hor {
+    width: auto;
+    height: 175px;
+}
+
+.share_gif {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-align-content: center;
+    -moz-align-content: center;
+    -ms-align-content: center;
+    align-content: center;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+    width: 75px;
+    height: 190px;
+
+
+    background-image: url("../../../../images/web/shareGIF.png");
+    background-repeat: no-repeat;
+    background-size: 74px 200px;
+    background-position: 0 center;
+}
+
+
+.s_photo {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+
+    background-image: url('../../../../images/web/sharePhoto2D.png');
+    background-size: 350px 100px;
+    width: 350px;
+    height: 95px;
+
+}
+
+.s_photo3D {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+
+    -webkit-align-content: center;
+    -moz-align-content: center;
+    -ms-align-content: center;
+    align-content: center;
+
+    background-image: url('../../../../images/web/sharePhoto3D.png');
+    background-size: contain;
+    width: 320px;
+    height: 95px;
+}
+
+.s_video {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+
+    -webkit-align-content: center;
+    -moz-align-content: center;
+    -ms-align-content: center;
+    align-content: center;
+
+    background-image: url('../../../../images/web/shareVideo.png');
+    background-size: contain;
+
+
+    padding-left: 10px;
+    width: 315px;
+    height: 95px;
+}
+
+.s_video3D {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+
+    -webkit-align-content: center;
+    -moz-align-content: center;
+    -ms-align-content: center;
+    align-content: center;
+
+    background-image: url('../../../../images/web/shareVideo3D.png');
+    background-size: contain;
+
+
+    padding-left: 10px;
+    width: 315px;
+    height: 95px;
+}
+
+.cove_img {
+    width: 60px;
+    height: 25px;
+}
+
+.banner {
+    width: 100%;
+    text-align: center;
+    margin-top: 75px;
+}
+
+.banner_img {
+    height: 100px;
+    width: 300px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+}
+
+.photoButton {
+    width: 50px;
+    height: 50px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.strips_mega {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+    width: 100%;
+    height: auto;
+    margin-bottom: 25px;
+}
+
+.strips_6x9 {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+    width: 100%;
+    height: auto;
+    margin-bottom: 100px;
+}
+
+.strips_horitzontal {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 115px;
+    margin-bottom: 25px;
+}
+
+#strip_img_horitzontal {
+    width: 315px !important;
+    height: auto;
+}
+
+.photoButton_hor {
+    width: 40px;
+    height: 40px;
+}
+
+.links_share_hor {
+    width: 40px;
+    height: 40px;
+
+}
+
+#strip_6x9_vertical {
+    width: 350px;
+    height: 625px;
+}
+
+#strip_6x9_horitzontal {
+    width: 625px;
+    height: 350px;
+}
+
+#strip_mega_img {
+    width: 350px !important;
+    height: 250px !important;
+}
+
+#strip_img {
+    width: 350px !important;
+}
+
+#photo3dConten {
+    width: 100%;
+    margin-left: 22.5%;
+    margin-bottom: 65px;
+    float: left;
+    position: relative;
+    cursor: pointer;
+    height: 745px;
+}
+
+#band3d {
+    width: 15%;
+}
+
+#band {
+    width: 15%;
+}
+
+#f3d {
+    width: 22%;
+    left: -22%;
+}
+
+#d3photo {
+    position: absolute;
+    z-index: 8;
+    top: 0px;
+    left: -12%;
+    box-shadow: -7px -3px 25px gray;
+    height: 750px;
+    width: 230px;
+}
+
+#no3dphoto {
+    height: 750px;
+    width: 230px;
+    position: absolute;
+    z-index: 10;
+    top: 20px;
+    box-shadow: -7px -3px 25px gray;
+}
+
+#sharePhoto3D {
+    background-image: url("../../../../images/web/sharePhoto3D.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 111px;
+    width: 300px;
+}
+
+.menu {
+    width: 100%;
+    height: 25px;
+}
+
+.gif_container_hor {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    width: 215px;
+    margin-top: 15px;
+}
+
+.cover_img_hor {
+    height: 15px;
+    width: 40px;
+}
+
+#content_face {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: flex-start;
+    -moz-justify-content: flex-start;
+    -ms-justify-content: flex-start;
+    justify-content: flex-start;
+
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+
+    width: auto;
+    padding-left: 10px;
+    height: 110px;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 5px;
+
+    display: none;
+}
+
+
+#pos_div0 {
+    width: 20%;
+    height: 100%;
+}
+
+#pos_div1 {
+    width: 15%;
+    height: 100%;
+}
+
+.facebook {
+    width: 57px;
+    height: 57px;
+}
+
+.first_container {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-align-content: flex-start;
+    -moz-align-content: flex-start;
+    -ms-align-content: flex-start;
+    align-content: flex-start;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-justify-content: space-around;
+    -moz-justify-content: space-around;
+    -ms-justify-content: space-around;
+    justify-content: space-around;
+
+    -webkit-align-content: space-around;
+    -moz-align-content: space-around;
+    -ms-align-content: space-around;
+    align-content: space-around;
+
+    height: auto;
+    margin: auto;
+    width: 95%;
+}
+
+.first_container_share {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-align-content: flex-start;
+    -moz-align-content: flex-start;
+    -ms-align-content: flex-start;
+    align-content: flex-start;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-justify-content: space-around;
+    -moz-justify-content: space-around;
+    -ms-justify-content: space-around;
+    justify-content: space-around;
+
+    -webkit-align-content: space-around;
+    -moz-align-content: space-around;
+    -ms-align-content: space-around;
+    align-content: space-around;
+
+    height: auto;
+    margin: auto;
+    width: 93%;
+}
+
+.s3_gif_c {
+    margin_top: 5px;
+    height: auto;
+    width: 100%;
+}
+
+.s3_gif {
+    display: block;
+    width: 93%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.s3_banner {
+    width: 100%;
+    text-align: center;
+    margin-top: 184px;
+}
+
+.s3_second {
+    margin: auto;
+    margin-top: 10px;
+    height: auto;
+    width: 93%;
+}
+
+
+
+#s3_img {
+    display: block;
+    width: 98%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.s3_s_photo {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+
+    background-image: url('../../../../images/web/sharePhoto.png');
+    background-size: 350px 100px;
+    width: 350px;
+    height: 95px;
+}
+
+.s3_share_gif {
+    margin-top: 5px;
+    background-image: url('../../../../images/web/botons-SHARE-GIF.png');
+}
+
+.s3 {
+    display: inline-block;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+    width: 100%;
+    height: auto;
+    margin-bottom: 2px;
+}

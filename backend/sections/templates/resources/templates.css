@@ -1,0 +1,206 @@
+.download{
+    float:left;
+    width: 50%;
+    border: none;
+}
+.collage{
+    float:left;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+/*.button img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2px;
+    -webkit-transform: scale(0.75);  Saf3.1+, Chrome 
+       -moz-transform: scale(0.75);  FF3.5+ 
+        -ms-transform: scale(0.75);  IE9 
+         -o-transform: scale(0.75);  Opera 10.5+ 
+            transform: scale(0.60);
+}*/
+.text{
+    margin-left: 25px;
+    margin-right: 10px;
+    width: 89%;
+}
+.text p{
+    margin: 0 0 10px 0;
+    text-align: justify;
+    text-decoration: none;
+
+}
+.text strong{
+    font-weight: 100 !important; 
+}
+
+.title{
+    font-style: italic;
+    color: #540097;
+}
+.text ul{
+    margin-left: 30px;
+    list-style-type: none;
+}
+.tutorial{
+    margin: 10px 0 10px 10px; 
+}
+.tutorial img{
+    padding: 2px;
+    display: block;
+    -webkit-transform: scale(0.75); /* Saf3.1+, Chrome */
+       -moz-transform: scale(0.75); /* FF3.5+ */
+        -ms-transform: scale(0.75); /* IE9 */
+         -o-transform: scale(0.75); /* Opera 10.5+ */
+            transform: scale(0.60);
+}
+
+#photoPop{    
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    
+    background: rgba(0,0,0,0.8);
+}
+
+.img_collage{
+    width:60%;
+    float:left;
+    display:inline;
+    border:0px solid;
+    text-align:center;
+    margin-left: 100px;
+}
+
+.selectedCollage{
+    width: 300px;
+    align-self: center;
+    margin-left: 67%;
+}
+
+.select_text{
+    background-color:rgba(255, 0, 0, 0.5);
+    color: red;
+    border-radius: 9px 9px 9px 9px;
+    -moz-border-radius: 9px 9px 9px 9px;
+    -webkit-border-radius: 9px 9px 9px 9px;
+    border: 2px solid #ff0000;
+    width: 260px;
+}
+
+#butons{
+    width: 70px;
+    margin-left: -70px;
+    margin-bottom: -23px;
+}
+
+.collagePreview2{
+      
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    
+    width: 200px;
+    height: 88px;
+    border:1px solid black;
+    
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.collagesADD{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    
+    /*width: 49%;
+    height: 70%;
+    border: 1px solid gray;*/
+    margin-bottom: 10px;
+}
+
+.input_text{
+    margin-left:186px;
+    width: 36%;
+    margin-bottom: 2%;
+}
+
+.select{
+    width: 224px;
+    margin-bottom: 5%;
+    align-self: center;
+    margin-left: 134px;
+    margin-top: -1%;
+}
+
+.button_select{
+    display: block;
+    background-image: url(../../../images/icons/submenu/selectCollages.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 180px;
+    height: 65px;
+    margin-left: 70px;
+    cursor:pointer;
+}
+.video{
+    display: block;
+    background-image: url(../../../images/icons/submenu/watch_video.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 180px;
+    height: 65px;
+    margin-left: 10px;
+    cursor:pointer;
+}
+
+.DCCollage{
+    background-image: url(../../../images/web/custom/collages.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 350px;
+    width: 350px;
+    cursor:pointer;
+}
+
+.layout{
+    background-image: url(../../../images/icons/submenu/layouts-img.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 385px;
+    width: 520px;
+    cursor:pointer;
+}
+.DLayout{
+    background-image: url(../../../images/icons/submenu/download-layouts.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 180px;
+    height: 65px;
+    margin-left: 160px;
+    cursor: pointer;
+    margin-top: 20px;
+}

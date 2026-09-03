@@ -1,0 +1,836 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "https://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="https://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+
+<link rel="icon"
+
+      type="image/ico"
+
+      href="https://www.jewelbeat.com/favicon.ico">
+
+
+
+
+
+<META NAME="Description" CONTENT="$2.99 music for your projects. Royalty free music with license to your name. Quality production music. Direct license. No PRO fees.">
+
+<title>JewelBeat $2.99 royalty free background music for video, photos, apps. Instrumental production music clips.</title>
+
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="https://www.jewelbeat.com/html/css/jscrollpane.css" rel="stylesheet" type="text/css" />
+<link href="https://www.jewelbeat.com/html/css/jwbox.css" rel="stylesheet" type="text/css" />
+<link href="https://www.jewelbeat.com/css/shadowbox.css" rel="stylesheet" type="text/css" /> 
+
+<script type="text/javascript" src="https://www.jewelbeat.com/js/home_search.js"></script>
+<script type="text/javascript" src="https://www.jewelbeat.com/js/home_top_search.js"></script>
+
+<script type="text/javascript" src="https://www.jewelbeat.com/js/jquery-1.5.1.min.js"></script>
+<script type="text/javascript" src="https://www.jewelbeat.com/html/js/jquery.jwbox.js"></script>
+<script type="text/javascript" src="https://www.jewelbeat.com/html/js/shadowbox.js"></script>
+<script type="text/javascript" src="https://www.jewelbeat.com/html/js/jquery.corner.js"></script>
+<script type="text/javascript" src="https://www.jewelbeat.com/html/js/jquery.jscrollpane.min.js"></script>
+
+
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	Shadowbox.init();
+
+});
+
+</script>
+
+
+
+<script type="text/javascript">
+
+$('.CurvyBox').corner();
+
+</script>
+
+
+
+<script type="text/javascript">
+
+$(function()
+
+{
+
+	$('.scroll-pane').jScrollPane();
+
+});
+
+</script>
+
+
+
+<script type="text/JavaScript">
+
+  $(function(){
+
+  settings = {
+
+          tl: { radius: 10 },
+
+          tr: { radius: 10 },
+
+          bl: { radius: 10 },
+
+          br: { radius: 10 },
+
+          antiAlias: true,
+
+          autoPad: true,
+
+          validTags: ["div"],
+
+		  metaData:false
+
+      }
+
+  $('.jwbox_hidden').corner(settings);
+
+  });
+
+</script>
+
+
+
+<script language="javascript" type="text/javascript">
+
+function IsEmpty(s) {
+
+	return /^\s*$/.test(IsEmpty.arguments[0]);
+
+}
+
+function postSearch(){
+
+	if( IsEmpty(document.getElementById("keyword").value) == false ){
+
+		//alert(document.getElementById("keyword").value);
+
+		document.location.href = "store/downloadresults.php?sTxt=" + document.getElementById("keyword").value;
+
+		return false;
+
+	}else{
+
+		alert("Please enter keyword on search field.");
+
+		document.getElementById("keyword").focus();
+
+	}
+
+}
+
+function onKeyPress(e){
+
+	var key = window.event ? e.keyCode : e.which;
+
+	if(document.getElementById("ajax_response").style.display == "none"){
+
+		if( key == 13 && IsEmpty(document.getElementById("keyword").value) == false ){
+
+			document.location.href = "store/downloadresults.php?sTxt=" + document.getElementById("keyword").value;
+
+			return false;
+
+		}
+
+	}else{
+
+		var ajax_response = document.getElementById("ajax_response");
+
+		if(key == 13 && ajax_response.style.display != "none"){
+
+			if(jQuery("ul.toplist li.selected a").text() == ""){
+
+				return postSearch();
+
+			}else{
+
+				document.location.href = "store/downloadresults.php?sTxt=" + jQuery("ul.toplist li.selected a").text();
+
+				return false;
+
+			}
+
+		}
+
+	}
+
+}
+
+</script>
+
+</head>
+
+
+
+<body onLoad="javascript: document.getElementById('keyword').focus();">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+function IsEmpty(s) {
+	return /^\s*$/.test(IsEmpty.arguments[0]);
+}
+function topPostSearch(){
+	if( IsEmpty(document.getElementById("topkeyword").value) == false ){
+		document.location.href = "store/downloadresults.php?sTxt=" + document.getElementById("topkeyword").value;
+		return false;
+	}else{
+		alert("Please enter keyword on search field.");
+		document.getElementById("topkeyword").focus();
+	}
+}
+function onKeyPressTop(e){
+	var key = window.event ? e.keyCode : e.which;
+	if(document.getElementById("ajax_response_top").style.display == "none"){
+		if( key == 13 && IsEmpty(document.getElementById("keyword").value) == false ){
+			document.location.href = "store/downloadresults.php?sTxt=" + document.getElementById("topkeyword").value;
+			return false;
+		}
+	}else{
+		var ajax_response = document.getElementById("ajax_response_top");
+		if(key == 13 && ajax_response.style.display != "none"){
+			if(jQuery("ul.toplist li.selected a").text() == ""){
+				return topPostSearch();
+			}else{
+				document.location.href = "store/downloadresults.php?sTxt=" + jQuery("ul.toplist li.selected a").text();
+				return false;
+			}
+		}
+	}
+}
+</script>
+<table id="main_out" width="1000" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+	<tr>
+		<td>
+			<table width="1000" height="108" border="0" align="center" cellpadding="0" cellspacing="0"  bgcolor="#FFFFFF">
+			  <tr>
+			    <td width="225"><a href="https://www.jewelbeat.com/index.php"><img src="https://www.jewelbeat.com/images/logo_299.jpg" width="222" height="73" border="0" alt="JewelBeat royalty free background music"></a></td>
+			    <td width="775" align="right" valign="bottom">
+					<table width="775" border="0" cellspacing="0" cellpadding="0">
+			          <tr>
+						<td>&nbsp;</td>
+					  </tr>
+			          <tr>
+			            <td align="right">
+                        
+                        
+						</td>
+			          </tr>
+			          <tr>
+						<td>&nbsp;</td>
+					  </tr>
+			          <tr>
+			            <td align="right">
+						  <div class="topmenu" >
+							<ul>
+							  <li ><a href="https://www.jewelbeat.com/static/help.php" >Help</a></li>
+							  							  <li><a href="https://www.jewelbeat.com/store/signin.php">Sign In</a></li>
+							  							  <li><a href="https://www.jewelbeat.com/static/contact.php">Contact</a></li>
+							  <li><a href="https://www.jewelbeat.com/store/viewcart.php">Cart <img src="https://www.jewelbeat.com/html/images/cart.jpg" align="absmiddle" width="28" height="21" border="0" alt="Shopping Cart"/></a></li>
+							  							  <li><a href="https://www.jewelbeat.com/store/signUp.php">Sign Up</a></li>
+							  							</ul>
+						  </div>
+			            </td>
+			          </tr>
+			        </table>
+				</td>
+			  </tr>
+			  <tr>
+			    <td height="31" colspan="2" align="left" valign="top"><div class="menu" style="width:999px;">
+			        <ul >
+			          <li style="margin-left:80px;"><a href="https://www.jewelbeat.com/store/downloadhome.php" >Download</a></li>
+			          
+                      
+			          <li style="margin-left:80px;"><a href="https://www.jewelbeat.com/store/jeweldiskhome.php">JewelDisk</a></li>
+			        </ul>
+			      </div>
+			     <!-- <div class="topsearchbar">
+					<div id="mid">
+					   <div id="holder"><input name="topSearchTxt" type="text" class="topsearchbartextfield" id="topkeyword" onkeyup="javascript: return onKeyPressTop(event);" /></div><div id="ajax_response_top"></div>
+					</div>
+					<div><a id="go" href="javascript: void(0);" onclick="javascript: return topPostSearch();"><img src="https://www.jewelbeat.com/html/images/go.png" width="20" height="20" border="0" alt="Go"/></a></div>
+				  </div>-->
+				</td>
+			  </tr>
+			</table>
+
+<table width="1000" height="113" border="0" align="center" cellpadding="0" cellspacing="0" background="images/search-bg-299.jpg">
+
+  <tr>
+
+    <td width="290" height="113" align="left" valign="bottom">&nbsp;</td>
+
+    <td width="392" align="left" valign="bottom"><div id="holder"><input type="text" name="searchTxt" id="keyword" class="searchbar" onkeyup="javascript: return onKeyPress(event);" /></div><div id="ajax_response"></div></td>
+
+    <td width="79" align="left" valign="bottom"><img src="images/blank.png" width="78" height="25" border="0" class="imgcursor" onclick="javascript: return postSearch();" /></td>
+
+    <td width="239" align="left" valign="bottom">&nbsp;</td>
+
+  </tr>
+
+</table>
+
+<table width="1000" height="500" border="0" align="center" cellpadding="0" cellspacing="0">
+
+  <tr height="300" align="center">
+
+    <td height="300" colspan="2" align="right" valign="bottom"><a href="store/downloadhome.php"><img src="images/download.jpg" width="350" height="179" border="0" alt="Download Music For Your Projects at 99&#162;"/></a></td>
+
+    <td width="74" align="center" valign="bottom">&nbsp;</td>
+
+    <td colspan="2" align="left" valign="bottom"><a href="store/jeweldiskhome.php"><img src="images/jeweldisk.jpg" width="397" height="291" border="0" alt="JewelDisk - Your Personal Royalty Free Music Library"/></a></td>
+
+  </tr>
+
+  <tr class="content1">
+
+    <td width="155" height="50" align="left" valign="bottom">&nbsp;</td>
+
+    <td width="286" align="left" valign="top" ><br />Music for your videos,<br />
+
+      photos, business,<br />
+
+      stores and more.<br /><br />
+
+      $2.99
+
+      </td>
+
+    <td align="left" valign="top" ><br /></td>
+
+    <td width="83" align="left" valign="bottom">&nbsp;</td>
+
+    <td width="402" align="left" valign="top" ><br />Your personal music library.<br />
+
+      Over 35,000 tracks.<br />
+
+      Royalty free.<br /><br />
+      <s>&nbsp;$999&nbsp;</s>&nbsp;Year end sale.
+      <br>
+      Limited units for just <b>$299!</b>
+      </td>
+
+  </tr>
+
+  <tr>
+
+    <td height="10" rowspan="2" align="left" valign="bottom">&nbsp;</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <td height="5" align="left" valign="bottom"><a href="store/downloadhome.php" class="bluetext">See Downloads</a>
+
+<br>
+<br>
+<br>
+<br>
+<br>  
+<br>
+<br>
+<br>  
+    
+    
+    
+    
+    </td>
+
+    <td align="left" valign="bottom">&nbsp;</td>
+
+        <td rowspan="2" align="left" valign="bottom">&nbsp;</td>
+
+    <td align="left" valign="bottom"><a href="store/jeweldiskhome.php" class="bluetext">See JewelDisk</a>
+    
+<br>
+<br>
+<br>
+<br>
+<br> 
+<br>
+<br>
+<br>   
+    
+    
+    
+    </td>
+
+  </tr>
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<table width="1000" cellspacing="0" cellpadding="0" border="0" align="center">
+
+  <tbody>
+
+  <tr>
+
+    <td><div id="NewTo" class="include">
+	<div class="videoBox">
+   
+        <div class="videoControl">
+        	<object width="560" height="349">
+		<param name="movie" value="https://www.youtube.com/v/Ap5ndZF4AdU?version=3&amp;hl=en_EN&amp;rel=0"></param>
+		<param name="allowFullScreen" value="true"></param>
+		<param name="allowscriptaccess" value="always"></param><param name="wmode" VALUE="transparent"><embed src="https://www.youtube.com/v/Ap5ndZF4AdU?version=3&amp;hl=en_EN&amp;rel=0" type="application/x-shockwave-flash" width="560" height="349" wmode="transparent" allowscriptaccess="always" allowfullscreen="true"></embed>
+		</object>        </div>
+        <div class="clear"></div>
+        </div>
+
+
+    <div class="videoDetails">
+    
+
+        <table width="100%" border="0" cellpadding="0" cellspacing="5">
+  			<tr>
+    		<td width="149" align="left" valign="top"><div class="jwbox">
+	<img src="https://www.jewelbeat.com/html/images/Thumbnails/music_for_everything_thumbnail_small.jpg" alt="Music For Everything" width="149" height="84" border="1" title="Music For Everything"/>
+	<div class="jwbox_hidden">
+		<div  class="jwbox_content">
+			<object width="560" height="349">
+		<param name="movie" value="https://www.youtube.com/v/VhHcwyY3L6s?version=3&amp;hl=en_EN&amp;rel=0"></param>
+		<param name="allowFullScreen" value="true"></param>
+		<param name="allowscriptaccess" value="always"></param><embed src="https://www.youtube.com/v/VhHcwyY3L6s?version=3&amp;hl=en_EN&amp;rel=0" type="application/x-shockwave-flash" width="560" height="349" allowscriptaccess="always" allowfullscreen="true"></embed>
+		</object>          <table border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <td><img src="https://www.jewelbeat.com/html/images/logo-small.png" width="79" height="20" alt="logo" /></td>
+    <td><div class="VidsTitle">Music for all your projects</div></td>
+  </tr>
+</table>
+	  </div>
+  </div>
+</div>
+            </td>
+    		<td align="left" valign="top">
+            <div class="titleFeatures">What kinds of usages?</div>
+            
+            </td>
+  			</tr>
+		</table>
+
+        <table width="100%" border="0" cellpadding="0" cellspacing="5">
+  			<tr>
+    		<td width="149" align="left" valign="top"><div class="jwbox">
+	<img src="https://www.jewelbeat.com/html/images/Thumbnails/jewelbeat_music_thumbnail_small.jpg" alt="JewelBeat Music Selection" width="150" height="85" border="1" title="JewelBeat Music Selection"/>
+	<div class="jwbox_hidden">
+		<div  class="jwbox_content">
+			<object width="560" height="349">
+		<param name="movie" value="https://www.youtube.com/v/wVhZSKDQS_8?version=3&amp;hl=en_EN&amp;rel=0"></param>
+		<param name="allowFullScreen" value="true"></param>
+		<param name="allowscriptaccess" value="always"></param><embed src="https://www.youtube.com/v/wVhZSKDQS_8?version=3&amp;hl=en_EN&amp;rel=0" type="application/x-shockwave-flash" width="560" height="349" allowscriptaccess="always" allowfullscreen="true"></embed>
+		</object>          <table border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <td><img src="https://www.jewelbeat.com/html/images/logo-small.png" width="79" height="20" alt="logo" /></td>
+    <td><div class="VidsTitle">Music Selection</div></td>
+  </tr>
+</table>
+	  </div>
+  </div>
+</div></td>
+    		<td align="left" valign="top">
+            <div class="titleFeatures">What kinds of music?</div>
+            
+            </td>
+  			</tr>
+		</table>
+
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+  			<tr>
+   			<td align="right"><a href="https://www.jewelbeat.com/static/allvids.php"><img style="margin-bottom:-4px;" src="https://www.jewelbeat.com/html/images/seemore_corner.png" width="86" height="88" border="0" /></a></td>
+  			</tr>
+		</table>
+
+    </div>
+<div class="clear"></div>
+</div></td>
+
+  </tr>
+
+</tbody>
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<table width="1000" cellspacing="0" cellpadding="0" border="0" align="center">
+
+  <tbody>
+
+  <tr>
+
+    <td>
+    
+    <br><br><br><br><br><br>
+    
+    <div style="margin-top:20px;" class="blackBar"></div>
+    
+    <br><br><br><br><br><br>
+    
+    </td>
+
+  </tr>
+
+</tbody>
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table width="1000" cellspacing="0" cellpadding="0" border="0" align="center">
+
+  <tbody>
+
+  <tr>
+
+    <td><div id="LastSection" class="include">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" align="left" valign="top">
+    <!--<h2>Blog</h2>-->
+    <h2 style="padding-left:42px;">Videos Featuring JewelBeat Music</h2>
+    <div class="detailFeatures01" style="margin-left: 50px;">
+      <!--<p>Stay tuned...<br />
+      </p>-->
+      <table width="100" border="0" cellspacing="0" cellpadding="5" style="float: left; margin-right: 8px; margin-bottom: 8px;">
+        <tr>
+          <td><div class="jwbox">
+	<img src="https://www.jewelbeat.com/html/images/Thumbnails/airborne_attacks_thumbnail_small.jpg" alt="Airborne Attacks" width="150" height="85" border="1" title="Airborne Attacks"/>
+            <div class="jwbox_hidden">
+              <div  class="jwbox_content">
+              <object width="560" height="349">
+		<param name="movie" value="https://www.youtube.com/v/SYBZQJ5LZ-Y?version=3&amp;hl=en_EN&amp;rel=0"></param>
+		<param name="allowFullScreen" value="true"></param>
+		<param name="allowscriptaccess" value="always"></param><embed src="https://www.youtube.com/v/SYBZQJ5LZ-Y?version=3&amp;hl=en_EN&amp;rel=0" type="application/x-shockwave-flash" width="560" height="349" allowscriptaccess="always" allowfullscreen="true"></embed>
+		</object>          <table border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <td><img src="https://www.jewelbeat.com/html/images/logo-small.png" width="79" height="20" alt="logo" /></td>
+    <td><div class="">Airborne Attacks</div></td>
+  </tr>
+</table>
+	  </div>
+            </div>
+          </div>            </td>
+        </tr>
+        <tr>
+          <td align="center">Airborne Attacks</td>
+        </tr>
+      </table>
+      <table width="100" border="0" cellspacing="0" cellpadding="5" style="margin-bottom: 8px;">
+        <tr>
+          <td><div class="jwbox"> <img src="https://www.jewelbeat.com/html/images/Thumbnails/cookie_queen_thumbnail_small.jpg" alt="Cookie Queen" width="150" height="85" border="1" title="Cookie Queen"/>
+            <div class="jwbox_hidden">
+              <div  class="jwbox_content">
+              <object width="560" height="349">
+		<param name="movie" value="https://www.youtube.com/v/bDMxs_lQffA?version=3&amp;hl=en_EN&amp;rel=0"></param>
+		<param name="allowFullScreen" value="true"></param>
+		<param name="allowscriptaccess" value="always"></param><embed src="https://www.youtube.com/v/bDMxs_lQffA?version=3&amp;hl=en_EN&amp;rel=0" type="application/x-shockwave-flash" width="560" height="349" allowscriptaccess="always" allowfullscreen="true"></embed>
+		</object>          <table border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <td><img src="https://www.jewelbeat.com/html/images/logo-small.png" width="79" height="20" alt="logo" /></td>
+    <td><div class="">Cookie Queen</div></td>
+  </tr>
+</table>
+	  </div>
+            </div>
+          </div>            </td>
+        </tr>
+        <tr>
+          <td align="center">Cookie Queen</td>
+        </tr>
+      </table>
+      
+      <table width="100" border="0" cellspacing="0" cellpadding="5" style="float: left; margin-right: 8px; margin-bottom: 8px;">
+        <tr>
+          <td><div class="jwbox"> <img src="https://www.jewelbeat.com/html/images/Thumbnails/trailer_darkflight_thumbnail_small.jpg" alt="Dark Flight" width="150" height="85" border="1" title="Dark Flight"/>
+            <div class="jwbox_hidden">
+              <div  class="jwbox_content">
+              <object width="560" height="349">
+		<param name="movie" value="https://www.youtube.com/v/RUTVDAPSrcw?version=3&amp;hl=en_EN&amp;rel=0"></param>
+		<param name="allowFullScreen" value="true"></param>
+		<param name="allowscriptaccess" value="always"></param><embed src="https://www.youtube.com/v/RUTVDAPSrcw?version=3&amp;hl=en_EN&amp;rel=0" type="application/x-shockwave-flash" width="560" height="349" allowscriptaccess="always" allowfullscreen="true"></embed>
+		</object>          <table border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <td><img src="https://www.jewelbeat.com/html/images/logo-small.png" width="79" height="20" alt="logo" /></td>
+    <td><div class="">Dark Flight</div></td>
+  </tr>
+</table>
+	  </div>
+            </div>
+          </div>            </td>
+        </tr>
+        <tr>
+          <td align="center">Dark Flight</td>
+        </tr>
+      </table>
+      <table width="100" border="0" cellspacing="0" cellpadding="5" style="margin-bottom: 8px;">
+        <tr>
+          <td><div class="jwbox"> <img src="https://www.jewelbeat.com/html/images/Thumbnails/what_is_jewelbeat_thumbnail_small.jpg" alt="Do Your Thing" width="150" height="85" border="1" title="Do Your Thing"/>
+            <div class="jwbox_hidden">
+              <div  class="jwbox_content">
+              <object width="560" height="349">
+		<param name="movie" value="https://www.youtube.com/v/u5mEVTIdfTw?version=3&amp;hl=en_EN&amp;rel=0"></param>
+		<param name="allowFullScreen" value="true"></param>
+		<param name="allowscriptaccess" value="always"></param><embed src="https://www.youtube.com/v/u5mEVTIdfTw?version=3&amp;hl=en_EN&amp;rel=0" type="application/x-shockwave-flash" width="560" height="349" allowscriptaccess="always" allowfullscreen="true"></embed>
+		</object>          <table border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <td><img src="https://www.jewelbeat.com/html/images/logo-small.png" width="79" height="20" alt="logo" /></td>
+    <td><div class="">Do Your Thing</div></td>
+  </tr>
+</table>
+	  </div>
+            </div>
+          </div>            </td>
+        </tr>
+        <tr>
+          <td align="center">Do Your Thing</td>
+        </tr>
+      </table>
+      <table width="100%" border="0" cellspacing="0" cellpadding="5">
+        <tr>
+          <td><a href="https://www.jewelbeat.com/static/allvids.php">See more videos</a></td>
+        </tr>
+      </table>
+    </div>
+    </td>
+    <td width="50%" align="left" valign="top">
+    <h2>Latest From JewelBeat Blog</h2>
+    <div class="detailFeatures01">
+          <p>
+<a href="https://www.jewelbeat.com/blog/microphones-for-video-recording">Microphones For Video: On-board vs. External</a><br>
+<a href="https://www.jewelbeat.com/blog/choosing-music-for-your-app-game">Choosing Music For Your App / Game</a><br>
+<a href="https://www.jewelbeat.com/blog/free-easy-listening-background-music-days">Free Easy Listening Background Music</a><br>
+<a href="https://www.jewelbeat.com/blog/from-the-expert-column">Just Launched: 'From The Expert'</a><br>
+<a href="https://www.jewelbeat.com/blog/how-to-revert-back-to-your-username-on-youtube">YouTube Tip: Revert Back To Your Old Username</a><br>
+<a href="https://www.jewelbeat.com/blog/frame-your-subject-video-production">Video Production: Frame Your Subject</a><br>
+<a href="https://www.jewelbeat.com/blog/best-corporate-background-music-for-videos">Best Corporate Background Music For Videos Playlist</a><br>
+<a href="https://www.jewelbeat.com/blog/recommended-video-tutorial-websites">Recommended Websites For Video Tutorials and More</a><br>
+<a href="https://www.jewelbeat.com/blog/free-royalty-free-dance-music">Free Royalty Free Dance Music</a>
+<br><br>
+<a href="https://www.jewelbeat.com/blog/">Visit JewelBeat Blog</a><br>
+</div>
+</p>
+<br>
+    <h2>Free Background Music &amp; Sound Effects</h2>
+    <div class="detailFeatures01">
+          <p>Download and use these royalty free production music loops and sound effects in your projects
+            - videos, photo slideshows, games and more.
+          You only need to credit us and place a link from your
+            website to ours.</p>
+          <!--<p><strong>Windows</strong>: Right-click, choose &quot;Save Link As...&quot;,
+            choose destination to save file.<br />
+        <strong>MAC</strong>: Hold down Control key, click &quot;Download Linked File As...&quot;, choose <br />
+        destination to save file.<br />
+      </p>-->
+    </div>
+    <div class="detailFeatures01">
+<table width="100%" border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <td width="50%"><a href="https://www.jewelbeat.com/free/free-music/JewelBeat%20-%20Angel%20Of%20Darkness.wav">Angle Of Darkness</a></td>
+    <td width="50%"><a href="https://www.jewelbeat.com/free/free-music/JewelBeat%20-%20Curse%20of%20the%20Unforgiven.wav">Curse Of The Unforgiven</a></td>
+  </tr>
+  <tr>
+    <td><a href="https://www.jewelbeat.com/free/free-music/JewelBeat%20-%20Coming%20Of%20Age.wav">Coming Of Age</a></td>
+    <td><a href="https://www.jewelbeat.com/free/free-music/JewelBeat%20-%20March%20To%20Pandora.wav">March To Pandora</a></td>
+  </tr>
+    <tr>
+    <td><a href="https://www.jewelbeat.com/free/free-sound-effects/musical%20effects/Taiko_Drum_1.mp3">Taiko Drums 1</a></td>
+    <td><a href="https://www.jewelbeat.com/free/free-sound-effects/musical%20effects/Trumpet_1.mp3">Trumpet 1</a></td>
+  </tr>
+</table>
+          <p>Get  more <a href="https://www.jewelbeat.com/free/free-background-music.htm">free background music</a> and <a href="https://www.jewelbeat.com/free/free-sound-effects-1.htm">free sound effects</a>. </p>
+        </div>
+    </td>
+  </tr>
+</table>
+</div></td>
+
+  </tr>
+
+</tbody>
+
+</table>
+
+
+
+
+
+			<table width="1000" border="0" align="center" cellpadding="0" cellspacing="0"  bgcolor="#000">
+
+			  <tr>
+
+			    <td width="134" height="84" align="left" valign="top">&nbsp;</td>
+
+			    <td width="329" align="left" valign="top"><div class="footernav">
+
+			        <ul>
+
+			          <li><a href="../store/downloadhome.php" style="color:#FFFFFF; text-decoration:none">Download Music</a></li>
+
+			          <li><a href="../store/jeweldiskhome.php" style="color:#FFFFFF; text-decoration:none">JewelDisk</a></li>
+
+			        </ul>
+
+			      </div></td>
+
+			    <td width="307" align="left" valign="top"><div class="footernav">
+
+			        <ul>
+
+			          <li><a href="../static/help.php"  style="color:#FFFFFF; text-decoration:none">Help</a></li>
+
+			          <li><a href="../static/contact.php" style="color:#FFFFFF; text-decoration:none">Contact</a></li>
+
+			          <li><a href="../store/account.php" style="color:#FFFFFF; text-decoration:none">Account</a></li>
+
+			        </ul>
+
+			      </div></td>
+
+			    <td width="230" align="left" valign="top"><div class="footernav">
+
+			        <ul>
+
+			          <li><a href="../static/aboutus.php" style="color:#FFFFFF; text-decoration:none">About Us</a></li>
+
+			          <li><a href="../static/sitemap.php" style="color:#FFFFFF; text-decoration:none">Site Map</a></li>
+
+                      <li><a href="../static/license.php" style="color:#FFFFFF; text-decoration:none">License Agreement</a></li>
+
+			          <li></li>
+
+			        </ul>
+
+			      </div></td>
+
+			  </tr>
+
+			</table>
+
+		</td>
+
+	</tr>
+
+</table>
+
+
+
+
+
+<script type="text/javascript">
+
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "https://www.");
+
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+</script>
+
+<script type="text/javascript">
+
+try {
+
+var pageTracker = _gat._getTracker("UA-16125823-1");
+
+pageTracker._trackPageview();
+
+} catch(err) {}</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
+
+

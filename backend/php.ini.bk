@@ -1,0 +1,13 @@
+;;;;;;;;;;;;;;;;;;
+; Fopen wrappers ;
+;;;;;;;;;;;;;;;;;;
+
+; Whether to allow the treatment of URLs (like https:// or ftp://) as files.
+allow_url_fopen = On
+allow_url_include = On
+upload_max_filesize = 200M
+post_max_size = 200M
+error_reporting = E_ALL | E_STRICT;
+log_errors = On;
+display_errors = Off;
+error_log = /kunden/homepages/46/d399659235/htdocs/log/php-errors.log;

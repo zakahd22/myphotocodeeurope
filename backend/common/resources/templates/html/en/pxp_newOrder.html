@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+	* {
+	    margin: 0;
+	    padding: 0;
+	}
+	html,body {
+	    margin: 0 auto;
+	    width: 615px;
+	    height: 540px;
+        }
+	header {
+	    text-align: center;
+	    margin-top: 13px;
+	}
+	section span {
+	    color: red;
+	}
+	section p {
+	    font-size: 14px;
+	    margin-top: 10px;
+	    font-family: Arial;
+	    color: #494848;
+	    line-height: 24px;
+	    margin-left: 20px;
+	}
+        table {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr><td colspan='2'>&nbsp;</td></tr>
+        <tr>
+            <td colspan='2'>
+                <p>Hello {owner_name}, <br/>
+                Your dongle payxprint <b>{dongle_string}</b> has reached the minimum stock, it would be generated a new order to get more prints.</p>
+            </td>
+        </tr>
+        <tr><td colspan='2'>&nbsp;</td></tr>
+        <tr><td colspan='2' style='background-color: #166E86; color: #FFF;'>Order Details:</td></tr>
+        <tr><td>Order number: </td><td>{order_number}</td></tr>
+        <tr><td>Quantity: </td><td>{quantity}</td></tr>
+        <tr><td>Proposed Date: </td><td>{proposed}</td></tr>
+    </table>
+    <br/>
+    <hr/>
+    <br/>
+    <p>
+        This email was sent automatically from myphotocode if you have any questions, ask your distributor.
+    </p>
+</body>
+</html>

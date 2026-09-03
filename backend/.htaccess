@@ -1,0 +1,12 @@
+Options +FollowSymLinks
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/assets
+RewriteCond %{REQUEST_URI} !^/gestor
+RewriteRule ^photo/(.*)$ /qrphoto.php?content=photo&code=$1
+RewriteRule ^(SMS.+)$ /index.php?token=$1
+RewriteRule ^(WAPP.+)$ /index.php?token=$1
+ErrorDocument 404 /404.htm
+ErrorDocument 403 /403.htm
+ErrorDocument 500 /500.htm
+
+IndexIgnore scripts

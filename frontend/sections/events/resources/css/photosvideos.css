@@ -1,0 +1,422 @@
+#photoBox{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: space-around;
+    -moz-justify-content: space-around;
+    -ms-justify-content: space-around;
+    justify-content: space-around;
+
+    -webkit-align-items: flex-start;
+    -moz-align-items: flex-start;
+    -ms-align-items: flex-start;
+    align-items: flex-start;
+
+    -webkit-align-content: space-around;
+    -moz-align-content: space-around;
+    -ms-align-content: space-around;
+    align-content: space-around;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+}
+
+.frames_{
+    margin-bottom: 15px;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5px;
+}
+.frames_1{
+    border: 1px solid gray;
+    width: 125px;
+    height: 380px;
+}
+.div_tira_mostra_1{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+    -webkit-align-content: center;
+    -moz-align-content: center;
+    -ms-align-content: center;
+    align-content: center;
+
+    height: 212px;
+    overflow: hidden;
+}
+.imgTira_1{
+    overflow: hidden;
+    text-align:center;
+    height: 285px;
+    width: auto;
+}
+
+
+.frames_2{
+    width: 210px;
+    height: 225px;
+}
+.div_tira_mostra_2{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+    -webkit-align-content: center;
+    -moz-align-content: center;
+    -ms-align-content: center;
+    align-content: center;
+
+    width: 212px;
+    overflow: hidden;
+}
+.imgTira_2{
+    overflow: hidden;
+    text-align:center;
+    height: 75px;
+    width: 285px;
+}
+
+.frames_3{
+    border: 1px solid gray;
+    width: 225px;
+    height: 310px;
+}
+.div_tira_mostra_3{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: flex-start;
+    -moz-justify-content: flex-start;
+    -ms-justify-content: flex-start;
+    justify-content: flex-start;
+
+    -webkit-align-content: center;
+    -moz-align-content: center;
+    -ms-align-content: center;
+    align-content: center;
+
+    height: 155px;
+    overflow: hidden;
+}
+
+.imgTira_3{
+    overflow: hidden;
+    text-align:center;
+    height: 140px;
+    width: auto;
+}
+
+.frames_4{
+    border: 1px solid gray;
+    width: 150px;
+    height: 282px;
+}
+
+.div_tira_mostra_4{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: flex-start;
+    -moz-justify-content: flex-start;
+    -ms-justify-content: flex-start;
+    justify-content: flex-start;
+
+    -webkit-align-content: center;
+    -moz-align-content: center;
+    -ms-align-content: center;
+    align-content: center;
+
+    height: 200px;
+    overflow: hidden;
+}
+
+.imgTira_4{
+    overflow: hidden;
+    text-align:center;
+    height: 200px;
+    width: auto;
+    margin-left: 8px;
+}
+
+.frames_video{
+    height:175px;
+    width: 90px;
+    border:1px solid gray;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: top;
+}
+.div_video_conten{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+    width: 100%;
+    height: 65px;
+}
+#group_videos{
+
+
+
+}
+
+.contingut{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: space-around;
+    -moz-justify-content: space-around;
+    -ms-justify-content: space-around;
+    justify-content: space-around;
+
+    -webkit-align-items: flex-start;
+    -moz-align-items: flex-start;
+    -ms-align-items: flex-start;
+    align-items: flex-start;
+
+    -webkit-align-content: flex-start;
+    -moz-align-content: flex-start;
+    -ms-align-content: flex-start;
+    align-content: flex-start;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+}
+
+#topBar{
+    width: 100%;
+    /*height: 40px;*/
+
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: flex-end;
+    -moz-justify-content: flex-end;
+    -ms-justify-content: flex-end;
+    justify-content: flex-end;
+
+    -webkit-align-items: flex-start;
+    -moz-align-items: flex-start;
+    -ms-align-items: flex-start;
+    align-items: flex-start;
+
+    -webkit-align-content: space-around;
+    -moz-align-content: space-around;
+    -ms-align-content: space-around;
+    align-content: space-around;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    z-index: 1;
+}
+.page-selector_1{
+    width: auto;
+}
+#top_0{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: flex-end;
+    -moz-justify-content: flex-end;
+    -ms-justify-content: flex-end;
+    justify-content: flex-end;
+
+    width: 40%;
+    height: 40px;
+
+}
+#top_1{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+    width: 20%;
+    height: 40px;
+}
+#top_2{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-justify-content: flex-end;
+    -moz-justify-content: flex-end;
+    -ms-justify-content: flex-end;
+    justify-content: flex-end;
+
+    -webkit-align-items: flex-start;
+    -moz-align-items: flex-start;
+    -ms-align-items: flex-start;
+    align-items: flex-start;
+
+    -webkit-align-content: space-around;
+    -moz-align-content: space-around;
+    -ms-align-content: space-around;
+    align-content: space-around;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    width: 40%;
+    height: 40px;
+}
+
+.inContent {
+    margin-top: 0px !important;
+}
+
+.boxLeft{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-align-content: space-between;
+    -moz-align-content: space-between;
+    -ms-align-content: space-between;
+    align-content: space-between;
+
+    -webkit-align-items: flex-start;
+    -moz-align-items: flex-start;
+    -ms-align-items: flex-start;
+    align-items: flex-start;
+
+    -webkit-align-content: space-around;
+    -moz-align-content: space-around;
+    -ms-align-content: space-around;
+    align-content: space-around;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    height: 92%;
+}
+
+.boxRight{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    position: relative;
+    width: 50%;
+    height: auto;
+    display: inline;
+    float: left;
+    padding-right: 50px;
+    height: 92%;
+}
+
+#title_box_1{
+    width: 100%;
+}
+.inContent{
+    min-height: 0px !important;
+    padding-top: 2px;
+    margin: 0px !important;
+
+}
+
+.boto_face{
+
+    background-size: 32px 32px;
+    float:left;
+    width: 32px;
+    height: 32px;
+    margin-left: 8px;
+    margin-right: 8px;
+    cursor: pointer;
+    top: 0px;
+    position: relative;
+    display: inline; 
+    border:0px;
+}
+#noPhotos_Import{
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+
+    width: 100%;
+    height: 40px;
+}
+
+#photoBoxA{
+    float: left; 
+
+}
+
+.boxLeftA{
+    float: left;
+    width: 50%;
+    border-right: 1px solid gray;
+    text-align: center;
+}
+
+.boxRightA{
+    float: left;
+    width: 50%;
+    text-align: center;
+    padding-left: 10px;
+}

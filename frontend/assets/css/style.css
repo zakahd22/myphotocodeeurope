@@ -1,0 +1,327 @@
+html,* {
+	margin:0px;
+	padding:0px;
+}
+
+a {
+	color:#024896;
+	text-decoration:none;
+}
+
+a:hover {
+	
+	
+	color: #d9e3ee;
+	
+}
+	
+body
+{
+	background:#1f86fc url("https://www.myphotocode.com/assets/images/bg.jpg") top left repeat-x;
+	font-family:Georgia;
+	color:#ebf6fc;
+}
+
+#header
+{
+	height:54px;
+	background:#034fa5;
+	width:100%;
+	font-size:14px;
+}
+
+#header a {
+	text-decoration:none;
+	color: #b0c7e2;
+}
+
+#header a:hover {
+	text-decoration:none;
+	color:#263b97;
+}
+
+#wrap
+{
+	width:100%;
+	text-align:center;
+}
+
+#content
+{
+	width:960px;
+	margin:0px auto;
+	text-align:left;
+	position:relative;
+}
+
+#inputCode
+{
+	width:446px;
+	margin:54px auto 0px auto;
+	text-align:center;
+}
+
+#logo
+{
+	width:343px;
+	height:88px;
+	background:url('https://www.myphotocode.com/assets/images/logo.png');
+	margin:0px auto 20px auto;
+}
+
+#inputCode #top
+{
+	background: url('https://www.myphotocode.com/assets/images/input-top.png');
+	width:446px;
+	height:11px;
+}
+
+#inputCode #body
+{
+	background: url('https://www.myphotocode.com/assets/images/input-body.png');
+	width:446px;
+	padding:26px 0px 14px 0px;
+}
+
+#inputCode #bottom
+{
+	background: url('https://www.myphotocode.com/assets/images/input-bottom.png');
+	width:446px;
+	height:11px;
+}
+
+#body .title {
+	margin-bottom:18px;
+}
+
+#body .error
+{
+	font-family:Georgia;
+	font-style:italic;
+	font-size:18px;
+	color:#ebf6fc;
+	margin-top:2px;
+	margin-bottom:18px;
+}
+
+#body .textfield
+{
+	width:325px;
+	margin:0px auto 18px auto;
+}
+
+#body .textfield input {
+	width:100%;
+	height:43px;
+	font-size:28px;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	background:#ebf6fc;
+	border:0px;
+	text-align:center;
+	color:#1c4c62;
+}
+
+#body .button {
+	margin-top:21px;
+}
+
+#body .label {
+	font-family:Georgia;
+	font-size:18px;
+	font-style:italic;
+	color:#263b97;
+	margin-bottom:6px;	
+}
+
+.form_area .label {
+	font-family:Georgia;
+	font-size:18px;
+	font-style:italic;
+	color:#263b97;
+	margin-bottom:6px;	
+}
+
+.form_area .sublabel {
+	font-size:16px;
+	font-style:italic;
+	margin-bottom:6px;	
+}
+
+.form_area a {
+	font-family:Georgia;
+	font-size:14px;
+	font-style:italic;
+	color:#263b97;
+	text-decoration:none;
+}
+
+.form_area a:hover {
+	font-family:Georgia;
+	font-size:14px;
+	font-style:italic;
+	color:#ebf6fc;
+	text-decoration:none;
+}
+
+#title {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:42px;
+	font-weight:bold;
+	color:#ebf6fc;
+	margin-bottom:8px;
+	line-height:26px;
+}
+
+#date {
+	font-family:Georgia;
+	font-size:22px;
+	font-style:italic;
+	color:#ebf6fc;
+	margin-bottom:26px;
+}
+
+#photoLandscape {
+	margin:62px auto;
+	width:960px;
+}
+
+#photoPortrait {
+	margin:62px auto;
+	width:960px;
+}
+
+#photo img {
+	border: #3e72e8 12px solid;
+}
+
+#photoLandscape #actions {
+	margin-top:42px;
+}
+
+#photoPortrait #photo {
+	float:left;
+}
+
+#photoPortrait #actions {
+	float:right;
+	width:722px;
+	text-align:left;
+}
+
+.trace {
+	font-size:10px;
+}
+
+table {
+	table-layout:fixed;
+}
+
+tr.header {
+	background:#195463;
+	color:#ebf6fc;
+	font-size:21px;
+	font-family:Arial, Helvetica, Sans-serif;
+	font-weight:bold;
+}
+
+tr.dark {
+	background:#b8c6da;
+	color:#164da7;
+}
+
+tr.light {
+	background:#dbe7ec;
+	color:#164da7;
+}
+
+td {
+	padding:6px 12px;	
+}
+
+.form_area {
+	background:#1f86fa;
+	padding:40px;
+	color:#034fa5;
+	font-size:21px;
+	margin-bottom:32px;
+}
+
+.form_area select {
+	font-size:21px;
+	/*height:38px;*/
+	color:#1a4363;
+	background-color:#eaf7fc;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin:6px 0px 28px 0px;
+}
+
+.form_area input {
+	font-size:28px;
+	padding:12px;
+	color:#1a4363;
+	border:0px;
+	background-color:#eaf7fc;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin:6px 0px 28px 0px;
+}
+
+.header-text {
+	color:#91a8b2;
+}
+
+#rental-navigation {
+	margin:32px 0px 42px 0px;
+	font-size:14px;
+	color: #ebf6fc;
+}
+
+#rental-navigation a {
+	color: #d2e6fc;
+	text-decoration:none;
+}
+
+#rental-navigation a:hover {
+	color: #1a4363;
+	text-decoration:none;
+}
+
+.raquo {
+	color: #2f90b4;
+}
+
+.light {
+	color: #ebf6fc;
+}
+
+select {
+	font-size:1.2em;
+	padding:8px;
+}
+
+.succeedMsg {
+	font-size:24px;
+	line-height:40px;
+	font-family:Arial, Helvetica, Sans-serif;
+	font-weight:bold;
+}
+
+.succeedMsg a {
+	font-family:Georgia;
+	font-weight:normal;
+	font-size:18px;
+	font-style:italic;
+}
+
+#uploading {
+	position:fixed;
+	top:0px;
+	left:0px;
+	height:400px;
+	width:100%;
+	background-color:#034fa5;
+	font-size:42px;
+	font-family:Arial, Helvetica, Sans-serif;
+	font-weight:bold;
+	text-align:center;
+	display:none;
+}

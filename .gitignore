@@ -75,4 +75,9 @@ API/facebook/smartprint/config/fb_config.php
 smartprint/facebook
 PB/
 temp/
+.dockerignore
+Dockerfile
+docker-compose.yml
+docker/
+
 

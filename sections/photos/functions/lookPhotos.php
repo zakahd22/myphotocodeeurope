@@ -90,6 +90,13 @@ class lookPhotos extends baseController{
      * haveGif2D = Flag to know if the code have Gif 2D
      */
     private $haveGif2D = false;
+
+    /**
+     * aiPhotos = Array with the paths of the extraproduct AI photos found ({code}-ia1.jpg ... -ia9.jpg)
+     * haveAI = Flag to know if the code has extraproduct AI photos
+     */
+    private $aiPhotos = array();
+    private $haveAI = false;
    
     /**
      * haveQuestions = Flag to know if the code have Questons
@@ -434,6 +441,7 @@ class lookPhotos extends baseController{
                 $this->have3D();
                 $this->haveGif();
                 $this->haveQuestions();
+                $this->haveAIPhotos();
                 $this->background();
                 
             }
@@ -462,7 +470,7 @@ class lookPhotos extends baseController{
                 $this->getElements();   // populates $this->event_folder
                 $jpg = G_PATH . $this->event_folder . $this->code . '.jpg';
 
-                // if it’s still not there, send only the spinner page
+                // if it's still not there, send only the spinner page
                 if (! file_exists($jpg)) {
                     // 2a) Output the <head> (so your CSS & JS still load)
                     echo $this->getHead();
@@ -937,107 +945,6 @@ class lookPhotos extends baseController{
         
         if(file_exists(G_PATH . $this->gif)){
             $this->haveGif2D = true;
-//20250111gifEncoderFalla INICI
-//        } elseif ($this->tipusPhoto == 1 || $this->tipusPhoto == 2){
-//            $foto = imagecreatefromjpeg(G_PATH . $this->img);
-//            if($this->tipusPhoto == 1){
-//                list($w, $h) = getimagesize(G_PATH . $this->img);
-//
-//                
-//                $h_m = ($h/4) - 57;
-//                //TODO: Farem un calcul de $h/4 a la tira i calculem els 4 valors. De moment ho provem a la B5
-//                if($this->boothType == 'W'){
-//                    $h2 = Array(57,498,939,1380); 
-//                }else{
-//                    
-//                   
-//                 $h2 = Array(57,566,1075,1584);
-//                }
-//                
-//                
-//                $w -= 110;
-//                $z=0;
-//                while($z<4){
-//                    $destino = imagecreatetruecolor($w, $h_m);
-//                    $destino_name = G_PATH . $this->event_folder.$this->code."-S".$z.".gif";
-//                    imagecopyresampled($destino, $foto , 0, 0, 55, $h2[$z] , $w, $h_m , $w, $h_m);
-//                    imagegif($destino,$destino_name);
-//                    imagedestroy($destino);
-//                    $z++;
-//                }
-//            }   
-//            elseif($this->tipusPhoto == 2){
-//                list($w, $h) = getimagesize(G_PATH . $this->img);
-//
-//                $w_m = ($w/4) - 65;
-//                $w2 = Array(75,587,1095,1600);                
-//                $h -= 110;
-//                $z=0;
-//                while($z<4){
-//                    $destino = imagecreatetruecolor($w_m, $h);
-//                    $destino_name = G_PATH . $this->event_folder.$this->code."-S".$z.".gif";
-//                    imagecopyresampled($destino, $foto, 0, 0, $w2[$z] , 55,  $w_m, $h , $w_m, $h);   
-//                    imagegif($destino,$destino_name);       
-//                    imagedestroy($destino);
-//                    $z++;
-//                }
-//            }
-//            
-//            $sd = scandir(G_PATH . $this->event_folder);
-//            $tempus = Array(75,50,50,50); 
-//            $i=0;
-//            
-//            foreach ($sd as $s){
-//                if ( $s != "." && $s != ".." ) {
-//                    if(strpos($s,$this->code."-S") !== false) {
-//                        $frames2[] = G_PATH . $this->event_folder.$s;
-//                        $time2[] = $tempus[$i];
-//                        $i++;
-//                    }
-//                }
-//            }
-//            
-//            $gif = new GIFEncoder($frames2, $time2, 0, 2, 0, 0, 0, "url");
-//            
-//            if(FWrite(FOpen(G_PATH . $this->event_folder.$this->code."GIF.gif", "wb" ), $gif->GetAnimation()) > 0){
-////                utils::log('Generated GIF', "logLookPhotos", "Generate Gif");
-//                $exist = $this->photo_FilesModel->getFile($this->code."GIF.gif");
-////                utils::log('Seaching file in Photo_files: '.$this->code."GIF.gif", "logLookPhotos", "Generate Gif");
-//                if(!$exist){
-////                    utils::log('Creating value', "logLookPhotos", "Generate Gif");
-//                    $server_id = $this->CLD_ServersModel->getCLD_Servers('1and1');
-//                    $server_id = $server_id[0]['id'];
-//                    
-//                    $this->entity->loadEntity('photo_Files');
-//                    $this->entity->setValue("photoId", $this->photo_id);
-//                    $this->entity->setValue("ServerId", $server_id);
-//                    $this->entity->setValue("name", $this->code."GIF.gif");
-//                    $this->entity->setValue("path", $this->event_folder.$this->code."GIF.gif");
-//                    $this->entity->setValue("fileType", "gif");
-//                    $this->entity->setValue("fileSize", filesize(G_PATH . $this->event_folder . $this->code . "GIF.gif"));
-//                    $this->entity->setValue("photobooth", $this->pbs_id);
-//                    $this->entity->setValue("dongle", $this->dongle_id);
-//                    $this->entity->setValue("date", utils::get_datetime());
-//                    
-////                    utils::log($this->entity->getAllValues(), "logLookPhotos", "Generate Gif");
-//                    
-//                    if(!$this->photo_FilesModel->insertphoto_Files()){
-//                        utils::log('Not inserted', "logLookPhotos", "Generate Gif");
-//                    }
-////                    else {
-////                        utils::log('Inserted', "logLookPhotos", "Generate Gif");
-////                    }
-//                }
-//            }
-//            
-//            $x=0;
-//            while($x<$i){
-//                unlink(G_PATH . $this->event_folder.$this->code."-S".$x.".gif");
-//                $x++;
-//            }
-//
-//            $this->haveGif2D = true;
-//20250111gifEncoderFalla FINAL
         }
     }
     
@@ -1083,11 +990,8 @@ class lookPhotos extends baseController{
             $gif = new GIFEncoder($frames, $time, 0, 2, 0, 0, 0, "url");
             
             if(FWrite(FOpen(G_PATH . $this->event_folder . $this->code . "-T3D.gif", "wb" ), $gif->GetAnimation()) > 0){
-////                utils::log('Generated GIF', "logLookPhotos", "Generate Gif");
                 $exist = $this->photo_FilesModel->getFile($this->code."-T3D.gif");
-////                utils::log('Seaching file in Photo_files: '.$this->code."-T3D.gif", "logLookPhotos", "Generate Gif");
                 if(!$exist){
-////                    utils::log('Creating value', "logLookPhotos", "Generate Gif");
                     $server_id = $this->CLD_ServersModel->getCLD_Servers('1and1');
                     $server_id = $server_id[0]['id'];
                     
@@ -1102,14 +1006,9 @@ class lookPhotos extends baseController{
                     $this->entity->setValue("dongle", $this->dongle_id);
                     $this->entity->setValue("date", utils::get_datetime());
                     
-////                    utils::log($this->entity->getAllValues(), "logLookPhotos", "Generate Gif");
-                    
                     if(!$this->photo_FilesModel->insertphoto_Files()){
                         utils::log('Not inserted', "logLookPhotos", "Generate Gif");
                     }
-////                    else {
-////                        utils::log('Inserted', "logLookPhotos", "Generate Gif");
-////                    }
                 }
             }
             
@@ -1124,6 +1023,76 @@ class lookPhotos extends baseController{
         elseif (file_exists(G_PATH . $this->event_folder . $this->code . "-T3D.gif")){
             $this->have3D = true;
         }
+    }
+
+    /**
+     * Busca las fotos IA del código actual: {code}-ia1.jpg ... -ia9.jpg
+     */
+    public function haveAIPhotos(){
+        $this->aiPhotos = array();
+
+        $files = glob(G_PATH . $this->event_folder . $this->code . "-ia*.jpg");
+
+        if ($files) {
+            natsort($files); // ia1, ia2, ... ia9 en orden correcto
+            foreach ($files as $f) {
+                $this->aiPhotos[] = $this->event_folder . basename($f);
+            }
+        }
+
+        $this->haveAI = count($this->aiPhotos) > 0;
+    }
+
+    /**
+     * Pinta las fotos IA reutilizando exactamente el mismo bloque de
+     * botones (descargar / facebook / email / twitter / instagram) que
+     * ya usa getSharePhoto() para la foto normal.
+     */
+    public function getAIPhotosHtml(){
+        $html = "";
+
+        if (!$this->haveAI) {
+            return $html;
+        }
+
+        $textTwitter = 'Look the photo I posted of the "' . $this->eventTitle . '" event!';
+        $textTwitter = str_replace(" ", "+", $textTwitter);
+
+        $html .= '<div class="ai_photos_container">';
+
+        foreach ($this->aiPhotos as $index => $aiPhotoPath) {
+            $n = $index + 1;
+            $photo_url  = G_PAGE . $aiPhotoPath;
+            $urlTwitter = "https://twitter.com/intent/tweet?url=" . $photo_url
+                        . "&text={$textTwitter}&hashtags={$this->getHashtagsTwitter()}";
+            $urlTwitter = filter_var($urlTwitter, FILTER_SANITIZE_URL);
+
+            $html .= '<div class="ai_photo_item">';
+            $html .=   "<img class='ai_photo_img' id='ai_photo_{$n}' src='{$aiPhotoPath}'>";
+            $html .=   "<div class='share s_photo' id='shareAI{$n}'>";
+            $html .=     "<div class='cove_img'></div>";
+            $html .=     "<a href='{$aiPhotoPath}' class='links_share' download>";
+            $html .=       "<img class='photoButton' src='{$this->path_common_imag}/icon-download.png'>";
+            $html .=     "</a>";
+            $html .=     "<img class='photoButton facebookUploadSDk' hashtags='{$this->hashtags}' code='{$this->code}' "
+                       .  "type_shared='3' fileType='photo' id='face_button_ai_{$n}' PhotoUrl='{$photo_url}' "
+                       .  "src='{$this->path_common_imag}/button-facebook.png'>";
+            $html .=     "<a class='links_share mail_links_share' event='{$this->event}' code='{$this->code}' "
+                       .  "type='photo' url='{$aiPhotoPath}'>";
+            $html .=       "<img class='photoButton' src='{$this->path_common_imag}/icon-mail.png'>";
+            $html .=     "</a>";
+            $html .=     "<a class='links_share twitterShare' href='{$urlTwitter}' target='_blank' "
+                       .  "code='{$this->code}' type_shared='5'>";
+            $html .=       "<img class='photoButton' src='{$this->path_common_imag}/icon-twitter.png'>";
+            $html .=     "</a>";
+            $html .=     $this->instagramButton($aiPhotoPath);
+            $html .=   "</div>";
+            $html .= '</div>';
+        }
+
+        $html .= '</div>';
+
+        return $html;
     }
     
     public function get_view(){
@@ -1150,6 +1119,7 @@ class lookPhotos extends baseController{
             $html .= $this->getSharePhoto();
             $html .= $this->getShareVideo();
             $html .= $this->getGif();
+            $html .= $this->getAIPhotosHtml();
         $html .= '</div>';
             
         return $html;
@@ -1181,9 +1151,7 @@ class lookPhotos extends baseController{
         $html = "";
             
         if($this->haveQuestions){           
-//            $html .= "<div id='title_popup_lookPhoto>EventQuestions</div>";
             $title = "EventQuestions";
-//            $html .= "<div id = 'content_popup_lookPhoto'>";
             $html .= "<form id='EventQuestions' onsubmit='return false;'>";
             
             $row = 1;
@@ -1203,27 +1171,16 @@ class lookPhotos extends baseController{
                 
             }
             $html .= "<p>Answer these questions to remove the popup, Thanks</p>";
-//            $html .= "<div class='lookPhoto_butons'>";
-//            $html .= "<input type='button'  onclick='askQuestions();' value='SEND' style='width:150px;height:30px;margin-top:10px;'>";
-//            $html .= "<input type='hidden' name='event' value='{$this->event}'>";
-//            $html .= "</div>";
-//            $html .= "</form>";
-//            $html .= "</div>";
-//            $content = htmlentities($html, ENT_QUOTES);
-//            $content = $html;
             
             $buttons = "";
-            //$buttons .= "<div class='lookPhoto_butons'>";
             $buttons .= "<input type='button' class='popup-confirm' onclick='askQuestions();' value='SEND' style='margin-top:-10px;'>";
             $html .= "<input type='hidden' name='event' value='{$this->event}'>";
-            //$buttons .= "</div>";
             $buttons .= "</form>";
             $html .= "</div>";
 
             $content = htmlentities($html, ENT_QUOTES);
             $content = $html;
             
-//            $array = json_encode(array('title'=>$title, 'content'=>$content));
             $array = json_encode(array('title'=>$title, 'content'=>$content, 'buttons'=>$buttons));
             
             $html = "<script> showPopupQuestions({$array}); </script>";
@@ -1403,12 +1360,6 @@ HTML;
                     <img class="photoButton" id="img2D" src="{$this->path_common_imag}/icon-download.png">
 
                 </a>
-              <!--        
-                <a class="links_share" href="https://www.facebook.com/dialog/feed?app_id=127533357397300&redirect_uri=http://www.myphotocode.com&link=www.myphotocode.com/index.php?code={$this->code}&picture=$photo_url">
-                    <img class="photoButton facebook" id="img2D" src="{$this->path_common_imag}/button-facebook.png" style=''/>
-
-                </a> 
-                 -->   
                    
                 <a class="links_share mail_links_share" event='{$this->event}' code='{$this->code}' type='photo' url='{$this->img}'>
                     <img class="photoButton" id="email2D" src="{$this->path_common_imag}/icon-mail.png">
@@ -1461,8 +1412,6 @@ HTML;
         $photo_url = G_PAGE . $this->event_folder . $this->code . ".gif";
         
         if($this->haveVideo){
-//            $textTwitter = 'Look the video I posted of the "' . $this->eventTitle . '" event!';
-//            $textTwitter = str_replace(" ", "+", $textTwitter);
             $video_url = G_PAGE . $this->video;
             $urlVideoTwitter = "https://twitter.com/intent/tweet?url=".G_PAGE.$this->video."&text={$textTwitter}&hashtags={$this->getHashtagsTwitter()}";
             $urlVideoTwitter = filter_var($urlVideoTwitter, FILTER_SANITIZE_URL);
@@ -1488,7 +1437,6 @@ HTML;
                     <input type='hidden' value='$urlVideoTwitter' id='videoTwitter'>
                 </div>
                 HTML;
-//            $textTwitter = str_replace(" ", "+", $textTwitter);
             $urlVideoTwitter = "https://twitter.com/intent/tweet?url=".G_PAGE.$this->video3D."&text={$textTwitter}&hashtags={$this->getHashtagsTwitter()}";
             $urlVideoTwitter = filter_var($urlVideoTwitter, FILTER_SANITIZE_URL);
             
@@ -1502,11 +1450,6 @@ HTML;
                     <a  onClick='startPopup("video3D","{$this->code}|{$this->eventDate}{$this->event}");' class="links_share">
                         <img class="photoButton" id="video"    src="{$this->path_common_imag}/button-video.png">
                     </a>
-                    <!--
-                    <a href='assets/php/templates/facebook-video3D.php' class="links_share mail_links_share">
-                        <img class="photoButton" id="facebook" type_shared="6" src="{$this->path_common_imag}/button-facebook.png">
-                    </a>
-                    -->
                     <a class="links_share mail_links_share" event='{$this->event}' code='{$this->code}' type='Video' url='{$photo_url}'>
                         <img class="photoButton" id="email"    src="{$this->path_common_imag}/button-email.png">
                     </a>
@@ -1690,11 +1633,6 @@ HTML;
             <a href='$this->gif' class="links_share" download>
                 <img class="photoButton" id="img2D" src="{$this->path_common_imag}/icon-download.png">
             </a>
-               <!--  
-            <a class="links_share" href="https://www.facebook.com/dialog/feed?app_id=127533357397300&redirect_uri=http://www.myphotocode.com&link=www.myphotocode.com/index.php?code={$this->code}&picture=$photo_url">
-                <img class="photoButton facebook" id="img2D" src="{$this->path_common_imag}/button-facebook.png" style=''/>
-            </a> 
-            -->
             <a class="links_share mail_links_share" event='{$this->event}' code='{$this->code}' type='photo' url='{$this->gif}'>
                 <img class="photoButton" id="email2D" src="{$this->path_common_imag}/icon-mail.png">
             </a>
@@ -1755,7 +1693,6 @@ HTML;
 HTML;
     return $html;
   }
-//202501    function instagramButton($picture, $size) {
     function instagramButton($picture, $size = null) {
 
 
@@ -2097,24 +2034,12 @@ HTML;
             <div class="error-title" style="font-weight: bold; font-size: 1.5em; margin-bottom: 15px;">{$title}</div>
             <div class="error-message" style="font-weight: normal;">{$message}</div>
             <div id="sendOptions" style="margin-top: 20px;">
-                <!-- For sending SMS reminder -->
-                <!-- <input type="image" src="images/icons/phone_60x75.png" onclick="avisaSMS();" id="si" value="Yes, send me a SMS"> -->
-                <!-- For sending whatsapp reminder -->
-                <!-- <input type="image" src="images/icons/whatsapp.png" onclick="avisaWhatsapp();" id="si" value="Yes, send me a WhatsApp"> -->
                 <button type="button" class="email-icon-button" onclick="avisaMail();" id="si">
                     <span class="email-icon">✉</span>
                     <span>EMAIL ME</span>
                 </button>
             </div>
             <div id="dades">
-                <!-- For sending SMS -->
-                <!-- <div class="smsSend" style="display: none" id="sms">
-                    {$this->getInputPhoneContactHtml()}
-                </div> -->
-                <!-- For sending whatsapp -->
-                <!-- <div class="whatsappSend" style="display: none" id="whatsapp">
-                    {$this->getInputWhatsappContactHtml()}
-                </div> -->
                 <div class="emailSend" style="display: none" id="mail">
                     {$this->getInputEmailContactHtml()}
                 </div>
@@ -2125,10 +2050,6 @@ HTML;
         if(isset($this->emailContact) && !empty($this->emailContact->getValue())) {
             setcookie("photo_contact_email", $this->emailContact->getValue(), time()+3600, "/");
         }
-        // Uncomment the following lines if you want to set a cookie for the phone contact as well.
-        // if(isset($this->phoneContact) && !empty($this->phoneContact->getValue())) {
-        //     setcookie("photo_contact_phone", $this->phoneContact->getValue(), time() + 3600, "/");
-        // }
         return $html;
     }
 
@@ -2174,4 +2095,3 @@ $lookPhotos->indexAction();
 
 
 ?>
-

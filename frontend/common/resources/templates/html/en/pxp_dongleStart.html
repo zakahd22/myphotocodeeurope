@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+	* {
+	    margin: 0;
+	    padding: 0;
+	}
+	html,body {
+	    margin: 0 auto;
+	    width: 615px;
+	    height: 540px;
+        }
+	header {
+	    text-align: center;
+	    margin-top: 13px;
+	}
+	section span {
+	    color: red;
+	}
+	section p {
+	    font-size: 14px;
+	    margin-top: 10px;
+	    font-family: Arial;
+	    color: #494848;
+	    line-height: 24px;
+	    margin-left: 20px;
+	}
+        table {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr><td colspan='2'>&nbsp;</td></tr>
+        <tr>
+            <td colspan='2'>
+                <p>
+                    Hello {owner_name}, <br/>
+                    Your dongle payxprint {dongle_string} has been activated. <br/>
+                    Now you can use the dongle with the payxprint features.
+                </p>
+            </td>
+        </tr>
+        <tr><td colspan='2'>&nbsp;</td></tr>
+        <tr><td colspan='2' style='background-color: #166E86; color: #FFF;'>Dongle Details:</td></tr>
+        <tr><td>Dongle String: </td><td>{dongle_string}</td></tr>
+        <tr><td>Minimum Stock: </td><td>{min_stock}</td></tr>
+        <tr><td>Quantity: </td><td>{quantity}</td></tr>
+        <tr><td>Balance: </td><td>{saldo}</td></tr>
+        <tr><td>Price: </td><td>{price}</td></tr>
+    </table>
+    <br/>
+    <hr/>
+    <br/>
+    <p>
+        This email was sent automatically from myphotocode if you have any questions, ask your distributor.
+    </p>
+</body>
+</html>

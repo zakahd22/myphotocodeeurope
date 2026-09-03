@@ -1,0 +1,217 @@
+/* 
+    Document   : styles
+    Created on : 15-sep-2014, 16:57:52
+    Author     : JOAN
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+body{
+    background-image: url('images/background2.jpg');
+
+}
+#logoIMG{
+    position: absolute;
+    right: 10%;
+    top: 0px;
+    z-index: 3;
+    width: 9%;
+}
+.blok{
+    width: 73%;
+    margin: 30px auto;
+    display: block;
+    overflow: hidden;
+}
+.blokWhite{
+    background-color:white;
+    border-radius: 20px;
+}
+
+.contentDiv{
+    width: 42%;
+    display:inline;
+    float:left;
+    padding-top:65px;
+}
+.color-box{
+    width:32px;
+    height:32px;
+    display:inline;
+    float:left;
+    cursor:pointer;
+    margin-left:3px;
+    border-radius:5px;
+    border:3px solid gray;
+}
+.yellowBorder{
+    border: 3px solid darkorange;
+}
+.borderError{
+    border:1px solid red;
+    box-shadow: 1px 1px 5px red;
+}
+.errorp{
+    color: red;
+    font-size: 8pt;
+    margin: 0px;
+    margin-top: -15px;
+    margin-bottom: 8px;
+    text-align: right;
+    width:100%;
+    height: 11px;
+}
+.tbl_tit{
+    width: 30%;
+}
+.tbl_datos{
+    width: 70%;
+    height: 28px;
+}
+.tbl_datos input{
+    width: 100%;
+    border: 3px solid #ccc;
+    background: #ddd;
+    height: 34px;
+    padding: 5px;
+}
+.nextButton{
+    background-image: url('images/next.png');
+    cursor:pointer;
+    width:218px;
+    height:58px;
+    display:block;
+    position: relative;
+    float:right;
+    margin: 8%;    
+    background-color: transparent;
+    border: 0px transparent;
+    color: transparent;
+}
+.styled-select select {
+    background: transparent;
+    width: 240px;
+    padding: 5px;
+    font-size: 16px;
+    line-height: 1;
+    border: 0;
+    border-radius: 0;
+    height: 34px;
+    -webkit-appearance: none;
+}
+.styled-select {
+    width: 240px;
+    height: 34px;
+    overflow: hidden;
+    background: url(images/new_arrow.jpg) no-repeat right #ddd;
+    border: 3px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+#PreuxQty{
+    font-size: 14pt;
+    font-weight: bolder;
+}
+#payButton{
+    width:218px;
+    height:58px;
+    cursor:pointer;
+    margin: 3%;
+    margin-right: 10%;
+    float:right;
+}
+
+
+.imgContainer{
+    width: 42%;
+    display: inline;
+    float: left;
+    position: relative;
+    margin-right: 7%;
+    overflow: hidden;
+    margin: 3%;
+    border:0px;
+    border-right: 3px solid gray;
+}
+.taza{
+    /*height: 610px;*/
+    width:101%;
+    position: relative;
+    z-index: 3;
+    margin-top: 3%;
+}
+.WhiteDiv{
+    position: relative;
+    background-color: white;
+    z-index: 2;
+    width: 106%;
+    height: 26%;
+    left: 5%;
+    display:none;
+}
+.WhiteDivLateral{
+    width:80px;
+    background-color: white;
+    position:absolute;
+    height:100%;
+    right:0px;
+    top:0px;
+    z-index:2;
+    display:none;
+}
+.totalDiv{
+    width:93%;
+    margin-left: 2%;
+    margin-right:2%;
+    display:inline;float:left;
+}
+.halfDiv{
+    width:45%;
+    margin-left: 2%;
+    margin-right:1%;
+    display:inline;float:left;
+}
+.oneDiv{
+    width: 20%;
+    margin-left: 2%;
+    margin-right:1%;
+    display:inline;float:left;
+}
+.thirdDiv{
+    width:70%;
+    margin-left: 2%;
+    margin-right:1%;
+    display:inline;float:left;
+}
+.formDiv input{
+    width: 100%;
+    border: 3px solid #ccc;
+    background: #ddd;
+    height: 34px;
+    padding: 5px;    
+}
+
+            .miniShop{
+                width: 500px;
+                height: auto;
+            }
+            .productMiniShop{
+                position:relative;
+                display:inline;
+                float:left;
+                width:25%;
+            }
+            .imgProduct{
+                position: absolute;        
+                width:100%;
+                top: 0;
+                left: 0;
+                z-index: 2;
+            }
+            .photoMini{
+                position:relative;
+                z-index:1;
+            }
