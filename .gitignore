@@ -27,9 +27,8 @@
 *.csv
 *_todelete*
 *.*~
-*.jpg
-*.png
-*.bmp
+
+
 .env
 
 nbproject
